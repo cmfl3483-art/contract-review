@@ -1,0 +1,1552 @@
+共解析 72 封邮件
+
+
+============================================================
+【合同预审-033】(29封)
+============================================================
+
+--- [1] 2026-02-05 16:49:51 ---
+  主题: 【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器，附件为损益表和阿里云采购合同。
+
+预计销售金额为6,600,000.00元，阿里云采购成本为5,250,000.00元，税率13%。
+
+预计销售合同三月份签约，该项目还有其他采购合同，目前由于客户部分需求还未完全敲定，所以其他采购合同金额暂不确认，为了锁定低价货源，希望先审批阿里云的采购合同。
+
+请各位领导审批！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:胡首 <hushou@belink.com>
+发送时间:2026-02-05 16:24:27 (星期四)
+收件人: 曾硕 <zengshuo@belink.com>
+抄送: changhx <changhx@belink.com>, 常佳宇 <changjy@belink.com>, kongfq <kongfq@belink.com>, wangyh <wangyh@belink.com>, wangpeng <wangpe
+
+--- [2] 2026-02-06 09:01:05 ---
+  主题: Re: 【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: zhaoyc1@belink.com <zhaoyc1@belink.com>
+  正文: 就合同文本：当前无上游合同，无法评估条款对应性，请注意相关内容的对应与风险防范；
+
+另，合同第20页明确约定，乙方不承担安装部署服务，损益表显示该合同为硬件产品销售、无实施工作量，请关注该合同是否不涉及安装部署服务。
+
+
+
+
+赵迎春   内核部
+北京易诚互动网络技术股份有限公司
+
+ 
+
+
+-----原始邮件-----
+发件人: 胡首 <hushou@belink.com>
+发送时间: 2026-02-05 16:24:27 (星期四)
+收件人: 曾硕 <zengshuo@belink.com>
+抄送: changhx <changhx@belink.com>, 常佳宇 <changjy@belink.com>, kongfq <kongfq@belink.com>, wangyh <wangyh@belink.com>, wangpeng <wangpeng@belink.com>, mengtao <mengtao@belink.com>, zhaoyc1 <zhaoyc1@belink.com>, 吕海青 <lvhq@belink.com>, wu
+
+--- [3] 2026-02-12 17:27:54 ---
+  主题: 【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+阿里云采购PPU合同的付款及发票条款（2）分期付款①增加了乙方收到预付款后发货。
+
+请各位领导审批！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:changhx <changhx@belink.com>
+发送时间:2026-02-12 16:17:28 (星期四)
+收件人: 常佳宇 <changjy@belink.com>, 曾硕 <zengshuo@belink.com>, mengtao <mengtao@belink.com>, wangpeng <wangpeng@belink.com>, wuqy <wuqy@belink.com>, "wangjl1@belink.com" <wangjl1@belink.com>, 吕海青 <lvhq@belink.com>, "wangyh3@belink.com" <wangyh3@belink.com>, 边莹 <bianying@belink.com>, hushou <hushou@be
+
+--- [4] 2026-02-13 10:47:15 ---
+  主题: Re: 【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+阿里云采购合同在附件：商务条款5.其他约定增加了本合同一式肆份，甲乙双方各执贰份，具有同等法律效力（如图）。
+
+请各位领导审批！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:常佳宇 <changjy@belink.com>
+发送时间:2026-02-12 17:27:54 (星期四)
+收件人: hushou <hushou@belink.com>, "wangjl1@belink.com" <wangjl1@belink.com>, wuqy <wuqy@belink.com>, wangyh <wangyh@belink.com>, kongfq <kongfq@belink.com>, 陈宇 <chenyu@belink.com>, "wangyh3@belink.com" <wangyh3@belink.com>, zhaoyc1 <zhaoyc1@belink.com>, 周喜春 <zhouxc@belink.com>, 边莹 <bia
+
+--- [5] 2026-02-13 11:25:42 ---
+  主题: 回复：【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: zhouxc <zhouxc@belink.com>
+  正文: 确认。
+
+在 2026年2月12日 17:27，常佳宇<changjy@belink.com> 写道：
+
+各位领导好：
+阿里云采购PPU合同的付款及发票条款（2）分期付款①增加了乙方收到预付款后发货。
+
+ 请各位领导审批！
+
+-----原始邮件-----
+ 发件人: changhx <changhx@belink.com>
+ 发送时间: 2026-02-12 16:17:28 (星期四)
+ 收件人: 常佳宇 <changjy@belink.com>, 曾硕 <zengshuo@belink.com>, mengtao <mengtao@belink.com>, wangpeng <wangpeng@belink.com>, wuqy <wuqy@belink.com>, "wangjl1@belink.com" <wangjl1@belink.com>, 吕海青 <lvhq@belink.com>, "wangyh3@belink.com" <wangyh3@belink.com>, 边莹 <bianying@belink.com>, hushou <hushou@belink.com
+
+--- [6] 2026-02-13 11:38:26 ---
+  主题: Re: 回复：【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 胡首 <hushou@belink.com>
+  正文: 同意！
+
+胡首
+
+20260213
+
+-----原始邮件-----
+发件人:zhouxc <zhouxc@belink.com>
+发送时间:2026-02-13 11:25:42 (星期五)
+收件人: hushou <hushou@belink.com>, "wangjl1@belink.com" <wangjl1@belink.com>, wuqy <wuqy@belink.com>, wangyh <wangyh@belink.com>, kongfq <kongfq@belink.com>, 陈宇 <chenyu@belink.com>, "wangyh3@belink.com" <wangyh3@belink.com>, zhaoyc1 <zhaoyc1@belink.com>, 边莹 <bianying@belink.com>, wangpeng <wangpeng@belink.com>, 吕海青 <lvhq@belink.com>, mengtao <mengtao@belink.com>, changhx <changhx@belink.com>, 常佳宇 <chang
+
+--- [7] 2026-02-13 12:32:42 ---
+  主题: Re: Re：【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: mengtao@belink.com <mengtao@belink.com>
+  正文: 鉴于此合同倒置问题跟付款模式已经经过特批。但是预审的上下游对应现在无法全面评估。
+此次仅为了采购行为本身做了责任分解跟落实。临近年底硬件市场价格波动大，等上下游合同都到齐之后再做正式审定。
+在此之前请做好风险防控跟责任落实，变动的条款请及时记录并落实防控措施。
+
+其他无异议。
+
+
+
+孟涛
+ 
+内核部
+
+北京易诚互动网络技术股份有限公司
+地址：北京市海淀区西小口路66号东升科技园A1楼2层201 
+邮编：100192
+手机：13916358796
+mail：mengtao@belink.com
+ 
+胡首 
+20260213 
+
+
+-----原始邮件-----
+发件人: zhouxc <zhouxc@belink.com>
+发送时间: 2026-02-13 11:25:42 (星期五)
+收件人: hushou <hushou@belink.com>, "wangjl1@belink.com" <wangjl1@belink.com>, wuqy <wuqy@belink.com>, wangyh <wangyh@belink.com>, k
+
+--- [8] 2026-03-24 15:30:02 ---
+  主题: 【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器，由于客户临时通知他们改了方案，不需要耗材了，附件为损益表（3月6号最新中标价格已更新），浪潮采购合同等。
+预计销售金额为6,852,000.00元，采购合同金额为5,951,593.00元，毛利率11.5%。
+采购阿里云成本5,537,920.00元，其中PPU采购成本5,250,000.00元，税率为13%；灵码私有化版本成本150,000.00元，税率13%；
+公共云灵码企业标准版本37,920.00元，税率13%，安装服务成本100,000.00元，税率6%。
+采购浪潮成本413,673.00元，其中raid卡成本52,773.00元，税率13%；维保服务成本360,900.00元，税率6%。
+预计销售合同三月底签约，预计客户在五月中旬付首款，为了不影响给客户交付，现申请给浪潮合同预审！
+请各位领导审批！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:changhx <chan
+
+--- [9] 2026-03-24 15:47:44 ---
+  主题: Re: 【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 胡首 <hushou@belink.com>
+  正文: 同意！
+
+胡首
+
+20260324
+
+-----原始邮件-----
+发件人:常佳宇 <changjy@belink.com>
+发送时间:2026-03-24 15:30:02 (星期二)
+收件人: hushou <hushou@belink.com>, 周喜春 <zhouxc@belink.com>, 陈宇 <chenyu@belink.com>, kongfq <kongfq@belink.com>, mengtao <mengtao@belink.com>, "wangyh3@belink.com" <wangyh3@belink.com>, wuqy <wuqy@belink.com>, 边莹 <bianying@belink.com>, 吕海青 <lvhq@belink.com>, wangyh <wangyh@belink.com>, zhaoyc1 <zhaoyc1@belink.com>, 'maofj' <maofj@belink.com>, "wangjl1@belink.com" <wangjl1@belink.com>, wangpeng <wangpeng@be
+
+--- [10] 2026-03-24 15:48:58 ---
+  主题: 回复：【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: zhouxc <zhouxc@belink.com>
+  正文: 确认，减少了耗材采购。
+
+在 2026年3月24日 15:30，常佳宇<changjy@belink.com> 写道：
+
+各位领导好：
+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器，由于客户临时通知他们改了方案，不需要耗材了，附件为损益表（3月6号最新中标价格已更新），浪潮采购合同等。
+ 预计销售金额为6,852,000.00元，采购合同金额为5,951,593.00元，毛利率11.5%。
+ 采购阿里云成本5,537,920.00元，其中PPU采购成本5,250,000.00元，税率为13%；灵码私有化版本成本150,000.00元，税率13%；
+ 公共云灵码企业标准版本37,920.00元，税率13%，安装服务成本100,000.00元，税率6%。
+ 采购浪潮成本413,673.00元，其中raid卡成本52,773.00元，税率13%；维保服务成本360,900.00元，税率6%。
+ 预计销售合同三月底签约，预计客户在五月中旬付首款，为了不影响给客户交付，现申请给浪潮合同预审！
+ 请各位领导审批！
+
+-----原始邮件-----
+ 发件人: changhx <ch
+
+--- [11] 2026-03-24 16:03:02 ---
+  主题: Re: 回复：【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: mengtao@belink.com <mengtao@belink.com>
+  正文: 请做好执行风险，保留关键的变更证据。
+
+其他无异议。
+
+
+
+孟涛
+ 
+内核部
+
+北京易诚互动网络技术股份有限公司
+地址：北京市海淀区西小口路66号东升科技园A1楼2层201 
+邮编：100192
+手机：13916358796
+mail：mengtao@belink.com
+ 
+
+
+在 2026年3月24日 15:30，常佳宇<changjy@belink.com> 写道：
+
+各位领导好： 
+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器，由于客户临时通知他们改了方案，不需要耗材了，附件为损益表（3月6号最新中标价格已更新），浪潮采购合同等。
+预计销售金额为6,852,000.00元，采购合同金额为5,951,593.00元，毛利率11.5%。
+采购阿里云成本5,537,920.00元，其中PPU采购成本5,250,000.00元，税率为13%；灵码私有化版本成本150,000.00元，税率13%；
+公共云灵码企业标准版本37,920.00元，税率13%，安装服务成本100,000.00元，税率6%。
+采购浪潮成本413,
+
+--- [12] 2026-03-30 15:08:42 ---
+  主题: 【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器，附件为损益表，浪潮采购合同，销售合同，阿里采购合同等。
+预计销售金额为6,852,000.00元，采购合同金额为5,951,593.00元，毛利率11.51%。
+采购阿里云成本5,537,920.00元，其中PPU采购成本5,250,000.00元，税率为13%；灵码私有化版本成本150,000.00元，税率13%；
+公共云灵码企业标准版本37,920.00元，税率13%，安装服务成本100,000.00元，税率6%。
+采购浪潮成本413,673.00元，其中raid卡成本52,773.00元，税率13%；维保服务成本360,900.00元，税率6%。
+现申请销售合同预审（合同为电子合同，着急今天签约），请各位领导审批！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:"mengtao@belink.com" <mengtao@belink.com>
+发送时间:2026-03-24 16
+
+--- [13] 2026-03-30 16:24:01 ---
+  主题: Re: 【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: zhaoyc1@belink.com <zhaoyc1@belink.com>
+  正文: 1.采购阿里、浪潮合同，均未涉及安装部署责任，销售合同提及了“集成改造”、“安装部署”、另有附件“软件工作说明书”等服务内容；
+      问题：损益显示该合同为纯代理合同，不涉及内部人员成本，请复核上述内容的实际情况；
+
+2.销售合同保修条款的具体要求，采购合同未明确，内容对应性无法评估；
+
+3.销售合同违约扣罚比例高，且采购合同未同步；采购合同设有责任限制、保管责任、进出口管制等多项条款，销售合同未同步；
+
+4.销售合同14.5款约定的增值服务，未见采购合同中的对应内容；
+
+5.销售合同标的物为“浪潮英政服务器3台 ”，与采购2合同标的物无法书面对应；
+
+6.销售合同约定永久保密，采购合同未对应；
+
+综上，上下游合同有多项核心条款及大量其他条款无法对应，请各位领导复审批示。
+
+
+
+赵迎春   内核部
+北京易诚互动网络技术股份有限公司
+
+ 
+
+
+
+-----原始邮件-----
+发件人: "mengtao@belink.com" <mengtao@belink.com>
+发送时间: 2026-03-24 16:03:02 (星期二)
+
+--- [14] 2026-03-30 16:51:42 ---
+  主题:  【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+对于赵老师的问题作出以下回复：
+
+软件工作说明书的软件灵码私有化，安装部署服务和集成改造之后会和阿里再签一个合同。
+
+请各位领导审批！ 
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:"zhaoyc1@belink.com" <zhaoyc1@belink.com>
+发送时间:2026-03-30 16:24:02 (星期一)
+收件人: 常佳宇 <changjy@belink.com>, 王宇航 <wangyh3@belink.com>, 周喜春 <zhouxc@belink.com>, 胡首 <hushou@belink.com>, 陈宇 <chenyu@belink.com>, 孔繁强 <kongfq@belink.com>, 边莹 <bianying@belink.com>, 吕海青 <lvhq@belink.com>, 王娅惠 <wangyh@belink.com>, 毛凤娇 <maofj@belink.com>, 王建磊1 <wangj
+
+--- [15] 2026-03-31 10:41:04 ---
+  主题: Re:  【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 王娅惠 <wangyh@belink.com>
+  正文: 一、关于集成改造 / 安装部署及软件服务的成本说明
+
+1、集成与安装服务：浪潮采购合同仅包含少量集成服务，大部分集成及安装部署服务将通过与阿里另行签订合同实现。对应损益表中 “外采服务 2（10 万元）” 为安装服务费，已覆盖该部分成本，不存在内部人员成本投入。
+
+2、软件服务：软件相关服务需与阿里签订补充合同，费用分为两部分：
+外采软件产品 3：15 万元（软件产品采购）
+
+外采软件产品 4：3.792 万元（阿里云公有云服务充值）
+
+二、关于保修条款的对应性说明
+
+客户要求的服务器保修为5 年原厂金牌服务 + 介质不返还，我司采购链路如下：
+
+1、从阿里采购：3 年原厂基础维保（不含金牌服务）
+2、从浪潮采购：
+3 年金牌升级服务：将基础维保升级为金牌级别
+2 年金牌续保服务：额外延长 2 年金牌维保
+最终合计满足客户 5 年金牌维保要求，保修条款已通过组合采购实现覆盖。
+
+三、关于违约及责任条款的差异说明
+销售合同违约扣罚比例为行内标准模版，无法单独调整。
+采购合同中责任限制、保管责任、进出口管制等条款，均为供应商标准模版要求，我司销售合同为行内通用版本，未同步此类条款。
+以上条
+
+--- [16] 2026-03-31 15:08:10 ---
+  主题: Re: Re:  【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 胡首 <hushou@belink.com>
+  正文: 同意！
+
+胡首
+
+20260331
+
+-----原始邮件-----
+发件人:王娅惠 <wangyh@belink.com>
+发送时间:2026-03-31 10:41:04 (星期二)
+收件人: 常佳宇 <changjy@belink.com>
+抄送: "zhaoyc1@belink.com" <zhaoyc1@belink.com>, 王宇航 <wangyh3@belink.com>, 周喜春 <zhouxc@belink.com>, 胡首 <hushou@belink.com>, 陈宇 <chenyu@belink.com>, 孔繁强 <kongfq@belink.com>, 边莹 <bianying@belink.com>, 吕海青 <lvhq@belink.com>, 毛凤娇 <maofj@belink.com>, 王建磊1 <wangjl1@belink.com>, 王朋 <wangpeng@belink.com>, 畅红霞 <changhx@belink.com>, 孟涛 <mengtao@belink.com>, 财务 <caiwu@belink.com>, 项目管理部 
+
+--- [17] 2026-03-31 15:29:46 ---
+  主题: Re: Re: Re:  【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 王娅惠 <wangyh@belink.com>
+  正文: 各位领导，
+
+      附件为浪潮合同里具体报价及相关配件，详情见附件合同。
+
+-----原始邮件-----
+发件人:胡首 <hushou@belink.com>
+发送时间:2026-03-31 15:08:10 (星期二)
+收件人: 王娅惠 <wangyh@belink.com>
+抄送: 常佳宇 <changjy@belink.com>, "zhaoyc1@belink.com" <zhaoyc1@belink.com>, 王宇航 <wangyh3@belink.com>, 周喜春 <zhouxc@belink.com>, 陈宇 <chenyu@belink.com>, 孔繁强 <kongfq@belink.com>, 边莹 <bianying@belink.com>, 吕海青 <lvhq@belink.com>, 毛凤娇 <maofj@belink.com>, 王建磊1 <wangjl1@belink.com>, 王朋 <wangpeng@belink.com>, 畅红霞 <changhx@belink.com>, 孟涛 <mengtao@belink.com>, 财务 <cai
+
+--- [18] 2026-03-31 17:40:45 ---
+  主题: Re: Re:  【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: zhouxc@belink.com <zhouxc@belink.com>
+  正文: 采购合同与招标要求不符，经销售沟通，目前采购阿里的整机+拿到的浪潮原厂邮件附件与招标要求已符合。
+
+  
+
+周喜春 
+zhouxc@belink.com
+ 
+      附件为浪潮合同里具体报价及相关配件，详情见附件合同。 
+
+
+
+
+
+
+
+
+-----原始邮件-----
+发件人: 胡首 <hushou@belink.com>
+发送时间: 2026-03-31 15:08:10 (星期二)
+收件人: 王娅惠 <wangyh@belink.com>
+抄送: 常佳宇 <changjy@belink.com>, "zhaoyc1@belink.com" <zhaoyc1@belink.com>, 王宇航 <wangyh3@belink.com>, 周喜春 <zhouxc@belink.com>, 陈宇 <chenyu@belink.com>, 孔繁强 <kongfq@belink.com>, 边莹 <bianying@belink.com>, 吕海青 <lvhq@belink.com>, 毛凤娇 <maofj@belink.com>, 王建磊1 <wan
+
+--- [19] 2026-03-31 18:06:08 ---
+  主题: Re:Re: Re:  【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 孟涛 <mengtao@belink.com>
+  正文: 情况特殊。请bd跟交付切实落实风险控制。
+其他无异议。
+
+在 2026-03-31 17:40:45，"zhouxc@belink.com" <zhouxc@belink.com> 写道：
+
+--- [20] 2026-04-16 11:48:10 ---
+  主题: 【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器，附件为损益表，阿里云采购合同，浪潮采购合同，阿里云公共云灵码采购合同和阿里云灵码私有云采购合同等。
+销售金额为6,852,000.00元，采购合同金额为5,944,009.00元，毛利率11.61%。
+采购阿里云成本5,530,336.00元，其中PPU采购成本5,250,000.00元，税率为13%；灵码私有化版本和安装成本250,000.00元，税率13%；
+公共云灵码企业标准版本30,336.00元，税率6%。
+采购浪潮成本413,673.00元，其中raid卡成本52,773.00元，税率13%；维保服务成本360,900.00元，税率6%。
+请各位领导给阿里云公共云灵码合同和阿里云灵码私有化和安装合同预审！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:changhx <changhx@belink.com>
+发送时间:2026-04-09 15:32:12 (星期四)
+收
+
+--- [21] 2026-04-16 13:54:27 ---
+  主题: Re: 【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: zhaoyc1@belink.com <zhaoyc1@belink.com>
+  正文: 请提供全套上下游合同标的物拆分、及签署进度表。
+
+
+
+赵迎春   内核部
+北京易诚互动网络技术股份有限公司
+
+ 
+
+
+-----原始邮件-----
+发件人: changhx <changhx@belink.com>
+发送时间: 2026-04-09 15:32:12 (星期四)
+收件人: hushou <hushou@belink.com>, 常佳宇 <changjy@belink.com>
+抄送: 周喜春 <zhouxc@belink.com>, "wangyh3@belink.com" <wangyh3@belink.com>, zhaoyc1 <zhaoyc1@belink.com>, wangyh <wangyh@belink.com>, 吕海青 <lvhq@belink.com>, wangpeng <wangpeng@belink.com>, "wangjl1@belink.com" <wangjl1@belink.com>, 边莹 <bianying@belink.com>, kongfq <kongfq@belink.com>, 陈宇 <ch
+
+--- [22] 2026-04-17 08:22:22 ---
+  主题: Re: Re: 【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: wangjl1@belink.com <wangjl1@belink.com>
+  正文: 你好：
+
+    销售合同（YCHD2026-033九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器）标的物包含硬件、硬件售后服务、软件、增值服务。其中硬件、硬件售后服务、软件部分已经完成合同签订，此次采购的为增值服务，包含通义灵码私有化和通义灵码公有云。
+    上下游详细的标的物拆分及对应合同签署进度详见附件。
+    
+    谢谢！
+
+
+
+
+王建磊
+北京易诚互动网络技术股份有限公司
+手机：15589892811
+邮箱：wangjl1@belink.com
+地址：北京市海淀区西小口路66号东升科技园A1楼2层（100192）
+请提供全套上下游合同标的物拆分、及签署进度表。
+
+
+
+赵迎春   内核部
+北京易诚互动网络技术股份有限公司
+
+ 
+
+
+-----原始邮件-----
+发件人: changhx <changhx@belink.com>
+发送时间: 2026-04-09 15:32:12 (星期四)
+收件人: hushou <hushou@belink.com>, 常佳宇 <changjy@belink.com
+
+--- [23] 2026-04-17 14:48:49 ---
+  主题: Re: Re: 【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: zhaoyc1@belink.com <zhaoyc1@belink.com>
+  正文: 进度表显示25万合同签署方为通义云，但采购合同文本为阿里云，请复核实际情况；
+
+采购阿里合同第10页，售后响应级别未勾选，应勾选为7*24小时；
+
+采购阿里合同附件2验收报告模板中，乙方公司名称填写错误；
+
+采购通义云合同与采购阿里云合同疑似标识错误；
+
+综上，合同基础问题过多，请先行清晰梳理。
+
+
+
+赵迎春   内核部
+北京易诚互动网络技术股份有限公司
+
+ 
+    销售合同（YCHD2026-033九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器）标的物包含硬件、硬件售后服务、软件、增值服务。其中硬件、硬件售后服务、软件部分已经完成合同签订，此次采购的为增值服务，包含通义灵码私有化和通义灵码公有云。
+    上下游详细的标的物拆分及对应合同签署进度详见附件。
+    
+    谢谢！
+
+
+
+
+王建磊
+北京易诚互动网络技术股份有限公司
+手机：15589892811
+邮箱：wangjl1@belink.com
+地址：北京市海淀区西小口路66号东升科技园A1楼2层（100192）
+请提供全套上下游合同标的物拆分、及签
+
+--- [24] 2026-04-17 15:46:42 ---
+  主题: Re: Re: 【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: wangjl1@belink.com <wangjl1@belink.com>
+  正文: 你好：
+    关于进度表签署方与合同不一致问题答复如下：
+    
+    问题：进度表显示25万合同签署方为通义云，但采购合同文本为阿里云，请复核实际情况；
+    答复：经核实，此合同签署方为：阿里云飞天（杭州）云计算技术有限公司，已更新【上下游合同标的物拆分及签署进度表】
+    
+    谢谢！
+
+
+王建磊
+北京易诚互动网络技术股份有限公司
+手机：15589892811
+邮箱：wangjl1@belink.com
+地址：北京市海淀区西小口路66号东升科技园A1楼2层（100192）
+进度表显示25万合同签署方为通义云，但采购合同文本为阿里云，请复核实际情况；
+
+采购阿里合同第10页，售后响应级别未勾选，应勾选为7*24小时；
+
+采购阿里合同附件2验收报告模板中，乙方公司名称填写错误；
+
+采购通义云合同与采购阿里云合同疑似标识错误；
+
+综上，合同基础问题过多，请先行清晰梳理。
+
+
+
+赵迎春   内核部
+北京易诚互动网络技术股份有限公司
+
+ 
+    销售合同（YCHD2026-033九江银行2026年鄱阳湖数据中心灾备
+
+--- [25] 2026-04-17 17:23:36 ---
+  主题: 【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+对于迎春老师的问题作出以下说明和回复：
+
+1.采购阿里灵码私有云合同为供应商模板：
+
+2.采购阿里合同第10页，售后响应级别未勾选，已勾选为7*24小时；
+3.采购阿里合同附件2验收报告模板中，乙方公司名称已更改为阿里云飞天（杭州）云计算技术有限公司。
+4.采购通义云合同与采购阿里云合同公司标识已问阿里云老师，没有问题。
+
+请各位领导审批！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:"wangjl1@belink.com" <wangjl1@belink.com>
+发送时间:2026-04-17 15:46:42 (星期五)
+收件人: "zhaoyc1@belink.com" <zhaoyc1@belink.com>, 常佳宇 <changjy@belink.com>, 王朋 <wangpeng@belink.com>, "zhouxc@belink.com" <zhouxc@belink.com>, 吕海青 <lvhq@belink.com
+
+--- [26] 2026-04-20 17:33:09 ---
+  主题: Re: 【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: wangjl1@belink.com <wangjl1@belink.com>
+  正文: 各位领导好：
+
+    针对此项目，销售合同里的硬件部分已经签约（阿里的整机采购及浪潮采购），此次为增值服务的采购，包含公共云灵码和灵码私有化。
+    采购范围确认：
+核心内容（公共云灵码：40人年；灵码私有化：1500人/永久）与销售合同要求符合，确认没问题。
+其他：销售合同要求后续维保费用不超过3万元，采购合同无此要求，请销售同事确认此风险。
+    损益表确认：
+        公共云灵码由原来预算的37,920.00元调整为实际的30,336.00元，并有税率的更新，毛利率由11.51%更新为11.61%，确认没问题。
+
+    请领导复核。
+
+    谢谢！
+
+
+
+王建磊
+北京易诚互动网络技术股份有限公司
+手机：15589892811
+邮箱：wangjl1@belink.com
+地址：北京市海淀区西小口路66号东升科技园A1楼2层（100192）
+
+
+
+-----原始邮件-----
+发件人: "wangjl1@belink.com" <wangjl1@belink.com>
+发送时间: 2026-04-17 15:46:42
+
+--- [27] 2026-04-21 10:56:52 ---
+  主题: Re: 【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: zhouxc <zhouxc@belink.com>
+  正文: (空或无法解析)
+
+--- [28] 2026-04-21 11:03:21 ---
+  主题: Re: Re: 【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 胡首 <hushou@belink.com>
+  正文: 同意！
+
+胡首
+
+20260421
+
+-----原始邮件-----
+发件人:zhouxc <zhouxc@belink.com>
+发送时间:2026-04-21 10:56:52 (星期二)
+收件人: wangjl1@belink.com
+抄送: 常佳宇 <changjy@belink.com>, zhaoyc1@belink.com, 王朋 <wangpeng@belink.com>, 吕海青 <lvhq@belink.com>, wangyh@belink.com, 孔繁强 <kongfq@belink.com>, 陈宇 <chenyu@belink.com>, 毛凤娇 <maofj@belink.com>, 孟涛 <mengtao@belink.com>, 王宇航 <wangyh3@belink.com>, 胡首 <hushou@belink.com>, changhx <changhx@belink.com>, 边莹 <bianying@belink.com>, 项目管理部 <xiangmu@belink.com>, caiwu <caiwu@belink.com>
+主题: R
+
+--- [29] 2026-04-21 11:23:26 ---
+  主题: Re:Re: Re: 【合同预审】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 孟涛 <mengtao@belink.com>
+  正文: 合同基础性错误为啥就都无视了？这些不修改是不行的 
+
+在 2026-04-21 11:03:21，胡首 <hushou@belink.com> 写道：
+
+============================================================
+【合同预审-灵码】(13封)
+============================================================
+
+--- [1] 2026-04-22 15:35:17 ---
+  主题: 【合同预审】商机编号XS-2026_0122+YCHD-ZB-2026-037+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器（采购公共云灵码）
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+对于孟总的问题作出以下回复：
+
+1.关于迎春老师提出的合同问题合同已更新。
+
+2.销售合同九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器合同编号为YCHD2026-033。
+
+3.公共云没有版本限制。
+
+4.1）灵码私有化平台交付 - 这个是由阿里云老师现场进行安装部署
+
+ 2）IDE插件交付 - 这个是由阿里云提供，通过下载连接和平台内置的插件安装包(.zip)文件给到客户，然后客户在自己电脑安装插件即可。
+
+请审批！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+--- [2] 2026-04-22 15:54:08 ---
+  主题: Re: 【合同预审】商机编号XS-2026_0122+YCHD-ZB-2026-037+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器（采购公共
+  发件人: 胡首 <hushou@belink.com>
+  正文: 同意！
+
+胡首
+
+20260422
+
+-----原始邮件-----
+发件人:常佳宇 <changjy@belink.com>
+发送时间:2026-04-22 15:35:17 (星期三)
+收件人: 孟涛 <mengtao@belink.com>
+抄送: 胡首 <hushou@belink.com>, zhouxc <zhouxc@belink.com>, wangjl1 <wangjl1@belink.com>, zhaoyc1 <zhaoyc1@belink.com>, 王朋 <wangpeng@belink.com>, 吕海青 <lvhq@belink.com>, wangyh <wangyh@belink.com>, 孔繁强 <kongfq@belink.com>, 陈宇 <chenyu@belink.com>, 毛凤娇 <maofj@belink.com>, 王宇航 <wangyh3@belink.com>, changhx <changhx@belink.com>, 边莹 <bianying@belink.com>, 项目管理部 <xiangmu@belink.com>, c
+
+--- [3] 2026-04-22 16:16:01 ---
+  主题: Re: 【合同预审】商机编号XS-2026_0122+YCHD-ZB-2026-037+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器（采购公共
+  发件人: zhaoyc1@belink.com <zhaoyc1@belink.com>
+  正文: 该合同孟总已多次与相关责任人就标的物、合同内应勾选内容、合同编号补充等事宜进行充分沟通，当前无明确反馈；
+
+请各位领导复审批示。
+
+
+
+赵迎春   内核部
+北京易诚互动网络技术股份有限公司
+
+--- [4] 2026-04-23 10:09:06 ---
+  主题: Re: Re: 【合同预审】商机编号XS-2026_0122+YCHD-ZB-2026-037+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器（
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+关于合同作出以下回复：
+
+1.合同对应标的物在王建磊老师之前回复的邮件中已回复（如图），相关附件上下游合同标的物拆分及签署进度表已附上。2.关于九江银行2026年算力服务器（采购阿里云灵码私有化）合同内应勾选内容已于下图邮件更新（如图所示），已附上pdf版合同。
+
+3.如无特别说明没有勾起来是因为，已问过阿里云的老师，这是软件合同不需要勾起来(如图）。
+
+4.通义云启公共云灵码合同对应合同编号为YCHD-ZB-2026-037，九江银行2026年算力服务器（采购阿里云灵码私有化）对应合同编号为YCHD-ZB-2026-048。
+
+请各位领导复审！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:"zhaoyc1@belink.com" <zhaoyc1@belink.com>
+发送时间:2026-04-22 16:16:01 (星期三)
+收件人: 常佳宇 <changjy@belink.com>, 孟涛 <mengtao@belink.com>
+抄
+
+--- [5] 2026-04-24 10:40:51 ---
+  主题: Re: Re: 【合同预审】商机编号XS-2026_0122+YCHD-ZB-2026-037+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器（
+  发件人: zhouxc <zhouxc@belink.com>
+  正文: 确认。
+
+在 2026年4月23日 10:09，常佳宇<changjy@belink.com> 写道：
+
+各位领导好：
+关于合同作出以下回复：
+1.合同对应标的物在王建磊老师之前回复的邮件中已回复（如图），相关附件上下游合同标的物拆分及签署进度表已附上。2.关于九江银行2026年算力服务器（采购阿里云灵码私有化）合同内应勾选内容已于下图邮件更新（如图所示），已附上pdf版合同。
+3.如无特别说明没有勾起来是因为，已问过阿里云的老师，这是软件合同不需要勾起来(如图）。
+4.通义云启公共云灵码合同对应合同编号为YCHD-ZB-2026-037，九江银行2026年算力服务器（采购阿里云灵码私有化）对应合同编号为YCHD-ZB-2026-048。
+请各位领导复审！
+
+-----原始邮件-----
+ 发件人: "zhaoyc1@belink.com" <zhaoyc1@belink.com>
+ 发送时间: 2026-04-22 16:16:01 (星期三)
+ 收件人: 常佳宇 <changjy@belink.com>, 孟涛 <mengtao@belink.com>
+ 抄送: 胡首 <husho
+
+--- [6] 2026-04-24 10:46:03 ---
+  主题: Re: Re: Re: 【合同预审】商机编号XS-2026_0122+YCHD-ZB-2026-037+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力
+  发件人: 胡首 <hushou@belink.com>
+  正文: 同意！
+
+胡首
+
+20260424
+
+-----原始邮件-----
+发件人:zhouxc <zhouxc@belink.com>
+发送时间:2026-04-24 10:40:51 (星期五)
+收件人: "zhaoyc1@belink.com" <zhaoyc1@belink.com>, 常佳宇 <changjy@belink.com>
+抄送: 孟涛 <mengtao@belink.com>, 胡首 <hushou@belink.com>, 王建磊1 <wangjl1@belink.com>, 王朋 <wangpeng@belink.com>, 吕海青 <lvhq@belink.com>, 王娅惠 <wangyh@belink.com>, 孔繁强 <kongfq@belink.com>, 陈宇 <chenyu@belink.com>, 毛凤娇 <maofj@belink.com>, 王宇航 <wangyh3@belink.com>, 畅红霞 <changhx@belink.com>, 边莹 <bianying@belink.com>, 项目管理部 <xiangmu@belink.com>
+
+--- [7] 2026-04-27 10:50:01 ---
+  主题: Re: Re: Re: Re: 【合同预审】商机编号XS-2026_0122+YCHD-ZB-2026-037+九江银行2026年鄱阳湖数据中心灾备完善项目-G
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+九江银行2026年算力服务器（采购阿里云灵码私有化）合同修改了9.1，9.2，9.5（如图所示）。 
+
+ 
+
+增加了14.3
+
+请审批！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:胡首 <hushou@belink.com>
+发送时间:2026-04-24 10:46:03 (星期五)
+收件人: zhouxc <zhouxc@belink.com>
+抄送: "zhaoyc1@belink.com" <zhaoyc1@belink.com>, 常佳宇 <changjy@belink.com>, 孟涛 <mengtao@belink.com>, 王建磊1 <wangjl1@belink.com>, 王朋 <wangpeng@belink.com>, 吕海青 <lvhq@belink.com>, 王娅惠 <wangyh@belink.com>, 孔繁强 <kongfq@belink.com>, 陈宇 <chenyu@belink.com>, 毛凤娇
+
+--- [8] 2026-04-27 15:06:24 ---
+  主题: Re: Re: 【合同预审】商机编号XS-2026_0122+YCHD-ZB-2026-037+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器（
+  发件人: zhaoyc1@belink.com <zhaoyc1@belink.com>
+  正文: 采购阿里合同第2页，合同约定有甲方及最终用户安装部署，与邮件描述不符；
+
+上下游合同条款及标的物描述存在出入；
+
+综上，请各位领导复审评估。
+
+
+
+
+赵迎春   内核部
+北京易诚互动网络技术股份有限公司
+
+ 
+增加了14.3 
+请审批！ 
+
+
+
+
+-----原始邮件-----
+发件人: 胡首 <hushou@belink.com>
+发送时间: 2026-04-24 10:46:03 (星期五)
+收件人: zhouxc <zhouxc@belink.com>
+抄送: "zhaoyc1@belink.com" <zhaoyc1@belink.com>, 常佳宇 <changjy@belink.com>, 孟涛 <mengtao@belink.com>, 王建磊1 <wangjl1@belink.com>, 王朋 <wangpeng@belink.com>, 吕海青 <lvhq@belink.com>, 王娅惠 <wangyh@belink.com>, 孔繁强 <kongfq@belink.com>, 陈宇 <chenyu@belink.com>
+
+--- [9] 2026-04-27 16:16:32 ---
+  主题: Re: Re: Re: 【合同预审】商机编号XS-2026_0122+YCHD-ZB-2026-037+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+对于迎春老师提出的问题作出以下回复：
+
+1.合同写甲方及最终用户安装部署，但实际是由阿里负责，目前阿里安装部署服务已完成。由于这个服务是阿里销售个人协调的，所以合同只能写由甲方及最终用户安装部署。
+
+请各位领导审批！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:"zhaoyc1@belink.com" <zhaoyc1@belink.com>
+发送时间:2026-04-27 15:06:25 (星期一)
+收件人: 常佳宇 <changjy@belink.com>, 胡首 <hushou@belink.com>, 王建磊1 <wangjl1@belink.com>, 孟涛 <mengtao@belink.com>, 王娅惠 <wangyh@belink.com>, 孔繁强 <kongfq@belink.com>, 吕海青 <lvhq@belink.com>, 畅红霞 <changhx@belink.com>, 边莹 <bianying@belin
+
+--- [10] 2026-04-27 17:53:28 ---
+  主题: Re: Re: Re: Re: 【合同预审】商机编号XS-2026_0122+YCHD-ZB-2026-037+九江银行2026年鄱阳湖数据中心灾备完善项目-G
+  发件人: 王娅惠 <wangyh@belink.com>
+  正文: 经确认，该合同中约定的所有软件已部署完成，谢谢！
+
+-----原始邮件-----
+发件人:常佳宇 <changjy@belink.com>
+发送时间:2026-04-27 16:16:32 (星期一)
+收件人: "zhaoyc1@belink.com" <zhaoyc1@belink.com>
+抄送: 胡首 <hushou@belink.com>, 王建磊1 <wangjl1@belink.com>, 孟涛 <mengtao@belink.com>, 王娅惠 <wangyh@belink.com>, 孔繁强 <kongfq@belink.com>, 吕海青 <lvhq@belink.com>, 畅红霞 <changhx@belink.com>, 边莹 <bianying@belink.com>, 王宇航 <wangyh3@belink.com>, 毛凤娇 <maofj@belink.com>, 陈宇 <chenyu@belink.com>, 周喜春 <zhouxc@belink.com>, 项目管理部 <xiangmu@belink.com>, 财务 <caiwu@belink.com
+
+--- [11] 2026-04-27 18:01:15 ---
+  主题: Re: Re: 【合同预审】商机编号XS-2026_0122+YCHD-ZB-2026-037+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器（
+  发件人: zhouxc@belink.com <zhouxc@belink.com>
+  正文: 确认。
+
+
+
+zhouxc@belink.com
+ 
+
+
+
+-----原始邮件-----
+发件人: 常佳宇 <changjy@belink.com>
+发送时间: 2026-04-27 16:16:32 (星期一)
+收件人: "zhaoyc1@belink.com" <zhaoyc1@belink.com>
+抄送: 胡首 <hushou@belink.com>, 王建磊1 <wangjl1@belink.com>, 孟涛 <mengtao@belink.com>, 王娅惠 <wangyh@belink.com>, 孔繁强 <kongfq@belink.com>, 吕海青 <lvhq@belink.com>, 畅红霞 <changhx@belink.com>, 边莹 <bianying@belink.com>, 王宇航 <wangyh3@belink.com>, 毛凤娇 <maofj@belink.com>, 陈宇 <chenyu@belink.com>, 周喜春 <zhouxc@belink.com>, 项目管理部 <xiangmu@belink.com>, 财
+
+--- [12] 2026-04-27 18:25:11 ---
+  主题: Re: Re: Re: 【合同预审】商机编号XS-2026_0122+YCHD-ZB-2026-037+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力
+  发件人: 胡首 <hushou@belink.com>
+  正文: 同意！
+
+胡首
+
+20260427
+
+-----原始邮件-----
+发件人:"zhouxc@belink.com" <zhouxc@belink.com>
+发送时间:2026-04-27 18:01:15 (星期一)
+收件人: wangyh <wangyh@belink.com>, 常佳宇 <changjy@belink.com>
+抄送: zhaoyc1 <zhaoyc1@belink.com>, hushou <hushou@belink.com>, wangjl1 <wangjl1@belink.com>, mengtao <mengtao@belink.com>, kongfq <kongfq@belink.com>, lvhq <lvhq@belink.com>, changhx <changhx@belink.com>, bianying <bianying@belink.com>, wangyh3 <wangyh3@belink.com>, maofj <maofj@belink.com>, chenyu <chenyu@belink.com>, xiangmu <xian
+
+--- [13] 2026-05-14 17:29:44 ---
+  主题: Re: Re:Re: Re: Re: 【合同预审】商机编号XS-2026_0122+YCHD-ZB-2026-037+九江银行2026年鄱阳湖数据中心灾备完善项
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器（采购灵码私有化）供应商提出交付方式选为其他（如图所示）。
+
+请审批！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+============================================================
+【开放权限】(2封)
+============================================================
+
+--- [1] 2026-04-08 17:04:18 ---
+  主题: 【开放权限申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+由于阿里公共云灵码要先充值后会生成合同（金额为30,336.00元），与安装服务和灵码私有化版本不在一个合同，因此需要变更业务采购合同备案，申请打开销售合同备案变更权限。
+
+请胡总确认！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:"zhouxc@belink.com" <zhouxc@belink.com>
+发送时间:2026-03-31 17:40:45 (星期二)
+收件人: wangyh <wangyh@belink.com>, hushou <hushou@belink.com>
+抄送: 常佳宇 <changjy@belink.com>, zhaoyc1 <zhaoyc1@belink.com>, wangyh3 <wangyh3@belink.com>, chenyu <chenyu@belink.com>, kongfq <kongfq@belink.com>, bianying <bianying@belink.com>, lvh
+
+--- [2] 2026-04-08 17:29:48 ---
+  主题: Re: 【开放权限申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 胡首 <hushou@belink.com>
+  正文: 同意！
+
+胡首
+
+20260408
+
+-----原始邮件-----
+发件人:常佳宇 <changjy@belink.com>
+发送时间:2026-04-08 17:04:18 (星期三)
+收件人: hushou <hushou@belink.com>
+抄送: "zhouxc@belink.com" <zhouxc@belink.com>, wangyh <wangyh@belink.com>, zhaoyc1 <zhaoyc1@belink.com>, wangyh3 <wangyh3@belink.com>, chenyu <chenyu@belink.com>, kongfq <kongfq@belink.com>, bianying <bianying@belink.com>, lvhq <lvhq@belink.com>, maofj <maofj@belink.com>, wangjl1 <wangjl1@belink.com>, wangpeng <wangpeng@belink.com>, changhx <changhx@belink.com>, mengtao <me
+
+============================================================
+【投标申请】(5封)
+============================================================
+
+--- [1] 2026-02-12 09:55:00 ---
+  主题: 【投标申请】商机编号XS-2026_0122+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器，附件为投标评审表，损益表，合同主要条款，招标文件等。
+
+预计销售合同金额为6,600,000.00元，采购总成本为5,806,000.00元，毛利率为10.50%。
+
+采购阿里云成本为5,350,000.00元，其中PPU成本为5,250,000.00元，税率为13%，安装服务成本为100,000.00元，税率为6%。
+
+采购浪潮成本为450,000.00元，其中维保成本为360,000.00元，税率为6%，配件成本为90,000.00元，税率为13%。
+
+采购耗材成本为6,000.00元，税率为13%。
+
+请各位领导审批！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:"zhaoyc1@belink.com" <zhaoyc1@belink.com>
+发送时间:2026-02-06 09:01:05 (星期五)
+收件人: 常佳宇 <changjy@belink.com>, 吕海青 
+
+--- [2] 2026-02-12 10:32:10 ---
+  主题: Re: 【投标申请】商机编号XS-2026_0122+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 胡首 <hushou@belink.com>
+  正文: 同意！
+
+胡首
+
+20260212
+
+-----原始邮件-----
+发件人:常佳宇 <changjy@belink.com>
+发送时间:2026-02-12 09:55:00 (星期四)
+收件人: 胡首 <hushou@belink.com>, 孔繁强 <kongfq@belink.com>, 边莹 <bianying@belink.com>, 王宇航 <wangyh3@belink.com>, 吴起玥 <wuqy@belink.com>, 王朋 <wangpeng@belink.com>, 孟涛 <mengtao@belink.com>, 周喜春 <zhouxc@belink.com>, 畅红霞 <changhx@belink.com>, 王娅惠 <wangyh@belink.com>, 吕海青 <lvhq@belink.com>, "zhaoyc1@belink.com" <zhaoyc1@belink.com>, 王建磊 <wangjl1@belink.com>
+抄送: 项目管理部 <xiangmu@belink.com>, 财务 <caiwu@belink.com>, 陈宇 <
+
+--- [3] 2026-02-12 14:03:52 ---
+  主题: Re: 【投标申请】商机编号XS-2026_0122+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: zhaoyc1@belink.com <zhaoyc1@belink.com>
+  正文: 当前损益与此前申请采购先签时提供的损益有巨大出入，包括采购内容、供应商、利润率等，均出现大幅变动；
+
+基于当前显示，合同为一对多的纯代理合同，请关注上下游合同对应性。
+
+
+
+
+赵迎春   内核部
+北京易诚互动网络技术股份有限公司
+
+ 
+
+
+-----原始邮件-----
+发件人: "zhaoyc1@belink.com" <zhaoyc1@belink.com>
+发送时间: 2026-02-06 09:01:05 (星期五)
+收件人: 常佳宇 <changjy@belink.com>, 吕海青 <lvhq@belink.com>, 吴起玥 <wuqy@belink.com>, 王宇航 <wangyh3@belink.com>, 边莹 <bianying@belink.com>, 周喜春 <zhouxc@belink.com>, 孟涛 <mengtao@belink.com>, 王朋 <wangpeng@belink.com>, 孔繁强 <kongfq@belink.com>, 王娅惠 <wangyh@belink.com>, 畅红霞 <changhx@be
+
+--- [4] 2026-02-12 15:08:23 ---
+  主题: Re: 【投标申请】商机编号XS-2026_0122+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: zhouxc <zhouxc@belink.com>
+  正文: (空或无法解析)
+
+--- [5] 2026-02-12 15:16:12 ---
+  主题: Re: Re: 【投标申请】商机编号XS-2026_0122+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 胡首 <hushou@belink.com>
+  正文: 同意投标！
+
+胡首
+
+20260212
+
+-----原始邮件-----
+发件人:"zhaoyc1@belink.com" <zhaoyc1@belink.com>
+发送时间:2026-02-12 14:03:53 (星期四)
+收件人: 常佳宇 <changjy@belink.com>, 胡首 <hushou@belink.com>, 孔繁强 <kongfq@belink.com>, 边莹 <bianying@belink.com>, 王宇航 <wangyh3@belink.com>, 吴起玥 <wuqy@belink.com>, 王朋 <wangpeng@belink.com>, 孟涛 <mengtao@belink.com>, 周喜春 <zhouxc@belink.com>, 畅红霞 <changhx@belink.com>, 王娅惠 <wangyh@belink.com>, 吕海青 <lvhq@belink.com>, 王建磊1 <wangjl1@belink.com>
+抄送: 项目管理部 <xiangmu@belink.com>, 财务 <caiwu@belink.com>, 陈
+
+============================================================
+【特批申请】(20封)
+============================================================
+
+--- [1] 2026-02-04 16:41:12 ---
+  主题: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器，附件为损益表和阿里云采购合同。
+
+预计销售金额为6,600,000.00元，采购合同金额为5,250,000.00元，税率13%，毛利率18.71%。
+
+预计销售合同三月份签约，为了锁定低价的货源，申请提前采购合同的盖章和付款流程。
+
+请各位领导特批！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+--- [2] 2026-02-04 16:54:22 ---
+  主题: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+阿里云采购合同签署部分添加了乙方公司名称。
+
+合同已更新。请各位领导特批！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:常佳宇 <changjy@belink.com>
+发送时间:2026-02-04 16:41:12 (星期三)
+收件人: 曾硕 <zengshuo@belink.com>, 胡首 <hushou@belink.com>, 王朋 <wangpeng@belink.com>, 周喜春 <zhouxc@belink.com>, 王娅惠 <wangyh@belink.com>, 边莹 <bianying@belink.com>, 畅红霞 <changhx@belink.com>, 孔繁强 <kongfq@belink.com>, 孟涛 <mengtao@belink.com>, 赵迎春 <zhaoyc1@belink.com>, 吕海青 <lvhq@belink.com>, 吴起玥 <wuqy@belink.com>, 王宇航 <wa
+
+--- [3] 2026-02-05 09:03:36 ---
+  主题: Re: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: zhouxc@belink.com <zhouxc@belink.com>
+  正文: 确认，已与客户沟通目标成交价，为锁定硬件采购价，提前采购阿里GPU设备。
+
+
+
+
+
+
+
+zhouxc@belink.com
+ 
+
+
+-----原始邮件-----
+发件人: 常佳宇 <changjy@belink.com>
+发送时间: 2026-02-04 16:41:12 (星期三)
+收件人: 曾硕 <zengshuo@belink.com>, 胡首 <hushou@belink.com>, 王朋 <wangpeng@belink.com>, 周喜春 <zhouxc@belink.com>, 王娅惠 <wangyh@belink.com>, 边莹 <bianying@belink.com>, 畅红霞 <changhx@belink.com>, 孔繁强 <kongfq@belink.com>, 孟涛 <mengtao@belink.com>, 赵迎春 <zhaoyc1@belink.com>, 吕海青 <lvhq@belink.com>, 吴起玥 <wuqy@belink.com>, 王宇航 <wangyh3@belink.com>
+抄送: caiwu@b
+
+--- [4] 2026-02-05 11:40:28 ---
+  主题: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+阿里模板改了，附件请以此为准。
+
+请各位领导审批！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:"zhouxc@belink.com" <zhouxc@belink.com>
+发送时间:2026-02-05 09:03:36 (星期四)
+收件人: 常佳宇 <changjy@belink.com>, zengshuo <zengshuo@belink.com>, hushou <hushou@belink.com>, wangpeng <wangpeng@belink.com>, wangyh <wangyh@belink.com>, bianying <bianying@belink.com>, changhx <changhx@belink.com>, kongfq <kongfq@belink.com>, mengtao <mengtao@belink.com>, zhaoyc1 <zhaoyc1@belink.com>, lvhq <lv
+
+--- [5] 2026-02-05 16:03:18 ---
+  主题: Re: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: changhx <changhx@belink.com>
+  正文: 同意，请尽快完成销售合同签署，注意把控执行风险。
+
+
+
+畅红霞
+
+地址：北京市海淀区西小口路66号东升科技园A1楼201（100192）
+电话：13501395526
+ 
+
+
+
+-----原始邮件-----
+发件人: "zhouxc@belink.com" <zhouxc@belink.com>
+发送时间: 2026-02-05 09:03:36 (星期四)
+收件人: 常佳宇 <changjy@belink.com>, zengshuo <zengshuo@belink.com>, hushou <hushou@belink.com>, wangpeng <wangpeng@belink.com>, wangyh <wangyh@belink.com>, bianying <bianying@belink.com>, changhx <changhx@belink.com>, kongfq <kongfq@belink.com>, mengtao <mengtao@belink.com>, zhaoyc1 <zhaoyc1@belink.com>, lvh
+
+--- [6] 2026-02-05 16:12:47 ---
+  主题: Re: Re: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 曾硕 <zengshuo@belink.com>
+  正文: 无异议
+
+-----原始邮件-----
+发件人:changhx <changhx@belink.com>
+发送时间:2026-02-05 16:03:18 (星期四)
+收件人: 常佳宇 <changjy@belink.com>, kongfq <kongfq@belink.com>, wangyh <wangyh@belink.com>, wangpeng <wangpeng@belink.com>, hushou <hushou@belink.com>, mengtao <mengtao@belink.com>, zhaoyc1 <zhaoyc1@belink.com>, 吕海青 <lvhq@belink.com>, wuqy <wuqy@belink.com>, "wangyh3@belink.com" <wangyh3@belink.com>, 边莹 <bianying@belink.com>, 曾硕 <zengshuo@belink.com>, 周喜春 <zhouxc@belink.com>
+抄送: caiwu <caiwu@belink.com>, 项目管理部邮箱 <xian
+
+--- [7] 2026-02-05 16:24:27 ---
+  主题: Re: Re: Re: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 胡首 <hushou@belink.com>
+  正文: 同意！
+
+胡首
+
+20260205
+
+-----原始邮件-----
+发件人:曾硕 <zengshuo@belink.com>
+发送时间:2026-02-05 16:12:47 (星期四)
+收件人: changhx <changhx@belink.com>
+抄送: 常佳宇 <changjy@belink.com>, kongfq <kongfq@belink.com>, wangyh <wangyh@belink.com>, wangpeng <wangpeng@belink.com>, hushou <hushou@belink.com>, mengtao <mengtao@belink.com>, zhaoyc1 <zhaoyc1@belink.com>, 吕海青 <lvhq@belink.com>, wuqy <wuqy@belink.com>, "wangyh3@belink.com" <wangyh3@belink.com>, 边莹 <bianying@belink.com>, 周喜春 <zhouxc@belink.com>, caiwu <caiwu@belink.com>,
+
+--- [8] 2026-02-12 16:05:11 ---
+  主题: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器增加的内容包含挂网招标要求中增加额外的两年维保及配件，以及阿里原厂的模型安装调试服务，因此更新损益表。
+
+预计销售合同金额为6,600,000.00元，采购总成本为5,806,000.00元，毛利率为10.50%。
+采购阿里云成本为5,350,000.00元，其中PPU成本为5,250,000.00元，税率为13%，安装服务成本为100,000.00元，税率为6%。
+采购浪潮成本为450,000.00元，其中维保成本为360,000.00元，税率为6%，配件成本为90,000.00元，税率为13%。
+采购耗材成本为6,000.00元，税率为13%。
+
+请各位领导审批！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:zhouxc <zhouxc@belink.com>
+发送时间:2026-02-12 15:08:23 (星期四)
+收件人: zhaoyc1@belink.com
+抄送: 常
+
+--- [9] 2026-02-12 16:17:28 ---
+  主题: Re: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: changhx <changhx@belink.com>
+  正文: 请确保所有成本已预估￥损益表预估无遗漏，其他无异议
+
+
+
+畅红霞
+
+地址：北京市海淀区西小口路66号东升科技园A1楼201（100192）
+电话：13501395526
+ 
+
+
+-----原始邮件-----
+发件人: zhouxc <zhouxc@belink.com>
+发送时间: 2026-02-12 15:08:23 (星期四)
+收件人: zhaoyc1@belink.com
+抄送: 常佳宇 <changjy@belink.com>, 胡首 <hushou@belink.com>, 孔繁强 <kongfq@belink.com>, 边莹 <bianying@belink.com>, 王宇航 <wangyh3@belink.com>, 吴起玥 <wuqy@belink.com>, 王朋 <wangpeng@belink.com>, 孟涛 <mengtao@belink.com>, 畅红霞 <changhx@belink.com>, 王娅惠 <wangyh@belink.com>, 吕海青 <lvhq@belink.com>, wangjl1@belink
+
+--- [10] 2026-02-13 07:55:28 ---
+  主题: Re: Re: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 曾硕 <zengshuo@belink.com>
+  正文: 无异议
+
+-----原始邮件-----
+发件人:changhx <changhx@belink.com>
+发送时间:2026-02-12 16:17:28 (星期四)
+收件人: 常佳宇 <changjy@belink.com>, 曾硕 <zengshuo@belink.com>, mengtao <mengtao@belink.com>, wangpeng <wangpeng@belink.com>, wuqy <wuqy@belink.com>, "wangjl1@belink.com" <wangjl1@belink.com>, 吕海青 <lvhq@belink.com>, "wangyh3@belink.com" <wangyh3@belink.com>, 边莹 <bianying@belink.com>, hushou <hushou@belink.com>, wangyh <wangyh@belink.com>, 陈宇 <chenyu@belink.com>, kongfq <kongfq@belink.com>, zhaoyc1 <zhaoyc1@belink.com>, 
+
+--- [11] 2026-02-13 10:53:53 ---
+  主题: Re: Re: Re: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+需要先盖章的阿里云采购合同是(YCHD-ZB-2026-015)九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器(采购阿里云)
+
+请胡总确认一下。
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:曾硕 <zengshuo@belink.com>
+发送时间:2026-02-13 07:55:28 (星期五)
+收件人: changhx <changhx@belink.com>
+抄送: 常佳宇 <changjy@belink.com>, mengtao <mengtao@belink.com>, wangpeng <wangpeng@belink.com>, wuqy <wuqy@belink.com>, "wangjl1@belink.com" <wangjl1@belink.com>, 吕海青 <lvhq@belink.com>, "wangyh3@belink.com" <wangyh3@belink.com>, 边莹 <bianyi
+
+--- [12] 2026-02-13 11:38:57 ---
+  主题: Re: Re: Re: Re: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力
+  发件人: 胡首 <hushou@belink.com>
+  正文: 确认！
+
+胡首
+
+20260213
+
+-----原始邮件-----
+发件人:常佳宇 <changjy@belink.com>
+发送时间:2026-02-13 10:53:53 (星期五)
+收件人: "wangyh3@belink.com" <wangyh3@belink.com>, 吕海青 <lvhq@belink.com>, wuqy <wuqy@belink.com>, 边莹 <bianying@belink.com>, 陈宇 <chenyu@belink.com>, wangyh <wangyh@belink.com>, wangpeng <wangpeng@belink.com>, kongfq <kongfq@belink.com>, "wangjl1@belink.com" <wangjl1@belink.com>, hushou <hushou@belink.com>, mengtao <mengtao@belink.com>, 周喜春 <zhouxc@belink.com>, zhaoyc1 <zhaoyc1@belink.com>, changhx <changhx@
+
+--- [13] 2026-03-23 16:20:03 ---
+  主题: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器，附件为损益表（3月6号最新中标价格已更新），江西蓝骏豫科采购合同，浪潮采购合同等。
+
+预计销售金额为6,852,000.00元，采购合同金额为5,956,465.00元，毛利率9.92%。
+
+采购阿里云成本5,537,920.00元，其中PPU采购成本5,250,000.00元，税率为13%；灵码私有化版本成本150,000.00元，税率13%；
+
+公共云灵码企业标准版本37,920.00元，税率13%，安装服务成本100,000.00元，税率6%。
+
+采购浪潮成本413,673.00元，其中raid卡成本52,773.00元，税率13%；维保服务成本360,900.00元，税率6%。
+
+采购江西蓝骏豫科耗材成本4,872.00元，税率13%。
+
+预计销售合同三月份签约，为了不影响给客户交付，申请提前给耗材和浪潮采购合同盖章和提交付款流程。
+
+请各位领导特批！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始
+
+--- [14] 2026-03-23 19:58:56 ---
+  主题: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器，由于客户临时通知他们改了方案，不需要耗材了，附件为损益表（3月6号最新中标价格已更新），浪潮采购合同等。
+
+预计销售金额为6,852,000.00元，采购合同金额为5,951,593.00元，毛利率11.5%。
+
+采购阿里云成本5,537,920.00元，其中PPU采购成本5,250,000.00元，税率为13%；灵码私有化版本成本150,000.00元，税率13%；
+
+公共云灵码企业标准版本37,920.00元，税率13%，安装服务成本100,000.00元，税率6%。
+
+采购浪潮成本413,673.00元，其中raid卡成本52,773.00元，税率13%；维保服务成本360,900.00元，税率6%。
+
+预计销售合同三月底签约，预计客户在五月中旬付首款，为了不影响给客户交付，申请提前给浪潮采购合同盖章和提前给浪潮付款（发货前付款，付全款413,673.00元）。
+
+请各位领导特批！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股
+
+--- [15] 2026-03-23 20:08:47 ---
+  主题: Re: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 胡首 <hushou@belink.com>
+  正文: 同意！
+
+胡首
+
+20260323
+
+-----原始邮件-----
+发件人:常佳宇 <changjy@belink.com>
+发送时间:2026-03-23 19:58:56 (星期一)
+收件人: 王建磊 <wangjl1@belink.com>, zhouxc <zhouxc@belink.com>, 陈宇 <chenyu@belink.com>, 孔繁强 <kongfq@belink.com>, "wangyh@belink.com" <wangyh@belink.com>, 胡首 <hushou@belink.com>, 毛凤娇 <maofj@belink.com>, "wangpeng@belink.com" <wangpeng@belink.com>, 边莹 <bianying@belink.com>, 赵迎春 <zhaoyc1@belink.com>, wuqy <wuqy@belink.com>, 王宇航 <wangyh3@belink.com>, changhx <changhx@belink.com>, lvhq <lvhq@belink.com>, "mengtao
+
+--- [16] 2026-03-24 08:27:21 ---
+  主题: Re: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: zhouxc <zhouxc@belink.com>
+  正文: 确认。
+
+在 2026年3月23日 20:08，胡首<hushou@belink.com> 写道：
+
+同意！
+
+胡首
+20260323
+
+ 
+
+-----原始邮件-----
+ 发件人: 常佳宇 <changjy@belink.com>
+ 发送时间: 2026-03-23 19:58:56 (星期一)
+ 收件人: 王建磊 <wangjl1@belink.com>, zhouxc <zhouxc@belink.com>, 陈宇 <chenyu@belink.com>, 孔繁强 <kongfq@belink.com>, "wangyh@belink.com" <wangyh@belink.com>, 胡首 <hushou@belink.com>, 毛凤娇 <maofj@belink.com>, "wangpeng@belink.com" <wangpeng@belink.com>, 边莹 <bianying@belink.com>, 赵迎春 <zhaoyc1@belink.com>, wuqy <wuqy@belink.com>, 王宇航 <wangyh3@belink.com>, chan
+
+--- [17] 2026-03-24 09:45:13 ---
+  主题: Re: Re: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: changhx <changhx@belink.com>
+  正文: 无异议
+
+
+
+畅红霞
+
+地址：北京市海淀区西小口路66号东升科技园A1楼201（100192）
+电话：13501395526
+ 
+在 2026年3月23日 20:08，胡首<hushou@belink.com> 写道：
+
+同意！ 
+
+胡首 
+20260323 
+
+
+-----原始邮件-----
+发件人: 常佳宇 <changjy@belink.com>
+发送时间: 2026-03-23 19:58:56 (星期一)
+收件人: 王建磊 <wangjl1@belink.com>, zhouxc <zhouxc@belink.com>, 陈宇 <chenyu@belink.com>, 孔繁强 <kongfq@belink.com>, "wangyh@belink.com" <wangyh@belink.com>, 胡首 <hushou@belink.com>, 毛凤娇 <maofj@belink.com>, "wangpeng@belink.com" <wangpeng@belink.com>, 边莹 <bianying@belink.com>, 赵迎
+
+--- [18] 2026-04-09 10:33:08 ---
+  主题: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器，九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器（采购阿里云-公共云灵码）需要先付款，付款金额为30,336.00元。
+
+付款之后才可以下载合同，请各位领导特批先付款再走合同盖章流程！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:胡首 <hushou@belink.com>
+发送时间:2026-04-08 17:29:48 (星期三)
+收件人: 常佳宇 <changjy@belink.com>
+抄送: "zhouxc@belink.com" <zhouxc@belink.com>, wangyh <wangyh@belink.com>, zhaoyc1 <zhaoyc1@belink.com>, wangyh3 <wangyh3@belink.com>, chenyu <chenyu@belink.com>, kongfq <kongfq@belink.com>, b
+
+--- [19] 2026-04-09 10:36:50 ---
+  主题: Re: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 胡首 <hushou@belink.com>
+  正文: 同意！
+
+胡首
+
+20260409
+
+-----原始邮件-----
+发件人:常佳宇 <changjy@belink.com>
+发送时间:2026-04-09 10:33:08 (星期四)
+收件人: 胡首 <hushou@belink.com>, "zhouxc@belink.com" <zhouxc@belink.com>, wangyh3 <wangyh3@belink.com>, zhaoyc1 <zhaoyc1@belink.com>, wangyh <wangyh@belink.com>, lvhq <lvhq@belink.com>, wangpeng <wangpeng@belink.com>, wangjl1 <wangjl1@belink.com>, bianying <bianying@belink.com>, changhx <changhx@belink.com>, kongfq <kongfq@belink.com>, chenyu <chenyu@belink.com>, maofj <maofj@belink.com>, mengtao <mengtao@b
+
+--- [20] 2026-04-09 15:32:12 ---
+  主题: Re: Re: 【特批申请】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: changhx <changhx@belink.com>
+  正文: 无异议
+
+
+
+畅红霞
+
+地址：北京市海淀区西小口路66号东升科技园A1楼201（100192）
+电话：13501395526
+ 
+胡首 
+20260409 
+
+
+-----原始邮件-----
+发件人: 常佳宇 <changjy@belink.com>
+发送时间: 2026-04-09 10:33:08 (星期四)
+收件人: 胡首 <hushou@belink.com>, "zhouxc@belink.com" <zhouxc@belink.com>, wangyh3 <wangyh3@belink.com>, zhaoyc1 <zhaoyc1@belink.com>, wangyh <wangyh@belink.com>, lvhq <lvhq@belink.com>, wangpeng <wangpeng@belink.com>, wangjl1 <wangjl1@belink.com>, bianying <bianying@belink.com>, changhx <changhx@belink.com>, kongfq <kongfq@belin
+
+============================================================
+【用印特批】(3封)
+============================================================
+
+--- [1] 2026-03-24 10:28:15 ---
+  主题: 【用印特批】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: 常佳宇 <changjy@belink.com>
+  正文: 各位领导好：
+
+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器，由于这个项目是行领导盯着的项目，需要我们每天汇报进展，行里着急服务器上架，使用；现在只差浪潮的配件就可以上架了。现申请先给浪潮合同线下用印，预计今天会发起合同盖章流程。请各位领导特批！
+
+常佳宇
+
+手机：19186980047
+
+E-mail：changjy@belink.com
+
+北京易诚互动网络技术股份有限公司
+
+-----原始邮件-----
+发件人:changhx <changhx@belink.com>
+发送时间:2026-03-24 09:45:13 (星期二)
+收件人: 周喜春 <zhouxc@belink.com>, 常佳宇 <changjy@belink.com>, hushou <hushou@belink.com>
+抄送: "wangjl1@belink.com" <wangjl1@belink.com>, 陈宇 <chenyu@belink.com>, kongfq <kongfq@belink.com>, wangyh <wangyh@belink.com>, 'maofj' <ma
+
+--- [2] 2026-03-24 10:53:06 ---
+  主题: 回复：【用印特批】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: hushou <hushou@belink.com>
+  正文: 同意！
+
+
+胡首
+20260324
+
+
+         原始邮件
+         
+       
+
+
+
+ 	各位领导好： 
+
+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器，由于这个项目是行领导盯着的项目，需要我们每天汇报进展，行里着急服务器上架，使用；现在只差浪潮的配件就可以上架了。现申请先给浪潮合同线下用印，预计今天会发起合同盖章流程。请各位领导特批！ 
+
+ 
+
+
+常佳宇  
+
+手机：19186980047  
+
+E-mail：changjy@belink.com   
+
+北京易诚互动网络技术股份有限公司  
+
+
+ 
+ 	-----原始邮件-----
+ 发件人:&nbsp;changhx <changhx@belink.com&gt;
+ 发送时间:&nbsp;2026-03-24 09:45:13 (星期二)
+ 收件人:&nbsp;周喜春 <zhouxc@belink.com&gt;, 常佳宇 <changjy@belink.com&gt;, hushou <hushou@belink.com&
+
+--- [3] 2026-03-24 14:45:56 ---
+  主题: Re: 回复：【用印特批】商机编号XS-2026_0122+YCHD2026-033+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器
+  发件人: changhx <changhx@belink.com>
+  正文: 同意
+
+
+
+畅红霞
+
+地址：北京市海淀区西小口路66号东升科技园A1楼201（100192）
+电话：13501395526
+ 
+胡首
+20260324
+
+原始邮件
+
+
+各位领导好： 
+九江银行2026年鄱阳湖数据中心灾备完善项目-GPU算力服务器，由于这个项目是行领导盯着的项目，需要我们每天汇报进展，行里着急服务器上架，使用；现在只差浪潮的配件就可以上架了。现申请先给浪潮合同线下用印，预计今天会发起合同盖章流程。请各位领导特批！ 
+
+
+
+-----原始邮件-----
+发件人: changhx <changhx@belink.com>
+发送时间: 2026-03-24 09:45:13 (星期二)
+收件人: 周喜春 <zhouxc@belink.com>, 常佳宇 <changjy@belink.com>, hushou <hushou@belink.com>
+抄送: "wangjl1@belink.com" <wangjl1@belink.com>, 陈宇 <chenyu@belink.com>, kongfq <kongfq@belin

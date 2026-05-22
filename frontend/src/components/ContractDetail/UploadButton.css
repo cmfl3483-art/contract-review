@@ -1,0 +1,28 @@
+.upload-button-container {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.upload-progress {
+  min-width: 200px;
+  padding: 4px 0;
+}
+
+/* 按钮悬停效果 */
+.upload-button-container .ant-btn:not(:disabled):hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
+
+/* 按钮禁用状态 */
+.upload-button-container .ant-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* 上传中状态 */
+.upload-button-container .ant-btn-loading {
+  cursor: wait;
+}

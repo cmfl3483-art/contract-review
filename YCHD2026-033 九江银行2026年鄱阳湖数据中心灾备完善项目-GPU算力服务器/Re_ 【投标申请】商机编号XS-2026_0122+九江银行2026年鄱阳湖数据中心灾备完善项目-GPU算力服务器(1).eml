@@ -1,0 +1,1974 @@
+Received: from belink.com (unknown [192.168.154.11])
+	by coremail (Coremail) with SMTP id AQAAfwDHmqWDfI1p8fVYBg--.20863S2;
+	Thu, 12 Feb 2026 15:08:51 +0800 (CST)
+Received: from mail.belink.com (unknown [116.162.93.135])
+	by gateway (Coremail) with SMTP id _____wC36MV4fI1pBX0xAA--.6648S3;
+	Thu, 12 Feb 2026 15:08:42 +0800 (CST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=belink.com; s=dkim; h=Received:Content-Type:
+	Content-Transfer-Encoding:From:Mime-Version:Subject:Date:
+	Message-Id:References:Cc:In-Reply-To:To; bh=jZMgCIlYHs+btnJPqEiR
+	66ifT4V3qaajKLS48MDXze8=; b=tDMB2h+DG+8lsloOYGJiS0wpiSGsaVxkDlVI
+	PL1YV6pxuy/CG82zdGRMaLrCw7xLBTTW4j7XX4y/5Q3oUOd+Jh1C7XwHvETwMm0A
+	4kGAov7LHggtZUvtN4J8dASiEHcoZe/3XUG+8sfljx7V10Vhy2GNUXjZW6Yi052W
+	4BOxwmI=
+Received: from smtpclient.apple (unknown [116.162.93.135])
+	by coremail (Coremail) with SMTP id AQAAfwDHmqV3fI1pxvVYBg--.20861S3;
+	Thu, 12 Feb 2026 15:08:39 +0800 (CST)
+Content-Type: multipart/alternative; boundary=Apple-Mail-302BAAEE-DA44-45E2-97BF-060FA5091D4B
+Content-Transfer-Encoding: 7bit
+From: zhouxc <zhouxc@belink.com>
+Mime-Version: 1.0 (1.0)
+Subject: =?utf-8?B?UmU6IOOAkOaKleagh+eUs+ivt+OAkeWVhuacuue8luWPt1hTLTIw?=
+ =?utf-8?B?MjZfMDEyMivkuZ3msZ/pk7booYwyMDI25bm06YSx6Ziz5rmW5pWw?=
+ =?utf-8?B?5o2u5Lit5b+D54G+5aSH5a6M5ZaE6aG555uuLUdQVeeul+WKmw==?=
+ =?utf-8?B?5pyN5Yqh5Zmo?=
+Date: Thu, 12 Feb 2026 15:08:23 +0800
+Message-Id: <5B5C5EA7-9186-4023-9A18-13A3C19C4023@belink.com>
+References: <2026021214035295588933@belink.com>
+Cc: =?utf-8?B?5bi45L2z5a6H?= <changjy@belink.com>,
+ =?utf-8?B?6IOh6aaW?= <hushou@belink.com>,
+ =?utf-8?B?5a2U57mB5by6?= <kongfq@belink.com>,
+ =?utf-8?B?6L656I65?= <bianying@belink.com>,
+ =?utf-8?B?546L5a6H6Iiq?= <wangyh3@belink.com>,
+ =?utf-8?B?5ZC06LW3546l?= <wuqy@belink.com>,
+ =?utf-8?B?546L5pyL?= <wangpeng@belink.com>,
+ =?utf-8?B?5a2f5rab?= <mengtao@belink.com>,
+ =?utf-8?B?55WF57qi6Zye?= <changhx@belink.com>,
+ =?utf-8?B?546L5aiF5oOg?= <wangyh@belink.com>,
+ =?utf-8?B?5ZCV5rW36Z2S?= <lvhq@belink.com>, wangjl1@belink.com,
+ =?utf-8?B?6aG555uu566h55CG6YOo?= <xiangmu@belink.com>,
+ =?utf-8?B?6LSi5Yqh?= <caiwu@belink.com>,
+ =?utf-8?B?6ZmI5a6H?= <chenyu@belink.com>
+In-Reply-To: <2026021214035295588933@belink.com>
+To: zhaoyc1@belink.com
+X-Mailer: iPhone Mail (23B85)
+X-CM-DELIVERINFO: =?B?JB3NGrvppcuX7Nbc8LRvkTfhp5opPDkVWQgH14xO43Kq6K2koiCOk0ni7xHDSUofsp
+	byrHzQuHlrafPKgvp1BYAdiHbHy4HRtpc23rqGp2V/azIDLzwo8r9Pw0ey07/g9VGl9LxL
+	MACmaQb2ETwq4O0/BKs=
+X-CM-TRANSID:AQAAfwDHmqWDfI1p8fVYBg--.20863S2
+Authentication-Results: coremail; spf=neutral smtp.mail=zhouxc@belink.
+	com; dkim=pass header.i=@belink.com
+X-CM-SenderInfo: p2kr35nf6evzxlqnhudrp/
+X-Coremail-Antispam: 1UD129KBjvAXoWftr4UGryfuF1ruFy7Ar4rAFb_yoW8tFW5to
+	WDAw15Jr18Ar15CryUJr18tF98AryUtr4xAr1UWay8Jr17XrWDtr1UJw13JryDJr1Utw1U
+	Xw18J34UWryqqr1Dn29KB7ZKAUJUUUUf529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+	AaLaJ3UjIYCTnIWjp_UUUoT7CY07I20VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM28lY4IE
+	4IxF12IF4wA2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84
+	ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4U
+	JwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJwAaw2AFwI0_JF0_Jw1le2I262IYc4
+	CY6c8Ij28IcVAaY2xG8wAqjxCEc2xF0cIa020Ex4CE44I27wAq07x20xvEIxAIcVA0r40E
+	r4AFj41l5I8CrVCF0I0E4I0vr24l5I8CrVC2j2CEjI02ccxYII8I67AEr4CY67k08wAv7V
+	ACjcxG62k0Y48FwI0_Jr0_Gr1lYx0E74AGY7Cv6cx26r4xMcvjeVCFs4IE7xkEbVWUJVW8
+	JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFcxC0VAqx4xG64xE4I
+	8GawACY4xI6c02F40Ez4kGawAKzVCjr7xvwVAFz4v204v26I0v724lc7CjxVAaw2AFwI0_
+	JF0_Jw1l42xK82IYc2Ij64vIr41l42xK82IY6x8ErcxFaVAv8VW8CwCFx2IqxVCFs4IE7x
+	kEbVWUJVW8JwCFI7km07C267AKxVWUAVWUtwC20s026c02F40E14v26r106r1rMI8I3I0E
+	7480Y4vE14v26r1j6r18MI8E67AF67kF1VAFwI0_GFv_WrylIxkGc2Ij64vIr41lIxAIcV
+	C0I7IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF
+	04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7
+	CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUGjgsUUUUU=
+
+
+--Apple-Mail-302BAAEE-DA44-45E2-97BF-060FA5091D4B
+Content-Type: text/html;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html class=3D"apple-mail-supports-explicit-dark-mode"><head><meta http-equi=
+v=3D"content-type" content=3D"text/html; charset=3Dutf-8"></head><body dir=3D=
+"auto">=E4=B8=8A=E4=B8=80=E6=AC=A1=E8=AF=84=E4=BC=B0=E4=B8=BA18%=E5=88=A9=E6=
+=B6=A6=EF=BC=8C=E6=AD=A4=E6=AC=A1=E5=A2=9E=E5=8A=A0=E7=9A=84=E5=86=85=E5=AE=B9=
+=E5=8C=85=E5=90=AB=E6=8C=82=E7=BD=91=E6=8B=9B=E6=A0=87=E8=A6=81=E6=B1=82=E4=B8=
+=AD=E5=A2=9E=E5=8A=A0=E9=A2=9D=E5=A4=96=E7=9A=84=E4=B8=A4=E5=B9=B4=E7=BB=B4=E4=
+=BF=9D=E5=8F=8A=E9=85=8D=E4=BB=B6=EF=BC=8C=E4=BB=A5=E5=8F=8A=E9=98=BF=E9=87=8C=
+=E5=8E=9F=E5=8E=82=E7=9A=84=E6=A8=A1=E5=9E=8B=E5=AE=89=E8=A3=85=E8=B0=83=E8=AF=
+=95=E6=9C=8D=E5=8A=A1=EF=BC=8C=E8=AF=B7=E6=B3=A8=E6=84=8F=E8=BD=AC=E5=8C=85=E7=
+=AD=BE=E7=BA=A6=E5=85=AC=E5=8F=B8=E4=B8=BA=E6=B5=AA=E6=BD=AE=E5=8F=8A=E9=98=BF=
+=E9=87=8C=E5=8E=9F=E5=8E=82=EF=BC=8C=E5=85=B6=E4=BB=96=E6=97=A0=E5=BC=82=E8=AE=
+=AE=E3=80=82<br id=3D"lineBreakAtBeginningOfSignature"><div dir=3D"ltr">=E5=8F=
+=91=E8=87=AA=E6=88=91=E7=9A=84=E2=80=86iPhone</div><div dir=3D"ltr"><br><blo=
+ckquote type=3D"cite">=E5=9C=A8 2026=E5=B9=B42=E6=9C=8812=E6=97=A5=EF=BC=8C1=
+4:04=EF=BC=8Czhaoyc1@belink.com =E5=86=99=E9=81=93=EF=BC=9A<br><br></blockqu=
+ote></div><blockquote type=3D"cite"><div dir=3D"ltr">=EF=BB=BF<meta http-equ=
+iv=3D"content-type" content=3D"text/html; charset=3DUTF-8"><style>body { lin=
+e-height: 1.5; }
+blockquote { margin-top: 0px; margin-bottom: 0px; margin-left: 0.5em; }
+p { margin-top: 0px; margin-bottom: 0px; }
+div.FoxDiv20260212140012828114 { }
+body { font-size: 14px; font-family: "Microsoft YaHei UI"; color: rgb(0, 0, 0=
+); line-height: 1.5; }</style>
+<div><br></div><div><font color=3D"#ff0000"><b>=E5=BD=93=E5=89=8D=E6=8D=9F=E7=
+=9B=8A=E4=B8=8E=E6=AD=A4=E5=89=8D=E7=94=B3=E8=AF=B7=E9=87=87=E8=B4=AD=E5=85=88=
+=E7=AD=BE=E6=97=B6=E6=8F=90=E4=BE=9B=E7=9A=84=E6=8D=9F=E7=9B=8A=E6=9C=89=E5=B7=
+=A8=E5=A4=A7=E5=87=BA=E5=85=A5=EF=BC=8C=E5=8C=85=E6=8B=AC=E9=87=87=E8=B4=AD=E5=
+=86=85=E5=AE=B9=E3=80=81=E4=BE=9B=E5=BA=94=E5=95=86=E3=80=81=E5=88=A9=E6=B6=A6=
+=E7=8E=87=E7=AD=89=EF=BC=8C=E5=9D=87=E5=87=BA=E7=8E=B0=E5=A4=A7=E5=B9=85=E5=8F=
+=98=E5=8A=A8=EF=BC=9B</b></font></div><div><br></div><div>=E5=9F=BA=E4=BA=8E=
+=E5=BD=93=E5=89=8D=E6=98=BE=E7=A4=BA=EF=BC=8C=E5=90=88=E5=90=8C=E4=B8=BA=E4=B8=
+=80=E5=AF=B9=E5=A4=9A=E7=9A=84=E7=BA=AF=E4=BB=A3=E7=90=86=E5=90=88=E5=90=8C=EF=
+=BC=8C=E8=AF=B7=E5=85=B3=E6=B3=A8=E4=B8=8A=E4=B8=8B=E6=B8=B8=E5=90=88=E5=90=8C=
+=E5=AF=B9=E5=BA=94=E6=80=A7=E3=80=82</div><div><br></div><div><span></span><=
+div>&lt;Catch.jpg&gt;</div></div>
+<div><br></div><hr style=3D"width: 210px; height: 1px;" color=3D"#b5c4df" si=
+ze=3D"1" align=3D"left">
+<div><span><div style=3D"margin: 10px;"><p class=3D"MsoNormal" style=3D"marg=
+in: 0cm 0cm 0.0001pt; text-align: justify; font-family: =E5=AE=8B=E4=BD=93;"=
+><font color=3D"#808080" style=3D"font-family: =E5=BE=AE=E8=BD=AF=E9=9B=85=E9=
+=BB=91; font-size: 10.5pt; line-height: 1.5; background-color: transparent;"=
+><span style=3D"font-size: 13.3333px; line-height: 20px;">=E8=B5=B5=E8=BF=8E=
+=E6=98=A5 &nbsp; =E5=86=85=E6=A0=B8</span></font><span style=3D"color: rgb(1=
+28, 128, 128); font-family: =E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91; font-size:=
+ 13.3333px; line-height: 20px; background-color: transparent;">=E9=83=A8</sp=
+an></p><p class=3D"MsoNormal" style=3D"margin: 0cm 0cm 0.0001pt; text-align:=
+ justify;"><font face=3D"=E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91"><font color=3D=
+"#808080" style=3D"font-size: 10.5pt; line-height: 1.5; background-color: tr=
+ansparent;"><span style=3D"font-size: 13.3333px; line-height: 20px;">=E5=8C=97=
+=E4=BA=AC=E6=98=93=E8=AF=9A=E4=BA=92=E5=8A=A8=E7=BD=91=E7=BB=9C=E6=8A=80=E6=9C=
+=AF=E8=82=A1=E4=BB=BD=E6=9C=89=E9=99=90=E5=85=AC=E5=8F=B8</span></font></fon=
+t></p><p class=3D"MsoNormal" style=3D"font-size: 12pt; margin: 0cm 0cm 0.000=
+1pt; text-align: justify;"><br></p></div></span></div>
+<blockquote style=3D"margin-Top: 0px; margin-Bottom: 0px; margin-Left: 0.5em=
+; margin-Right: inherit"><div>&nbsp;</div><div style=3D"border:none;border-t=
+op:solid #B5C4DF 1.0pt;padding:3.0pt 0cm 0cm 0cm"><div style=3D"PADDING-RIGH=
+T: 8px; PADDING-LEFT: 8px; FONT-SIZE: 12px;FONT-FAMILY:tahoma;COLOR:#000000;=
+ BACKGROUND: #efefef; PADDING-BOTTOM: 8px; PADDING-TOP: 8px"><div><b>=E5=8F=91=
+=E4=BB=B6=E4=BA=BA=EF=BC=9A</b>&nbsp;<a href=3D"mailto:changjy@belink.com">=E5=
+=B8=B8=E4=BD=B3=E5=AE=87</a></div><div><b>=E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4=
+=EF=BC=9A</b>&nbsp;2026-02-12&nbsp;09:55</div><div><b>=E6=94=B6=E4=BB=B6=E4=BA=
+=BA=EF=BC=9A</b>&nbsp;<a href=3D"mailto:hushou@belink.com">=E8=83=A1=E9=A6=96=
+</a>; <a href=3D"mailto:kongfq@belink.com">=E5=AD=94=E7=B9=81=E5=BC=BA</a>; <=
+a href=3D"mailto:bianying@belink.com">=E8=BE=B9=E8=8E=B9</a>; <a href=3D"mai=
+lto:wangyh3@belink.com">=E7=8E=8B=E5=AE=87=E8=88=AA</a>; <a href=3D"mailto:w=
+uqy@belink.com">=E5=90=B4=E8=B5=B7=E7=8E=A5</a>; <a href=3D"mailto:wangpeng@=
+belink.com">=E7=8E=8B=E6=9C=8B</a>; <a href=3D"mailto:mengtao@belink.com">=E5=
+=AD=9F=E6=B6=9B</a>; <a href=3D"mailto:zhouxc@belink.com">=E5=91=A8=E5=96=9C=
+=E6=98=A5</a>; <a href=3D"mailto:changhx@belink.com">=E7=95=85=E7=BA=A2=E9=9C=
+=9E</a>; <a href=3D"mailto:wangyh@belink.com">=E7=8E=8B=E5=A8=85=E6=83=A0</a=
+>; <a href=3D"mailto:lvhq@belink.com">=E5=90=95=E6=B5=B7=E9=9D=92</a>; <a hr=
+ef=3D"mailto:zhaoyc1@belink.com">zhaoyc1@belink.com</a>; <a href=3D"mailto:w=
+angjl1@belink.com">=E7=8E=8B=E5=BB=BA=E7=A3=8A</a></div><div><b>=E6=8A=84=E9=
+=80=81=EF=BC=9A</b>&nbsp;<a href=3D"mailto:xiangmu@belink.com">=E9=A1=B9=E7=9B=
+=AE=E7=AE=A1=E7=90=86=E9=83=A8</a>; <a href=3D"mailto:caiwu@belink.com">=E8=B4=
+=A2=E5=8A=A1</a>; <a href=3D"mailto:chenyu@belink.com">=E9=99=88=E5=AE=87</a=
+></div><div><b>=E4=B8=BB=E9=A2=98=EF=BC=9A</b>&nbsp;=E3=80=90=E6=8A=95=E6=A0=
+=87=E7=94=B3=E8=AF=B7=E3=80=91=E5=95=86=E6=9C=BA=E7=BC=96=E5=8F=B7XS-2026_01=
+22+=E4=B9=9D=E6=B1=9F=E9=93=B6=E8=A1=8C2026=E5=B9=B4=E9=84=B1=E9=98=B3=E6=B9=
+=96=E6=95=B0=E6=8D=AE=E4=B8=AD=E5=BF=83=E7=81=BE=E5=A4=87=E5=AE=8C=E5=96=84=E9=
+=A1=B9=E7=9B=AE-GPU=E7=AE=97=E5=8A=9B=E6=9C=8D=E5=8A=A1=E5=99=A8</div></div>=
+</div><div><div class=3D"FoxDiv20260212140012828114"><div class=3D"default-f=
+ont-1770861300173" style=3D"font-size: 14px; font-family: &quot;Microsoft Ya=
+Hei UI&quot;;">
+<div class=3D"default-font-1770694189435" style=3D"font-size: 14px; font-fam=
+ily: &quot;Microsoft YaHei UI&quot;;">
+	<p style=3D"font-size: 14px; margin: 0px;">
+		=E5=90=84=E4=BD=8D=E9=A2=86=E5=AF=BC=E5=A5=BD=EF=BC=9A
+	</p>
+	<p style=3D"font-size: 14px; margin: 0px;">
+		<span style=3D"text-wrap-mode:nowrap;">=E4=B9=9D=E6=B1=9F=E9=
+=93=B6=E8=A1=8C2026=E5=B9=B4=E9=84=B1=E9=98=B3=E6=B9=96=E6=95=B0=E6=8D=AE=E4=
+=B8=AD=E5=BF=83=E7=81=BE=E5=A4=87=E5=AE=8C=E5=96=84=E9=A1=B9=E7=9B=AE-GPU=E7=
+=AE=97=E5=8A=9B=E6=9C=8D=E5=8A=A1=E5=99=A8=EF=BC=8C=E9=99=84=E4=BB=B6=E4=B8=BA=
+=E6=8A=95=E6=A0=87=E8=AF=84=E5=AE=A1=E8=A1=A8=EF=BC=8C=E6=8D=9F=E7=9B=8A=E8=A1=
+=A8=EF=BC=8C=E5=90=88=E5=90=8C=E4=B8=BB=E8=A6=81=E6=9D=A1=E6=AC=BE=EF=BC=8C=E6=
+=8B=9B=E6=A0=87=E6=96=87=E4=BB=B6=E7=AD=89=E3=80=82</span>=20
+	</p>
+	<p style=3D"font-size: 14px; margin: 0px;">
+		=E9=A2=84=E8=AE=A1=E9=94=80=E5=94=AE=E5=90=88=E5=90=8C=E9=87=
+=91=E9=A2=9D=E4=B8=BA6,600,000.00=E5=85=83=EF=BC=8C=E9=87=87=E8=B4=AD=E6=80=BB=
+=E6=88=90=E6=9C=AC=E4=B8=BA5,806,000.00=E5=85=83=EF=BC=8C=E6=AF=9B=E5=88=A9=E7=
+=8E=87=E4=B8=BA10.50%=E3=80=82
+	</p>
+	<p style=3D"font-size: 14px; margin: 0px;">
+		=E9=87=87=E8=B4=AD=E9=98=BF=E9=87=8C=E4=BA=91=E6=88=90=E6=9C=
+=AC=E4=B8=BA5,350,000.00=E5=85=83=EF=BC=8C=E5=85=B6=E4=B8=ADPPU=E6=88=90=E6=9C=
+=AC=E4=B8=BA5,250,000.00=E5=85=83=EF=BC=8C=E7=A8=8E=E7=8E=87=E4=B8=BA13%=EF=BC=
+=8C=E5=AE=89=E8=A3=85=E6=9C=8D=E5=8A=A1=E6=88=90=E6=9C=AC=E4=B8=BA100,000.00=
+=E5=85=83=EF=BC=8C=E7=A8=8E=E7=8E=87=E4=B8=BA6%=E3=80=82
+	</p>
+	<p style=3D"font-size: 14px; margin: 0px;">
+		=E9=87=87=E8=B4=AD=E6=B5=AA=E6=BD=AE=E6=88=90=E6=9C=AC=E4=B8=
+=BA450,000.00=E5=85=83=EF=BC=8C=E5=85=B6=E4=B8=AD=E7=BB=B4=E4=BF=9D=E6=88=90=
+=E6=9C=AC=E4=B8=BA360,000.00=E5=85=83=EF=BC=8C=E7=A8=8E=E7=8E=87=E4=B8=BA6%=EF=
+=BC=8C=E9=85=8D=E4=BB=B6=E6=88=90=E6=9C=AC=E4=B8=BA90,000.00=E5=85=83=EF=BC=8C=
+=E7=A8=8E=E7=8E=87=E4=B8=BA13%=E3=80=82
+	</p>
+	<p style=3D"font-size: 14px; margin: 0px;">
+		=E9=87=87=E8=B4=AD=E8=80=97=E6=9D=90=E6=88=90=E6=9C=AC=E4=B8=
+=BA6,000.00=E5=85=83=EF=BC=8C=E7=A8=8E=E7=8E=87=E4=B8=BA13%=E3=80=82
+	</p>
+	<p style=3D"font-size: 14px; margin: 0px;">
+		=E8=AF=B7=E5=90=84=E4=BD=8D=E9=A2=86=E5=AF=BC=E5=AE=A1=E6=89=
+=B9=EF=BC=81
+	</p>
+<br>
+<span class=3D"spnEditorSign">=20
+	<hr class=3D"signature-separator" align=3D"left" style=3D"margin:0.=
+5em 0;width:10em;height:1px;background-color:#999;border:none;">
+	<p style=3D"line-height: 1; margin: 0px;">
+		<span style=3D"color:#E53333;font-family:Arial;">&nbsp; </s=
+pan><span style=3D"font-size:14px;"><span style=3D"color:#E53333;font-family=
+:Arial;font-size:14px;">&nbsp;</span><span style=3D"color:#E53333;font-famil=
+y:Arial;font-size:14px;"><span style=3D"color:#E53333;font-family:Arial;font=
+-size:14px;">Best Regards</span></span> </span>=20
+	</p>
+	<p style=3D"line-height: 1; margin: 0px;">
+		<span style=3D"font-size:14px;">=E5=B8=B8=E4=BD=B3=E5=AE=87=
+</span>=20
+	</p>
+	<p style=3D"line-height: 1; margin: 0px;">
+		<span style=3D"font-size:14px;">=E6=89=8B=E6=9C=BA=EF=BC=9A=
+19186980047</span>=20
+	</p>
+	<p style=3D"line-height: 1; margin: 0px;">
+		<span style=3D"font-size:14px;"><span style=3D"font-family:=
+Arial;font-size:14px;">E-mail=EF=BC=9A<span style=3D"font-family:Arial;color=
+:#003399;font-size:14px;">changjy@belink.com</span></span> </span>=20
+	</p>
+	<p style=3D"line-height: 1; margin: 0px;">
+		<span style=3D"font-size:14px;">=E5=8C=97=E4=BA=AC=E6=98=93=
+=E8=AF=9A=E4=BA=92=E5=8A=A8=E7=BD=91=E7=BB=9C=E6=8A=80=E6=9C=AF=E8=82=A1=E4=BB=
+=BD=E6=9C=89=E9=99=90=E5=85=AC=E5=8F=B8</span>=20
+	</p>
+	<p style=3D"margin: 0px;">
+		<br>
+	</p>
+</span>=20
+	<blockquote name=3D"replyContent" class=3D"ReferenceQuote" style=3D=
+"font-size: 14px; padding-left: 5px; margin: 0px 0px 0px 0.5em; border-left:=
+ 2px solid rgb(182, 182, 182);">
+		-----=E5=8E=9F=E5=A7=8B=E9=82=AE=E4=BB=B6-----<br>
+<b>=E5=8F=91=E4=BB=B6=E4=BA=BA:</b> <span id=3D"rc_from">"zhaoyc1@belink.com=
+" &lt;zhaoyc1@belink.com&gt;</span><br>
+<b>=E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4:</b> <span id=3D"rc_senttime">2026-0=
+2-06 09:01:05 (=E6=98=9F=E6=9C=9F=E4=BA=94)</span><br>
+<b>=E6=94=B6=E4=BB=B6=E4=BA=BA:</b> =E5=B8=B8=E4=BD=B3=E5=AE=87 &lt;changjy@=
+belink.com&gt;, =E5=90=95=E6=B5=B7=E9=9D=92 &lt;lvhq@belink.com&gt;, =E5=90=B4=
+=E8=B5=B7=E7=8E=A5 &lt;wuqy@belink.com&gt;, =E7=8E=8B=E5=AE=87=E8=88=AA &lt;=
+wangyh3@belink.com&gt;, =E8=BE=B9=E8=8E=B9 &lt;bianying@belink.com&gt;, =E5=91=
+=A8=E5=96=9C=E6=98=A5 &lt;zhouxc@belink.com&gt;, =E5=AD=9F=E6=B6=9B &lt;meng=
+tao@belink.com&gt;, =E7=8E=8B=E6=9C=8B &lt;wangpeng@belink.com&gt;, =E5=AD=94=
+=E7=B9=81=E5=BC=BA &lt;kongfq@belink.com&gt;, =E7=8E=8B=E5=A8=85=E6=83=A0 &l=
+t;wangyh@belink.com&gt;, =E7=95=85=E7=BA=A2=E9=9C=9E &lt;changhx@belink.com&=
+gt;, =E8=83=A1=E9=A6=96 &lt;hushou@belink.com&gt;<br>
+<b>=E6=8A=84=E9=80=81:</b> =E9=A1=B9=E7=9B=AE=E7=AE=A1=E7=90=86=E9=83=A8 &lt=
+;xiangmu@belink.com&gt;, =E8=B4=A2=E5=8A=A1 &lt;caiwu@belink.com&gt;<br>
+<b>=E4=B8=BB=E9=A2=98:</b> Re: =E3=80=90=E5=90=88=E5=90=8C=E9=A2=84=E5=AE=A1=
+=E3=80=91=E5=95=86=E6=9C=BA=E7=BC=96=E5=8F=B7XS-2026_0122+YCHD2026-033+=E4=B9=
+=9D=E6=B1=9F=E9=93=B6=E8=A1=8C2026=E5=B9=B4=E9=84=B1=E9=98=B3=E6=B9=96=E6=95=
+=B0=E6=8D=AE=E4=B8=AD=E5=BF=83=E7=81=BE=E5=A4=87=E5=AE=8C=E5=96=84=E9=A1=B9=E7=
+=9B=AE-GPU=E7=AE=97=E5=8A=9B=E6=9C=8D=E5=8A=A1=E5=99=A8<br>
+<br>
+		<div>
+			<span></span><br>
+		</div>
+		<div>
+			=E5=B0=B1=E5=90=88=E5=90=8C=E6=96=87=E6=9C=AC=EF=BC=
+=9A=E5=BD=93=E5=89=8D=E6=97=A0=E4=B8=8A=E6=B8=B8=E5=90=88=E5=90=8C=EF=BC=8C=E6=
+=97=A0=E6=B3=95=E8=AF=84=E4=BC=B0=E6=9D=A1=E6=AC=BE=E5=AF=B9=E5=BA=94=E6=80=A7=
+=EF=BC=8C=E8=AF=B7=E6=B3=A8=E6=84=8F=E7=9B=B8=E5=85=B3=E5=86=85=E5=AE=B9=E7=9A=
+=84=E5=AF=B9=E5=BA=94=E4=B8=8E=E9=A3=8E=E9=99=A9=E9=98=B2=E8=8C=83=EF=BC=9B
+		</div>
+		<div>
+			<br>
+		</div>
+		<div>
+			=E5=8F=A6=EF=BC=8C=E5=90=88=E5=90=8C=E7=AC=AC20=E9=A1=
+=B5=E6=98=8E=E7=A1=AE=E7=BA=A6=E5=AE=9A=EF=BC=8C=E4=B9=99=E6=96=B9<span styl=
+e=3D"color:#ff0000;">=E4=B8=8D=E6=89=BF=E6=8B=85</span>=E5=AE=89=E8=A3=85=E9=
+=83=A8=E7=BD=B2=E6=9C=8D=E5=8A=A1=EF=BC=8C=E6=8D=9F=E7=9B=8A=E8=A1=A8=E6=98=BE=
+=E7=A4=BA=E8=AF=A5=E5=90=88=E5=90=8C=E4=B8=BA=E7=A1=AC=E4=BB=B6=E4=BA=A7=E5=93=
+=81=E9=94=80=E5=94=AE=E3=80=81=E6=97=A0=E5=AE=9E=E6=96=BD=E5=B7=A5=E4=BD=9C=E9=
+=87=8F=EF=BC=8C=E8=AF=B7=E5=85=B3=E6=B3=A8=E8=AF=A5=E5=90=88=E5=90=8C=E6=98=AF=
+=E5=90=A6=E4=B8=8D=E6=B6=89=E5=8F=8A=E5=AE=89=E8=A3=85=E9=83=A8=E7=BD=B2=E6=9C=
+=8D=E5=8A=A1=E3=80=82
+		</div>
+		<div>
+			<br>
+		</div>
+		<div>
+			<br>
+		</div>
+		<hr style=3D"width:210px;height:1px;" color=3D"#b5c4df" siz=
+e=3D"1" align=3D"left">
+		<div>
+			<span>=20
+			<div style=3D"margin:10px;">
+				<p class=3D"MsoNormal" style=3D"margin: 0px=
+; text-align: justify; font-family: =E5=AE=8B=E4=BD=93;">
+					<span style=3D"font-family:=E5=BE=AE=
+=E8=BD=AF=E9=9B=85=E9=BB=91;font-size:10.5pt;line-height:1.5;background-colo=
+r:transparent;color:#808080;"><span style=3D"font-size:13.3333px;line-height=
+:20px;">=E8=B5=B5=E8=BF=8E=E6=98=A5 &nbsp; =E5=86=85=E6=A0=B8</span></span><=
+span style=3D"color:#808080;font-family:=E5=BE=AE=E8=BD=AF=E9=9B=85=E9=BB=91=
+;font-size:13.3333px;line-height:20px;background-color:transparent;">=E9=83=A8=
+</span>=20
+				</p>
+				<p class=3D"MsoNormal" style=3D"margin: 0px=
+; text-align: justify;">
+					<span style=3D"font-family:=E5=BE=AE=
+=E8=BD=AF=E9=9B=85=E9=BB=91;"><span style=3D"font-size:10.5pt;line-height:1.=
+5;background-color:transparent;color:#808080;"><span style=3D"font-size:13.3=
+333px;line-height:20px;">=E5=8C=97=E4=BA=AC=E6=98=93=E8=AF=9A=E4=BA=92=E5=8A=
+=A8=E7=BD=91=E7=BB=9C=E6=8A=80=E6=9C=AF=E8=82=A1=E4=BB=BD=E6=9C=89=E9=99=90=E5=
+=85=AC=E5=8F=B8</span></span></span>=20
+				</p>
+				<p class=3D"MsoNormal" style=3D"font-size: 1=
+2pt; margin: 0px; text-align: justify;">
+					<br>
+				</p>
+			</div>
+</span>=20
+		</div>
+		<blockquote style=3D"margin-top:0px;margin-bottom:0px;margi=
+n-left:0.5em;margin-right:inherit;">
+			<div>
+				&nbsp;
+			</div>
+			<div style=3D"border:none;border-top:solid #B5C4DF 1=
+.0pt;padding:3.0pt 0cm 0cm 0cm;">
+				<div style=3D"padding-right:8px;padding-lef=
+t:8px;font-size:12px;font-family:tahoma;color:#000000;background:#efefef;pad=
+ding-bottom:8px;padding-top:8px;">
+					<div>
+						<b>=E5=8F=91=E4=BB=B6=E4=BA=
+=BA=EF=BC=9A</b>&nbsp;<a href=3D"mailto:changjy@belink.com">=E5=B8=B8=E4=BD=B3=
+=E5=AE=87</a>=20
+					</div>
+					<div>
+						<b>=E5=8F=91=E9=80=81=E6=97=
+=B6=E9=97=B4=EF=BC=9A</b>&nbsp;2026-02-05&nbsp;16:49
+					</div>
+					<div>
+						<b>=E6=94=B6=E4=BB=B6=E4=BA=
+=BA=EF=BC=9A</b>&nbsp;<a href=3D"mailto:zhaoyc1@belink.com">zhaoyc1</a>; <a h=
+ref=3D"mailto:lvhq@belink.com">=E5=90=95=E6=B5=B7=E9=9D=92</a>; <a href=3D"m=
+ailto:wuqy@belink.com">wuqy</a>; <a href=3D"mailto:wangyh3@belink.com">wangy=
+h3@belink.com</a>; <a href=3D"mailto:bianying@belink.com">=E8=BE=B9=E8=8E=B9=
+</a>; <a href=3D"mailto:zhouxc@belink.com">=E5=91=A8=E5=96=9C=E6=98=A5</a>; <=
+a href=3D"mailto:mengtao@belink.com">mengtao</a>; <a href=3D"mailto:wangpeng=
+@belink.com">wangpeng</a>; <a href=3D"mailto:kongfq@belink.com">kongfq</a>; <=
+a href=3D"mailto:wangyh@belink.com">wangyh</a>; <a href=3D"mailto:changhx@be=
+link.com">changhx</a>; <a href=3D"mailto:hushou@belink.com">=E8=83=A1=E9=A6=96=
+</a>=20
+					</div>
+					<div>
+						<b>=E6=8A=84=E9=80=81=EF=BC=
+=9A</b>&nbsp;<a href=3D"mailto:xiangmu@belink.com">=E9=A1=B9=E7=9B=AE=E7=AE=A1=
+=E7=90=86=E9=83=A8=E9=82=AE=E7=AE=B1</a>; <a href=3D"mailto:caiwu@belink.com=
+">caiwu</a>=20
+					</div>
+					<div>
+						<b>=E4=B8=BB=E9=A2=98=EF=BC=
+=9A</b>&nbsp;=E3=80=90=E5=90=88=E5=90=8C=E9=A2=84=E5=AE=A1=E3=80=91=E5=95=86=
+=E6=9C=BA=E7=BC=96=E5=8F=B7XS-2026_0122+YCHD2026-033+=E4=B9=9D=E6=B1=9F=E9=93=
+=B6=E8=A1=8C2026=E5=B9=B4=E9=84=B1=E9=98=B3=E6=B9=96=E6=95=B0=E6=8D=AE=E4=B8=
+=AD=E5=BF=83=E7=81=BE=E5=A4=87=E5=AE=8C=E5=96=84=E9=A1=B9=E7=9B=AE-GPU=E7=AE=
+=97=E5=8A=9B=E6=9C=8D=E5=8A=A1=E5=99=A8
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class=3D"FoxDiv20260206085807152927">
+					<div class=3D"default-font-17702813=
+91475" style=3D"font-size:14px;font-family:&quot;Microsoft YaHei UI&quot;;">=
+
+						<p style=3D"font-size: 14px=
+; margin: 0px;">
+							=E5=90=84=E4=BD=8D=E9=
+=A2=86=E5=AF=BC=E5=A5=BD=EF=BC=9A
+						</p>
+						<p style=3D"font-size: 14px=
+; margin: 0px;">
+							=E4=B9=9D=E6=B1=9F=E9=
+=93=B6=E8=A1=8C2026=E5=B9=B4=E9=84=B1=E9=98=B3=E6=B9=96=E6=95=B0=E6=8D=AE=E4=
+=B8=AD=E5=BF=83=E7=81=BE=E5=A4=87=E5=AE=8C=E5=96=84=E9=A1=B9=E7=9B=AE-GPU=E7=
+=AE=97=E5=8A=9B=E6=9C=8D=E5=8A=A1=E5=99=A8=EF=BC=8C=E9=99=84=E4=BB=B6=E4=B8=BA=
+=E6=8D=9F=E7=9B=8A=E8=A1=A8=E5=92=8C=E9=98=BF=E9=87=8C=E4=BA=91=E9=87=87=E8=B4=
+=AD=E5=90=88=E5=90=8C=E3=80=82
+						</p>
+						<p style=3D"margin: 0px;">
+							=E9=A2=84=E8=AE=A1=E9=
+=94=80=E5=94=AE=E9=87=91=E9=A2=9D=E4=B8=BA6,600,000.00=E5=85=83=EF=BC=8C=E9=98=
+=BF=E9=87=8C=E4=BA=91=E9=87=87=E8=B4=AD=E6=88=90=E6=9C=AC=E4=B8=BA5,250,000.=
+00=E5=85=83=EF=BC=8C=E7=A8=8E=E7=8E=8713%=E3=80=82
+						</p>
+						<p style=3D"margin: 0px;">
+							<span style=3D"text=
+-wrap-mode:nowrap;">=E9=A2=84=E8=AE=A1=E9=94=80=E5=94=AE=E5=90=88=E5=90=8C=E4=
+=B8=89=E6=9C=88=E4=BB=BD=E7=AD=BE=E7=BA=A6=EF=BC=8C=E8=AF=A5=E9=A1=B9=E7=9B=AE=
+=E8=BF=98=E6=9C=89=E5=85=B6=E4=BB=96=E9=87=87=E8=B4=AD=E5=90=88=E5=90=8C=EF=BC=
+=8C=E7=9B=AE=E5=89=8D=E7=94=B1=E4=BA=8E=E5=AE=A2=E6=88=B7=E9=83=A8=E5=88=86=E9=
+=9C=80=E6=B1=82=E8=BF=98=E6=9C=AA=E5=AE=8C=E5=85=A8=E6=95=B2=E5=AE=9A=EF=BC=8C=
+=E6=89=80=E4=BB=A5=E5=85=B6=E4=BB=96=E9=87=87=E8=B4=AD=E5=90=88=E5=90=8C=E9=87=
+=91=E9=A2=9D=E6=9A=82=E4=B8=8D=E7=A1=AE=E8=AE=A4=EF=BC=8C=E4=B8=BA=E4=BA=86=E9=
+=94=81=E5=AE=9A=E4=BD=8E=E4=BB=B7=E8=B4=A7=E6=BA=90=EF=BC=8C=E5=B8=8C=E6=9C=9B=
+=E5=85=88=E5=AE=A1=E6=89=B9=E9=98=BF=E9=87=8C=E4=BA=91=E7=9A=84=E9=87=87=E8=B4=
+=AD=E5=90=88=E5=90=8C=E3=80=82</span><br>
+						</p>
+=E8=AF=B7=E5=90=84=E4=BD=8D=E9=A2=86=E5=AF=BC=E5=AE=A1=E6=89=B9=EF=BC=81<br>=
+
+<br>
+<span class=3D"spnEditorSign">=20
+						<hr class=3D"signature-sepa=
+rator" align=3D"left" style=3D"margin:0.5em 0;width:10em;height:1px;backgrou=
+nd-color:#999;border:none;">
+						<p style=3D"line-height: 1;=
+ margin: 0px;">
+							<span style=3D"colo=
+r:#E53333;font-family:Arial;">&nbsp; </span><span style=3D"font-size:14px;">=
+<span style=3D"color:#E53333;font-family:Arial;font-size:14px;">&nbsp;</span=
+><span style=3D"color:#E53333;font-family:Arial;font-size:14px;"><span style=
+=3D"color:#E53333;font-family:Arial;font-size:14px;">Best Regards</span></sp=
+an> </span>=20
+						</p>
+						<p style=3D"line-height: 1;=
+ margin: 0px;">
+							<span style=3D"font=
+-size:14px;">=E5=B8=B8=E4=BD=B3=E5=AE=87</span>=20
+						</p>
+						<p style=3D"line-height: 1;=
+ margin: 0px;">
+							<span style=3D"font=
+-size:14px;">=E6=89=8B=E6=9C=BA=EF=BC=9A19186980047</span>=20
+						</p>
+						<p style=3D"line-height: 1;=
+ margin: 0px;">
+							<span style=3D"font=
+-size:14px;"><span style=3D"font-family:Arial;font-size:14px;">E-mail=EF=BC=9A=
+<span style=3D"font-family:Arial;color:#003399;font-size:14px;">changjy@beli=
+nk.com</span></span> </span>=20
+						</p>
+						<p style=3D"line-height: 1;=
+ margin: 0px;">
+							<span style=3D"font=
+-size:14px;">=E5=8C=97=E4=BA=AC=E6=98=93=E8=AF=9A=E4=BA=92=E5=8A=A8=E7=BD=91=
+=E7=BB=9C=E6=8A=80=E6=9C=AF=E8=82=A1=E4=BB=BD=E6=9C=89=E9=99=90=E5=85=AC=E5=8F=
+=B8</span>=20
+						</p>
+						<p style=3D"margin: 0px;">
+							<br>
+						</p>
+</span>=20
+						<blockquote name=3D"replyCo=
+ntent" class=3D"ReferenceQuote" style=3D"font-size:14px;padding-left:5px;mar=
+gin:0px 0px 0px 0.5em;border-left:2px solid #B6B6B6;">
+							-----=E5=8E=9F=E5=A7=
+=8B=E9=82=AE=E4=BB=B6-----<br>
+<b>=E5=8F=91=E4=BB=B6=E4=BA=BA:</b> <span id=3D"rc_from">=E8=83=A1=E9=A6=96 &=
+lt;hushou@belink.com&gt;</span><br>
+<b>=E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4:</b> <span id=3D"rc_senttime">2026-0=
+2-05 16:24:27 (=E6=98=9F=E6=9C=9F=E5=9B=9B)</span><br>
+<b>=E6=94=B6=E4=BB=B6=E4=BA=BA:</b> =E6=9B=BE=E7=A1=95 &lt;zengshuo@belink.c=
+om&gt;<br>
+<b>=E6=8A=84=E9=80=81:</b> changhx &lt;changhx@belink.com&gt;, =E5=B8=B8=E4=BD=
+=B3=E5=AE=87 &lt;changjy@belink.com&gt;, kongfq &lt;kongfq@belink.com&gt;, w=
+angyh &lt;wangyh@belink.com&gt;, wangpeng &lt;wangpeng@belink.com&gt;, mengt=
+ao &lt;mengtao@belink.com&gt;, zhaoyc1 &lt;zhaoyc1@belink.com&gt;, =E5=90=95=
+=E6=B5=B7=E9=9D=92 &lt;lvhq@belink.com&gt;, wuqy &lt;wuqy@belink.com&gt;, "w=
+angyh3@belink.com" &lt;wangyh3@belink.com&gt;, =E8=BE=B9=E8=8E=B9 &lt;bianyi=
+ng@belink.com&gt;, =E5=91=A8=E5=96=9C=E6=98=A5 &lt;zhouxc@belink.com&gt;, ca=
+iwu &lt;caiwu@belink.com&gt;, =E9=A1=B9=E7=9B=AE=E7=AE=A1=E7=90=86=E9=83=A8=E9=
+=82=AE=E7=AE=B1 &lt;xiangmu@belink.com&gt;<br>
+<b>=E4=B8=BB=E9=A2=98:</b> Re: Re: Re: =E3=80=90=E7=89=B9=E6=89=B9=E7=94=B3=E8=
+=AF=B7=E3=80=91=E5=95=86=E6=9C=BA=E7=BC=96=E5=8F=B7XS-2026_0122+YCHD2026-033=
++=E4=B9=9D=E6=B1=9F=E9=93=B6=E8=A1=8C2026=E5=B9=B4=E9=84=B1=E9=98=B3=E6=B9=96=
+=E6=95=B0=E6=8D=AE=E4=B8=AD=E5=BF=83=E7=81=BE=E5=A4=87=E5=AE=8C=E5=96=84=E9=A1=
+=B9=E7=9B=AE-GPU=E7=AE=97=E5=8A=9B=E6=9C=8D=E5=8A=A1=E5=99=A8<br>
+<br>
+							<div class=3D"defau=
+lt-font-1770279867227" style=3D"font-size:14px;font-family:&quot;Microsoft Y=
+aHei UI&quot;;">
+								<p style=3D=
+"margin: 0px;">
+									=E5=
+=90=8C=E6=84=8F=EF=BC=81
+								</p>
+								<p style=3D=
+"margin: 0px;">
+									<br=
+>
+								</p>
+								<p style=3D=
+"margin: 0px;">
+									=E8=
+=83=A1=E9=A6=96
+								</p>
+								<p style=3D=
+"margin: 0px;">
+									202=
+60205
+								</p>
+<br>
+<br>
+								<blockquote=
+ name=3D"replyContent" class=3D"ReferenceQuote" style=3D"padding-left:5px;ma=
+rgin:0px 0px 0px 0.5em;border-left:2px solid #B6B6B6;">
+									---=
+--=E5=8E=9F=E5=A7=8B=E9=82=AE=E4=BB=B6-----<br>
+<b>=E5=8F=91=E4=BB=B6=E4=BA=BA:</b> <span id=3D"rc_from">=E6=9B=BE=E7=A1=95 &=
+lt;zengshuo@belink.com&gt;</span><br>
+<b>=E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4:</b> <span id=3D"rc_senttime">2026-0=
+2-05 16:12:47 (=E6=98=9F=E6=9C=9F=E5=9B=9B)</span><br>
+<b>=E6=94=B6=E4=BB=B6=E4=BA=BA:</b> changhx &lt;changhx@belink.com&gt;<br>
+<b>=E6=8A=84=E9=80=81:</b> =E5=B8=B8=E4=BD=B3=E5=AE=87 &lt;changjy@belink.co=
+m&gt;, kongfq &lt;kongfq@belink.com&gt;, wangyh &lt;wangyh@belink.com&gt;, w=
+angpeng &lt;wangpeng@belink.com&gt;, hushou &lt;hushou@belink.com&gt;, mengt=
+ao &lt;mengtao@belink.com&gt;, zhaoyc1 &lt;zhaoyc1@belink.com&gt;, =E5=90=95=
+=E6=B5=B7=E9=9D=92 &lt;lvhq@belink.com&gt;, wuqy &lt;wuqy@belink.com&gt;, "w=
+angyh3@belink.com" &lt;wangyh3@belink.com&gt;, =E8=BE=B9=E8=8E=B9 &lt;bianyi=
+ng@belink.com&gt;, =E5=91=A8=E5=96=9C=E6=98=A5 &lt;zhouxc@belink.com&gt;, ca=
+iwu &lt;caiwu@belink.com&gt;, =E9=A1=B9=E7=9B=AE=E7=AE=A1=E7=90=86=E9=83=A8=E9=
+=82=AE=E7=AE=B1 &lt;xiangmu@belink.com&gt;<br>
+<b>=E4=B8=BB=E9=A2=98:</b> Re: Re: =E3=80=90=E7=89=B9=E6=89=B9=E7=94=B3=E8=AF=
+=B7=E3=80=91=E5=95=86=E6=9C=BA=E7=BC=96=E5=8F=B7XS-2026_0122+YCHD2026-033+=E4=
+=B9=9D=E6=B1=9F=E9=93=B6=E8=A1=8C2026=E5=B9=B4=E9=84=B1=E9=98=B3=E6=B9=96=E6=
+=95=B0=E6=8D=AE=E4=B8=AD=E5=BF=83=E7=81=BE=E5=A4=87=E5=AE=8C=E5=96=84=E9=A1=B9=
+=E7=9B=AE-GPU=E7=AE=97=E5=8A=9B=E6=9C=8D=E5=8A=A1=E5=99=A8<br>
+<br>
+									<di=
+v class=3D"default-font-1770279167529" style=3D"font-size:14px;font-family:&=
+quot;Microsoft YaHei UI&quot;;">
+									=
+	=E6=97=A0=E5=BC=82=E8=AE=AE<br>
+<br>
+<br>
+									=
+	<blockquote name=3D"replyContent" class=3D"ReferenceQuote" style=3D"padding=
+-left:5px;margin:0px 0px 0px 0.5em;border-left:2px solid #B6B6B6;">
+									=
+		-----=E5=8E=9F=E5=A7=8B=E9=82=AE=E4=BB=B6-----<br>
+<b>=E5=8F=91=E4=BB=B6=E4=BA=BA:</b> <span id=3D"rc_from">changhx &lt;changhx=
+@belink.com&gt;</span><br>
+<b>=E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4:</b> <span id=3D"rc_senttime">2026-0=
+2-05 16:03:18 (=E6=98=9F=E6=9C=9F=E5=9B=9B)</span><br>
+<b>=E6=94=B6=E4=BB=B6=E4=BA=BA:</b> =E5=B8=B8=E4=BD=B3=E5=AE=87 &lt;changjy@=
+belink.com&gt;, kongfq &lt;kongfq@belink.com&gt;, wangyh &lt;wangyh@belink.c=
+om&gt;, wangpeng &lt;wangpeng@belink.com&gt;, hushou &lt;hushou@belink.com&g=
+t;, mengtao &lt;mengtao@belink.com&gt;, zhaoyc1 &lt;zhaoyc1@belink.com&gt;, =E5=
+=90=95=E6=B5=B7=E9=9D=92 &lt;lvhq@belink.com&gt;, wuqy &lt;wuqy@belink.com&g=
+t;, "wangyh3@belink.com" &lt;wangyh3@belink.com&gt;, =E8=BE=B9=E8=8E=B9 &lt;=
+bianying@belink.com&gt;, =E6=9B=BE=E7=A1=95 &lt;zengshuo@belink.com&gt;, =E5=
+=91=A8=E5=96=9C=E6=98=A5 &lt;zhouxc@belink.com&gt;<br>
+<b>=E6=8A=84=E9=80=81:</b> caiwu &lt;caiwu@belink.com&gt;, =E9=A1=B9=E7=9B=AE=
+=E7=AE=A1=E7=90=86=E9=83=A8=E9=82=AE=E7=AE=B1 &lt;xiangmu@belink.com&gt;<br>=
+
+<b>=E4=B8=BB=E9=A2=98:</b> Re: =E3=80=90=E7=89=B9=E6=89=B9=E7=94=B3=E8=AF=B7=
+=E3=80=91=E5=95=86=E6=9C=BA=E7=BC=96=E5=8F=B7XS-2026_0122+YCHD2026-033+=E4=B9=
+=9D=E6=B1=9F=E9=93=B6=E8=A1=8C2026=E5=B9=B4=E9=84=B1=E9=98=B3=E6=B9=96=E6=95=
+=B0=E6=8D=AE=E4=B8=AD=E5=BF=83=E7=81=BE=E5=A4=87=E5=AE=8C=E5=96=84=E9=A1=B9=E7=
+=9B=AE-GPU=E7=AE=97=E5=8A=9B=E6=9C=8D=E5=8A=A1=E5=99=A8<br>
+<br>
+									=
+		<div>
+									=
+			<span></span>=E5=90=8C=E6=84=8F=EF=BC=8C=E8=AF=B7=E5=B0=BD=E5=
+=BF=AB=E5=AE=8C=E6=88=90=E9=94=80=E5=94=AE=E5=90=88=E5=90=8C=E7=AD=BE=E7=BD=B2=
+=EF=BC=8C=E6=B3=A8=E6=84=8F=E6=8A=8A=E6=8E=A7=E6=89=A7=E8=A1=8C=E9=A3=8E=E9=99=
+=A9=E3=80=82
+									=
+		</div>
+									=
+		<div>
+									=
+			<br>
+									=
+		</div>
+									=
+		<hr style=3D"width:210px;height:1px;" color=3D"#b5c4df" size=3D"1" a=
+lign=3D"left">
+									=
+		<div>
+									=
+			<span>=20
+									=
+			<div style=3D"margin:10px;font-family:verdana;font-size:10p=
+t;">
+									=
+				<div style=3D"font-family:'Microsoft YaHei UI';">
+									=
+					=E7=95=85=E7=BA=A2=E9=9C=9E
+									=
+				</div>
+									=
+				<div style=3D"font-family:'Microsoft YaHei UI';">
+									=
+					<br>
+									=
+				</div>
+									=
+				<div style=3D"font-family:'Microsoft YaHei UI';">
+									=
+					=E5=9C=B0=E5=9D=80=EF=BC=9A=E5=8C=97=E4=BA=AC=
+=E5=B8=82=E6=B5=B7=E6=B7=80=E5=8C=BA=E8=A5=BF=E5=B0=8F=E5=8F=A3=E8=B7=AF66=E5=
+=8F=B7=E4=B8=9C=E5=8D=87=E7=A7=91=E6=8A=80=E5=9B=ADA1=E6=A5=BC201=EF=BC=8810=
+0192=EF=BC=89
+									=
+				</div>
+									=
+				<div style=3D"font-family:'Microsoft YaHei UI';">
+									=
+					=E7=94=B5=E8=AF=9D=EF=BC=9A13501395526
+									=
+				</div>
+									=
+			</div>
+</span>=20
+									=
+		</div>
+									=
+		<blockquote style=3D"margin-top:0px;margin-bottom:0px;margin-left:0=
+.5em;margin-right:inherit;">
+									=
+			<div>
+									=
+				&nbsp;
+									=
+			</div>
+									=
+			<div style=3D"border:none;border-top:solid #B5C4DF 1.0pt;pa=
+dding:3.0pt 0cm 0cm 0cm;">
+									=
+				<div style=3D"padding-right:8px;padding-left:8px;fo=
+nt-size:12px;font-family:tahoma;color:#000000;background:#efefef;padding-bot=
+tom:8px;padding-top:8px;">
+									=
+					<div>
+									=
+						<b>=E5=8F=91=E4=BB=B6=E4=BA=BA=EF=BC=
+=9A</b>&nbsp;<a href=3D"mailto:changjy@belink.com">=E5=B8=B8=E4=BD=B3=E5=AE=87=
+</a>=20
+									=
+					</div>
+									=
+					<div>
+									=
+						<b>=E5=8F=91=E9=80=81=E6=97=B6=E9=97=
+=B4=EF=BC=9A</b>&nbsp;2026-02-05&nbsp;11:40
+									=
+					</div>
+									=
+					<div>
+									=
+						<b>=E6=94=B6=E4=BB=B6=E4=BA=BA=EF=BC=
+=9A</b>&nbsp;<a href=3D"mailto:kongfq@belink.com">kongfq</a>; <a href=3D"mai=
+lto:wangyh@belink.com">wangyh</a>; <a href=3D"mailto:wangpeng@belink.com">wa=
+ngpeng</a>; <a href=3D"mailto:hushou@belink.com">hushou</a>; <a href=3D"mail=
+to:mengtao@belink.com">mengtao</a>; <a href=3D"mailto:zhaoyc1@belink.com">zh=
+aoyc1</a>; <a href=3D"mailto:lvhq@belink.com">lvhq</a>; <a href=3D"mailto:wu=
+qy@belink.com">wuqy</a>; <a href=3D"mailto:wangyh3@belink.com">wangyh3</a>; <=
+a href=3D"mailto:changhx@belink.com">changhx</a>; <a href=3D"mailto:bianying=
+@belink.com">bianying</a>; <a href=3D"mailto:zengshuo@belink.com">zengshuo</=
+a>; <a href=3D"mailto:zhouxc@belink.com">zhouxc@belink.com</a>=20
+									=
+					</div>
+									=
+					<div>
+									=
+						<b>=E6=8A=84=E9=80=81=EF=BC=9A</b>&=
+nbsp;<a href=3D"mailto:caiwu@belink.com">caiwu</a>; <a href=3D"mailto:xiangm=
+u@belink.com">xiangmu</a>=20
+									=
+					</div>
+									=
+					<div>
+									=
+						<b>=E4=B8=BB=E9=A2=98=EF=BC=9A</b>&=
+nbsp;=E3=80=90=E7=89=B9=E6=89=B9=E7=94=B3=E8=AF=B7=E3=80=91=E5=95=86=E6=9C=BA=
+=E7=BC=96=E5=8F=B7XS-2026_0122+YCHD2026-033+=E4=B9=9D=E6=B1=9F=E9=93=B6=E8=A1=
+=8C2026=E5=B9=B4=E9=84=B1=E9=98=B3=E6=B9=96=E6=95=B0=E6=8D=AE=E4=B8=AD=E5=BF=
+=83=E7=81=BE=E5=A4=87=E5=AE=8C=E5=96=84=E9=A1=B9=E7=9B=AE-GPU=E7=AE=97=E5=8A=
+=9B=E6=9C=8D=E5=8A=A1=E5=99=A8
+									=
+					</div>
+									=
+				</div>
+									=
+			</div>
+									=
+			<div>
+									=
+				<div class=3D"FoxDiv20260205160243385176">
+									=
+					<div class=3D"default-font-1770262827996" s=
+tyle=3D"font-size:14px;font-family:&quot;Microsoft YaHei UI&quot;;">
+									=
+						<p style=3D"margin: 0px;">
+									=
+							=E5=90=84=E4=BD=8D=E9=A2=86=
+=E5=AF=BC=E5=A5=BD=EF=BC=9A
+									=
+						</p>
+									=
+						<p style=3D"margin: 0px;">
+									=
+							=E9=98=BF=E9=87=8C=E6=A8=A1=
+=E6=9D=BF=E6=94=B9=E4=BA=86=EF=BC=8C=E9=99=84=E4=BB=B6=E8=AF=B7=E4=BB=A5=E6=AD=
+=A4=E4=B8=BA=E5=87=86=E3=80=82
+									=
+						</p>
+									=
+						<p style=3D"margin: 0px;">
+									=
+							=E8=AF=B7=E5=90=84=E4=BD=8D=
+=E9=A2=86=E5=AF=BC=E5=AE=A1=E6=89=B9=EF=BC=81
+									=
+						</p>
+<br>
+<br>
+<span class=3D"spnEditorSign">=20
+									=
+						<hr class=3D"signature-separator" a=
+lign=3D"left" style=3D"margin:0.5em 0;width:10em;height:1px;background-color=
+:#999;border:none;">
+									=
+						<p style=3D"line-height: 1; margin:=
+ 0px;">
+									=
+							<span style=3D"color:#E5333=
+3;font-family:Arial;">&nbsp; </span><span style=3D"font-size:14px;"><span st=
+yle=3D"color:#E53333;font-family:Arial;font-size:14px;">&nbsp;</span><span s=
+tyle=3D"color:#E53333;font-family:Arial;font-size:14px;"><span style=3D"colo=
+r:#E53333;font-family:Arial;font-size:14px;">Best Regards</span></span> </sp=
+an>=20
+									=
+						</p>
+									=
+						<p style=3D"line-height: 1; margin:=
+ 0px;">
+									=
+							<span style=3D"font-size:14=
+px;">=E5=B8=B8=E4=BD=B3=E5=AE=87</span>=20
+									=
+						</p>
+									=
+						<p style=3D"line-height: 1; margin:=
+ 0px;">
+									=
+							<span style=3D"font-size:14=
+px;">=E6=89=8B=E6=9C=BA=EF=BC=9A19186980047</span>=20
+									=
+						</p>
+									=
+						<p style=3D"line-height: 1; margin:=
+ 0px;">
+									=
+							<span style=3D"font-size:14=
+px;"><span style=3D"font-family:Arial;font-size:14px;">E-mail=EF=BC=9A<span s=
+tyle=3D"font-family:Arial;color:#003399;font-size:14px;">changjy@belink.com<=
+/span></span> </span>=20
+									=
+						</p>
+									=
+						<p style=3D"line-height: 1; margin:=
+ 0px;">
+									=
+							<span style=3D"font-size:14=
+px;">=E5=8C=97=E4=BA=AC=E6=98=93=E8=AF=9A=E4=BA=92=E5=8A=A8=E7=BD=91=E7=BB=9C=
+=E6=8A=80=E6=9C=AF=E8=82=A1=E4=BB=BD=E6=9C=89=E9=99=90=E5=85=AC=E5=8F=B8</sp=
+an>=20
+									=
+						</p>
+									=
+						<p style=3D"margin: 0px;">
+									=
+							<br>
+									=
+						</p>
+</span>=20
+									=
+						<blockquote name=3D"replyContent" c=
+lass=3D"ReferenceQuote" style=3D"padding-left:5px;margin:0px 0px 0px 0.5em;b=
+order-left:2px solid #B6B6B6;">
+									=
+							-----=E5=8E=9F=E5=A7=8B=E9=82=
+=AE=E4=BB=B6-----<br>
+<b>=E5=8F=91=E4=BB=B6=E4=BA=BA:</b> <span id=3D"rc_from">"zhouxc@belink.com"=
+ &lt;zhouxc@belink.com&gt;</span><br>
+<b>=E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4:</b> <span id=3D"rc_senttime">2026-0=
+2-05 09:03:36 (=E6=98=9F=E6=9C=9F=E5=9B=9B)</span><br>
+<b>=E6=94=B6=E4=BB=B6=E4=BA=BA:</b> =E5=B8=B8=E4=BD=B3=E5=AE=87 &lt;changjy@=
+belink.com&gt;, zengshuo &lt;zengshuo@belink.com&gt;, hushou &lt;hushou@beli=
+nk.com&gt;, wangpeng &lt;wangpeng@belink.com&gt;, wangyh &lt;wangyh@belink.c=
+om&gt;, bianying &lt;bianying@belink.com&gt;, changhx &lt;changhx@belink.com=
+&gt;, kongfq &lt;kongfq@belink.com&gt;, mengtao &lt;mengtao@belink.com&gt;, z=
+haoyc1 &lt;zhaoyc1@belink.com&gt;, lvhq &lt;lvhq@belink.com&gt;, wuqy &lt;wu=
+qy@belink.com&gt;, wangyh3 &lt;wangyh3@belink.com&gt;<br>
+<b>=E6=8A=84=E9=80=81:</b> caiwu &lt;caiwu@belink.com&gt;, xiangmu &lt;xiang=
+mu@belink.com&gt;<br>
+<b>=E4=B8=BB=E9=A2=98:</b> Re: =E3=80=90=E7=89=B9=E6=89=B9=E7=94=B3=E8=AF=B7=
+=E3=80=91=E5=95=86=E6=9C=BA=E7=BC=96=E5=8F=B7XS-2026_0122+YCHD2026-033+=E4=B9=
+=9D=E6=B1=9F=E9=93=B6=E8=A1=8C2026=E5=B9=B4=E9=84=B1=E9=98=B3=E6=B9=96=E6=95=
+=B0=E6=8D=AE=E4=B8=AD=E5=BF=83=E7=81=BE=E5=A4=87=E5=AE=8C=E5=96=84=E9=A1=B9=E7=
+=9B=AE-GPU=E7=AE=97=E5=8A=9B=E6=9C=8D=E5=8A=A1=E5=99=A8<br>
+<br>
+									=
+							<div>
+									=
+								<span></span>=E7=A1=
+=AE=E8=AE=A4=EF=BC=8C=E5=B7=B2=E4=B8=8E=E5=AE=A2=E6=88=B7=E6=B2=9F=E9=80=9A=E7=
+=9B=AE=E6=A0=87=E6=88=90=E4=BA=A4=E4=BB=B7=EF=BC=8C=E4=B8=BA=E9=94=81=E5=AE=9A=
+=E7=A1=AC=E4=BB=B6=E9=87=87=E8=B4=AD=E4=BB=B7=EF=BC=8C=E6=8F=90=E5=89=8D=E9=87=
+=87=E8=B4=AD=E9=98=BF=E9=87=8CGPU=E8=AE=BE=E5=A4=87=E3=80=82
+									=
+							</div>
+									=
+							<div>
+									=
+								<br>
+									=
+							</div>
+									=
+							<div>
+									=
+								<br>
+									=
+							</div>
+									=
+							<div>
+									=
+								<br>
+									=
+							</div>
+									=
+							<div>
+									=
+								<br>
+									=
+							</div>
+									=
+							<div>
+									=
+								<br>
+									=
+							</div>
+									=
+							<hr style=3D"width:210px;he=
+ight:1px;" color=3D"#b5c4df" size=3D"1" align=3D"left">
+									=
+							<div>
+									=
+								<span>=20
+									=
+								<div style=3D"margi=
+n:10px;font-family:verdana;font-size:10pt;">
+									=
+									<div>
+									=
+										zho=
+uxc@belink.com
+									=
+									</div>
+									=
+								</div>
+</span>=20
+									=
+							</div>
+									=
+							<blockquote style=3D"margin=
+-top:0px;margin-bottom:0px;margin-left:0.5em;margin-right:inherit;">
+									=
+								<div>
+									=
+									&nbsp;
+									=
+								</div>
+									=
+								<div style=3D"borde=
+r:none;border-top:solid #B5C4DF 1.0pt;padding:3.0pt 0cm 0cm 0cm;">
+									=
+									<div style=3D=
+"padding-right:8px;padding-left:8px;font-size:12px;font-family:tahoma;color:=
+#000000;background:#efefef;padding-bottom:8px;padding-top:8px;">
+									=
+										<di=
+v>
+									=
+										=
+	<b>=E5=8F=91=E4=BB=B6=E4=BA=BA=EF=BC=9A</b>&nbsp;<a href=3D"mailto:changjy@=
+belink.com">=E5=B8=B8=E4=BD=B3=E5=AE=87</a>=20
+									=
+										</d=
+iv>
+									=
+										<di=
+v>
+									=
+										=
+	<b>=E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4=EF=BC=9A</b>&nbsp;2026-02-04&nbsp;1=
+6:54
+									=
+										</d=
+iv>
+									=
+										<di=
+v>
+									=
+										=
+	<b>=E6=94=B6=E4=BB=B6=E4=BA=BA=EF=BC=9A</b>&nbsp;<a href=3D"mailto:zengshuo=
+@belink.com">=E6=9B=BE=E7=A1=95</a>; <a href=3D"mailto:hushou@belink.com">=E8=
+=83=A1=E9=A6=96</a>; <a href=3D"mailto:wangpeng@belink.com">=E7=8E=8B=E6=9C=8B=
+</a>; <a href=3D"mailto:zhouxc@belink.com">=E5=91=A8=E5=96=9C=E6=98=A5</a>; <=
+a href=3D"mailto:wangyh@belink.com">=E7=8E=8B=E5=A8=85=E6=83=A0</a>; <a href=
+=3D"mailto:bianying@belink.com">=E8=BE=B9=E8=8E=B9</a>; <a href=3D"mailto:ch=
+anghx@belink.com">=E7=95=85=E7=BA=A2=E9=9C=9E</a>; <a href=3D"mailto:kongfq@=
+belink.com">=E5=AD=94=E7=B9=81=E5=BC=BA</a>; <a href=3D"mailto:mengtao@belin=
+k.com">=E5=AD=9F=E6=B6=9B</a>; <a href=3D"mailto:zhaoyc1@belink.com">=E8=B5=B5=
+=E8=BF=8E=E6=98=A5</a>; <a href=3D"mailto:lvhq@belink.com">=E5=90=95=E6=B5=B7=
+=E9=9D=92</a>; <a href=3D"mailto:wuqy@belink.com">=E5=90=B4=E8=B5=B7=E7=8E=A5=
+</a>; <a href=3D"mailto:wangyh3@belink.com">=E7=8E=8B=E5=AE=87=E8=88=AA</a>=20=
+
+									=
+										</d=
+iv>
+									=
+										<di=
+v>
+									=
+										=
+	<b>=E6=8A=84=E9=80=81=EF=BC=9A</b>&nbsp;<a href=3D"mailto:caiwu@belink.com"=
+>caiwu</a>; <a href=3D"mailto:xiangmu@belink.com">xiangmu</a>=20
+									=
+										</d=
+iv>
+									=
+										<di=
+v>
+									=
+										=
+	<b>=E4=B8=BB=E9=A2=98=EF=BC=9A</b>&nbsp;=E3=80=90=E7=89=B9=E6=89=B9=E7=94=B3=
+=E8=AF=B7=E3=80=91=E5=95=86=E6=9C=BA=E7=BC=96=E5=8F=B7XS-2026_0122+YCHD2026-=
+033+=E4=B9=9D=E6=B1=9F=E9=93=B6=E8=A1=8C2026=E5=B9=B4=E9=84=B1=E9=98=B3=E6=B9=
+=96=E6=95=B0=E6=8D=AE=E4=B8=AD=E5=BF=83=E7=81=BE=E5=A4=87=E5=AE=8C=E5=96=84=E9=
+=A1=B9=E7=9B=AE-GPU=E7=AE=97=E5=8A=9B=E6=9C=8D=E5=8A=A1=E5=99=A8
+									=
+										</d=
+iv>
+									=
+									</div>
+									=
+								</div>
+									=
+								<div>
+									=
+									<div class=3D=
+"FoxDiv20260205090255352214">
+									=
+										<di=
+v class=3D"default-font-1770195262668" style=3D"font-size:14px;font-family:=E5=
+=AE=8B=E4=BD=93, arial, Verdana, sans-serif;">
+									=
+										=
+	<p style=3D"margin: 0px;">
+									=
+										=
+		=E5=90=84=E4=BD=8D=E9=A2=86=E5=AF=BC=E5=A5=BD=EF=BC=9A
+									=
+										=
+	</p>
+									=
+										=
+	<p style=3D"margin: 0px;">
+									=
+										=
+		=E9=98=BF=E9=87=8C=E4=BA=91=E9=87=87=E8=B4=AD=E5=90=88=E5=90=8C=E7=AD=
+=BE=E7=BD=B2=E9=83=A8=E5=88=86=E6=B7=BB=E5=8A=A0=E4=BA=86=E4=B9=99=E6=96=B9=E5=
+=85=AC=E5=8F=B8=E5=90=8D=E7=A7=B0=E3=80=82
+									=
+										=
+	</p>
+									=
+										=
+	<p style=3D"margin: 0px;">
+									=
+										=
+		<div>&lt;image(02-05-09-0(02-12-14-00-12).png&gt;</div>=20
+									=
+										=
+	</p>
+=E5=90=88=E5=90=8C=E5=B7=B2=E6=9B=B4=E6=96=B0=E3=80=82=E8=AF=B7=E5=90=84=E4=BD=
+=8D=E9=A2=86=E5=AF=BC=E7=89=B9=E6=89=B9=EF=BC=81<br>
+<br>
+<span class=3D"spnEditorSign">=20
+									=
+										=
+	<hr class=3D"signature-separator" align=3D"left" style=3D"margin:0.5em 0;wi=
+dth:10em;height:1px;background-color:#999;border:none;">
+									=
+										=
+	<p style=3D"line-height: 1; margin: 0px;">
+									=
+										=
+		<span style=3D"color:#E53333;font-family:Arial;">&nbsp; </span><spa=
+n style=3D"font-size:14px;"><span style=3D"color:#E53333;font-family:Arial;f=
+ont-size:14px;">&nbsp;</span><span style=3D"color:#E53333;font-family:Arial;=
+font-size:14px;"><span style=3D"color:#E53333;font-family:Arial;font-size:14=
+px;">Best Regards</span></span> </span>=20
+									=
+										=
+	</p>
+									=
+										=
+	<p style=3D"line-height: 1; margin: 0px;">
+									=
+										=
+		<span style=3D"font-size:14px;">=E5=B8=B8=E4=BD=B3=E5=AE=87</span>=20=
+
+									=
+										=
+	</p>
+									=
+										=
+	<p style=3D"line-height: 1; margin: 0px;">
+									=
+										=
+		<span style=3D"font-size:14px;">=E6=89=8B=E6=9C=BA=EF=BC=9A19186980=
+047</span>=20
+									=
+										=
+	</p>
+									=
+										=
+	<p style=3D"line-height: 1; margin: 0px;">
+									=
+										=
+		<span style=3D"font-size:14px;"><span style=3D"font-family:Arial;fo=
+nt-size:14px;">E-mail=EF=BC=9A<span style=3D"font-family:Arial;color:#003399=
+;font-size:14px;">changjy@belink.com</span></span> </span>=20
+									=
+										=
+	</p>
+									=
+										=
+	<p style=3D"line-height: 1; margin: 0px;">
+									=
+										=
+		<span style=3D"font-size:14px;">=E5=8C=97=E4=BA=AC=E6=98=93=E8=AF=9A=
+=E4=BA=92=E5=8A=A8=E7=BD=91=E7=BB=9C=E6=8A=80=E6=9C=AF=E8=82=A1=E4=BB=BD=E6=9C=
+=89=E9=99=90=E5=85=AC=E5=8F=B8</span>=20
+									=
+										=
+	</p>
+									=
+										=
+	<p style=3D"margin: 0px;">
+									=
+										=
+		<br>
+									=
+										=
+	</p>
+</span>=20
+									=
+										=
+	<blockquote name=3D"replyContent" class=3D"ReferenceQuote" style=3D"padding=
+-left:5px;margin:0px 0px 0px 0.5em;border-left:2px solid #B6B6B6;">
+									=
+										=
+		-----=E5=8E=9F=E5=A7=8B=E9=82=AE=E4=BB=B6-----<br>
+<b>=E5=8F=91=E4=BB=B6=E4=BA=BA:</b> <span id=3D"rc_from">=E5=B8=B8=E4=BD=B3=E5=
+=AE=87 &lt;changjy@belink.com&gt;</span><br>
+<b>=E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4:</b> <span id=3D"rc_senttime">2026-0=
+2-04 16:41:12 (=E6=98=9F=E6=9C=9F=E4=B8=89)</span><br>
+<b>=E6=94=B6=E4=BB=B6=E4=BA=BA:</b> =E6=9B=BE=E7=A1=95 &lt;zengshuo@belink.c=
+om&gt;, =E8=83=A1=E9=A6=96 &lt;hushou@belink.com&gt;, =E7=8E=8B=E6=9C=8B &lt=
+;wangpeng@belink.com&gt;, =E5=91=A8=E5=96=9C=E6=98=A5 &lt;zhouxc@belink.com&=
+gt;, =E7=8E=8B=E5=A8=85=E6=83=A0 &lt;wangyh@belink.com&gt;, =E8=BE=B9=E8=8E=B9=
+ &lt;bianying@belink.com&gt;, =E7=95=85=E7=BA=A2=E9=9C=9E &lt;changhx@belink=
+.com&gt;, =E5=AD=94=E7=B9=81=E5=BC=BA &lt;kongfq@belink.com&gt;, =E5=AD=9F=E6=
+=B6=9B &lt;mengtao@belink.com&gt;, =E8=B5=B5=E8=BF=8E=E6=98=A5 &lt;zhaoyc1@b=
+elink.com&gt;, =E5=90=95=E6=B5=B7=E9=9D=92 &lt;lvhq@belink.com&gt;, =E5=90=B4=
+=E8=B5=B7=E7=8E=A5 &lt;wuqy@belink.com&gt;, =E7=8E=8B=E5=AE=87=E8=88=AA &lt;=
+wangyh3@belink.com&gt;<br>
+<b>=E6=8A=84=E9=80=81:</b> caiwu@belink.com, xiangmu@belink.com<br>
+<b>=E4=B8=BB=E9=A2=98:</b> =E3=80=90=E7=89=B9=E6=89=B9=E7=94=B3=E8=AF=B7=E3=80=
+=91=E5=95=86=E6=9C=BA=E7=BC=96=E5=8F=B7XS-2026_0122+YCHD2026-033+=E4=B9=9D=E6=
+=B1=9F=E9=93=B6=E8=A1=8C2026=E5=B9=B4=E9=84=B1=E9=98=B3=E6=B9=96=E6=95=B0=E6=
+=8D=AE=E4=B8=AD=E5=BF=83=E7=81=BE=E5=A4=87=E5=AE=8C=E5=96=84=E9=A1=B9=E7=9B=AE=
+-GPU=E7=AE=97=E5=8A=9B=E6=9C=8D=E5=8A=A1=E5=99=A8<br>
+<br>
+									=
+										=
+		<div class=3D"default-font-1770194472500" style=3D"font-size:14px;f=
+ont-family:=E5=AE=8B=E4=BD=93, arial, Verdana, sans-serif;">
+									=
+										=
+			<p style=3D"font-size: 14px; margin: 0px;">
+									=
+										=
+				=E5=90=84=E4=BD=8D=E9=A2=86=E5=AF=BC=E5=A5=BD=EF=BC=
+=9A
+									=
+										=
+			</p>
+									=
+										=
+			<p style=3D"font-size: 14px; margin: 0px;">
+									=
+										=
+				<span style=3D"text-wrap-mode:nowrap;">=E4=B9=9D=E6=
+=B1=9F=E9=93=B6=E8=A1=8C2026=E5=B9=B4=E9=84=B1=E9=98=B3=E6=B9=96=E6=95=B0=E6=
+=8D=AE=E4=B8=AD=E5=BF=83=E7=81=BE=E5=A4=87=E5=AE=8C=E5=96=84=E9=A1=B9=E7=9B=AE=
+-GPU=E7=AE=97=E5=8A=9B=E6=9C=8D=E5=8A=A1=E5=99=A8=EF=BC=8C=E9=99=84=E4=BB=B6=
+=E4=B8=BA=E6=8D=9F=E7=9B=8A=E8=A1=A8=E5=92=8C=E9=98=BF=E9=87=8C=E4=BA=91=E9=87=
+=87=E8=B4=AD=E5=90=88=E5=90=8C=E3=80=82</span>=20
+									=
+										=
+			</p>
+									=
+										=
+			<p style=3D"font-size: 14px; margin: 0px;">
+									=
+										=
+				<span style=3D"text-wrap-mode:nowrap;">=E9=A2=84=E8=
+=AE=A1=E9=94=80=E5=94=AE=E9=87=91=E9=A2=9D=E4=B8=BA6,600,000.00=E5=85=83=EF=BC=
+=8C=E9=87=87=E8=B4=AD=E5=90=88=E5=90=8C=E9=87=91=E9=A2=9D=E4=B8=BA5,250,000.=
+00=E5=85=83=EF=BC=8C=E7=A8=8E=E7=8E=8713%=EF=BC=8C=E6=AF=9B=E5=88=A9=E7=8E=87=
+18.71%=E3=80=82</span>=20
+									=
+										=
+			</p>
+									=
+										=
+			<p style=3D"font-size: 14px; margin: 0px;">
+									=
+										=
+				=E9=A2=84=E8=AE=A1=E9=94=80=E5=94=AE=E5=90=88=E5=90=
+=8C=E4=B8=89=E6=9C=88=E4=BB=BD=E7=AD=BE=E7=BA=A6=EF=BC=8C=E4=B8=BA=E4=BA=86<=
+span style=3D"text-wrap-mode:nowrap;">=E9=94=81=E5=AE=9A=E4=BD=8E=E4=BB=B7=E7=
+=9A=84=E8=B4=A7=E6=BA=90=EF=BC=8C=E7=94=B3=E8=AF=B7=E6=8F=90=E5=89=8D=E9=87=87=
+=E8=B4=AD=E5=90=88=E5=90=8C=E7=9A=84=E7=9B=96=E7=AB=A0=E5=92=8C=E4=BB=98=E6=AC=
+=BE=E6=B5=81=E7=A8=8B=E3=80=82</span>=20
+									=
+										=
+			</p>
+=E8=AF=B7=E5=90=84=E4=BD=8D=E9=A2=86=E5=AF=BC=E7=89=B9=E6=89=B9=EF=BC=81<br>=
+
+<span class=3D"spnEditorSign">=20
+									=
+										=
+			<hr class=3D"signature-separator" align=3D"left" style=3D"m=
+argin:0.5em 0;width:10em;height:1px;background-color:#999;border:none;">
+									=
+										=
+			<p style=3D"line-height: 1; margin: 0px;">
+									=
+										=
+				<span style=3D"color:#E53333;font-family:Arial;">&n=
+bsp; </span><span style=3D"font-size:14px;"><span style=3D"color:#E53333;fon=
+t-family:Arial;font-size:14px;">&nbsp;</span><span style=3D"color:#E53333;fo=
+nt-family:Arial;font-size:14px;"><span style=3D"color:#E53333;font-family:Ar=
+ial;font-size:14px;">Best Regards</span></span> </span>=20
+									=
+										=
+			</p>
+									=
+										=
+			<p style=3D"line-height: 1; margin: 0px;">
+									=
+										=
+				<span style=3D"font-size:14px;">=E5=B8=B8=E4=BD=B3=E5=
+=AE=87</span>=20
+									=
+										=
+			</p>
+									=
+										=
+			<p style=3D"line-height: 1; margin: 0px;">
+									=
+										=
+				<span style=3D"font-size:14px;">=E6=89=8B=E6=9C=BA=EF=
+=BC=9A19186980047</span>=20
+									=
+										=
+			</p>
+									=
+										=
+			<p style=3D"line-height: 1; margin: 0px;">
+									=
+										=
+				<span style=3D"font-size:14px;"><span style=3D"font=
+-family:Arial;font-size:14px;">E-mail=EF=BC=9A<span style=3D"font-family:Ari=
+al;color:#003399;font-size:14px;">changjy@belink.com</span></span> </span>=20=
+
+									=
+										=
+			</p>
+									=
+										=
+			<p style=3D"line-height: 1; margin: 0px;">
+									=
+										=
+				<span style=3D"font-size:14px;">=E5=8C=97=E4=BA=AC=E6=
+=98=93=E8=AF=9A=E4=BA=92=E5=8A=A8=E7=BD=91=E7=BB=9C=E6=8A=80=E6=9C=AF=E8=82=A1=
+=E4=BB=BD=E6=9C=89=E9=99=90=E5=85=AC=E5=8F=B8</span>=20
+									=
+										=
+			</p>
+									=
+										=
+			<p style=3D"margin: 0px;">
+									=
+										=
+				<br>
+									=
+										=
+			</p>
+</span>=20
+									=
+										=
+		</div>
+<br>
+<br>
+									=
+										=
+		<div>
+									=
+										=
+			<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>********=
+****************************************************************************=
+********************************************************************</b></sp=
+an>=20
+									=
+										=
+		</div>
+									=
+										=
+		<div>
+									=
+										=
+			<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>The info=
+rmation in this email is confidential and may be legally privileged. If you h=
+ave received this email in error or are not the intended recipient,</b></spa=
+n>=20
+									=
+										=
+		</div>
+									=
+										=
+		<div>
+									=
+										=
+			<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>please i=
+mmediately notify the sender and delete this message from your computer. Any=
+ use, distribution, or copying of this email other than by the&nbsp;</b></sp=
+an>=20
+									=
+										=
+		</div>
+									=
+										=
+		<div>
+									=
+										=
+			<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>intended=
+ recipient is strictly prohibited. All messages sent to and from us may be m=
+onitored to ensure compliance with internal policies and to&nbsp;</b></span>=
+=20
+									=
+										=
+		</div>
+									=
+										=
+		<div>
+									=
+										=
+			<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>protect o=
+ur business.</b></span>=20
+									=
+										=
+		</div>
+									=
+										=
+		<div>
+									=
+										=
+			<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>Emails a=
+re not secure and cannot be guaranteed to be error free as they can be inter=
+cepted, amended, lost or destroyed, or contain viruses. Anyone</b></span>=20=
+
+									=
+										=
+		</div>
+									=
+										=
+		<div>
+									=
+										=
+			<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>who comm=
+unicates with us by email is taken to accept these risks.</b></span>=20
+									=
+										=
+		</div>
+									=
+										=
+		<div>
+									=
+										=
+			<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>=E6=94=B6=
+=E5=8F=91=E9=82=AE=E4=BB=B6=E8=80=85=E8=AF=B7=E6=B3=A8=E6=84=8F:</b></span>=20=
+
+									=
+										=
+		</div>
+									=
+										=
+		<div>
+									=
+										=
+			<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>=E6=9C=AC=
+=E9=82=AE=E4=BB=B6=E5=90=AB=E6=B6=89=E5=AF=86=E4=BF=A1=E6=81=AF=EF=BC=8C=E8=AF=
+=B7=E4=BF=9D=E5=AE=88=E7=A7=98=E5=AF=86=EF=BC=8C=E8=8B=A5=E8=AF=AF=E6=94=B6=E6=
+=9C=AC=E9=82=AE=E4=BB=B6=EF=BC=8C=E8=AF=B7=E5=8A=A1=E5=BF=85=E9=80=9A=E7=9F=A5=
+=E5=8F=91=E9=80=81=E4=BA=BA=E5=B9=B6=E7=9B=B4=E6=8E=A5=E5=88=A0=E5=8E=BB=EF=BC=
+=8C=E4=B8=8D=E5=BE=97=E4=BD=BF=E7=94=A8=E3=80=81=E4=BC=A0=E6=92=AD=E6=88=96=E5=
+=A4=8D=E5=88=B6=E6=9C=AC=E9=82=AE=E4=BB=B6=E3=80=82</b></span>=20
+									=
+										=
+		</div>
+									=
+										=
+		<div>
+									=
+										=
+			<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>=E8=BF=9B=
+=E5=87=BA=E9=82=AE=E4=BB=B6=E5=9D=87=E5=8F=97=E5=88=B0=E6=9C=AC=E5=85=AC=E5=8F=
+=B8=E5=90=88=E8=A7=84=E7=9B=91=E6=8E=A7=E3=80=82=E9=82=AE=E4=BB=B6=E5=8F=AF=E8=
+=83=BD=E5=8F=91=E7=94=9F=E8=A2=AB=E6=88=AA=E7=95=99=E3=80=81=E8=A2=AB=E4=BF=AE=
+=E6=94=B9=E3=80=81=E4=B8=A2=E5=A4=B1=E3=80=81=E8=A2=AB=E7=A0=B4=E5=9D=8F=E6=88=
+=96=E5=8C=85=E5=90=AB=E8=AE=A1=E7=AE=97=E6=9C=BA=E7=97=85=E6=AF=92=E7=AD=89=E4=
+=B8=8D=E5=AE=89=E5=85=A8=E6=83=85=E5=86=B5=E3=80=82</b></span>=20
+									=
+										=
+		</div>
+									=
+										=
+		<div>
+									=
+										=
+			<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>********=
+****************************************************************************=
+********************************************************************</b></sp=
+an>=20
+									=
+										=
+		</div>
+									=
+										=
+	</blockquote>
+<br>
+<br>
+<br>
+									=
+										</d=
+iv>
+<br>
+<br>
+									=
+										<di=
+v>
+									=
+										=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>************************=
+****************************************************************************=
+****************************************************</b></span>=20
+									=
+										</d=
+iv>
+									=
+										<di=
+v>
+									=
+										=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>The information in this e=
+mail is confidential and may be legally privileged. If you have received thi=
+s email in error or are not the intended recipient,</b></span>=20
+									=
+										</d=
+iv>
+									=
+										<di=
+v>
+									=
+										=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>please immediately notif=
+y the sender and delete this message from your computer. Any use, distributi=
+on, or copying of this email other than by the&nbsp;</b></span>=20
+									=
+										</d=
+iv>
+									=
+										<di=
+v>
+									=
+										=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>intended recipient is st=
+rictly prohibited. All messages sent to and from us may be monitored to ensu=
+re compliance with internal policies and to&nbsp;</b></span>=20
+									=
+										</d=
+iv>
+									=
+										<di=
+v>
+									=
+										=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>protect our business.</b=
+></span>=20
+									=
+										</d=
+iv>
+									=
+										<di=
+v>
+									=
+										=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>Emails are not secure an=
+d cannot be guaranteed to be error free as they can be intercepted, amended,=
+ lost or destroyed, or contain viruses. Anyone</b></span>=20
+									=
+										</d=
+iv>
+									=
+										<di=
+v>
+									=
+										=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>who communicates with us=
+ by email is taken to accept these risks.</b></span>=20
+									=
+										</d=
+iv>
+									=
+										<di=
+v>
+									=
+										=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>=E6=94=B6=E5=8F=91=E9=82=
+=AE=E4=BB=B6=E8=80=85=E8=AF=B7=E6=B3=A8=E6=84=8F:</b></span>=20
+									=
+										</d=
+iv>
+									=
+										<di=
+v>
+									=
+										=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>=E6=9C=AC=E9=82=AE=E4=BB=
+=B6=E5=90=AB=E6=B6=89=E5=AF=86=E4=BF=A1=E6=81=AF=EF=BC=8C=E8=AF=B7=E4=BF=9D=E5=
+=AE=88=E7=A7=98=E5=AF=86=EF=BC=8C=E8=8B=A5=E8=AF=AF=E6=94=B6=E6=9C=AC=E9=82=AE=
+=E4=BB=B6=EF=BC=8C=E8=AF=B7=E5=8A=A1=E5=BF=85=E9=80=9A=E7=9F=A5=E5=8F=91=E9=80=
+=81=E4=BA=BA=E5=B9=B6=E7=9B=B4=E6=8E=A5=E5=88=A0=E5=8E=BB=EF=BC=8C=E4=B8=8D=E5=
+=BE=97=E4=BD=BF=E7=94=A8=E3=80=81=E4=BC=A0=E6=92=AD=E6=88=96=E5=A4=8D=E5=88=B6=
+=E6=9C=AC=E9=82=AE=E4=BB=B6=E3=80=82</b></span>=20
+									=
+										</d=
+iv>
+									=
+										<di=
+v>
+									=
+										=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>=E8=BF=9B=E5=87=BA=E9=82=
+=AE=E4=BB=B6=E5=9D=87=E5=8F=97=E5=88=B0=E6=9C=AC=E5=85=AC=E5=8F=B8=E5=90=88=E8=
+=A7=84=E7=9B=91=E6=8E=A7=E3=80=82=E9=82=AE=E4=BB=B6=E5=8F=AF=E8=83=BD=E5=8F=91=
+=E7=94=9F=E8=A2=AB=E6=88=AA=E7=95=99=E3=80=81=E8=A2=AB=E4=BF=AE=E6=94=B9=E3=80=
+=81=E4=B8=A2=E5=A4=B1=E3=80=81=E8=A2=AB=E7=A0=B4=E5=9D=8F=E6=88=96=E5=8C=85=E5=
+=90=AB=E8=AE=A1=E7=AE=97=E6=9C=BA=E7=97=85=E6=AF=92=E7=AD=89=E4=B8=8D=E5=AE=89=
+=E5=85=A8=E6=83=85=E5=86=B5=E3=80=82</b></span>=20
+									=
+										</d=
+iv>
+									=
+										<di=
+v>
+									=
+										=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>************************=
+****************************************************************************=
+****************************************************</b></span>=20
+									=
+										</d=
+iv>
+									=
+									</div>
+									=
+								</div>
+									=
+							</blockquote>
+									=
+						</blockquote>
+<br>
+<br>
+<br>
+									=
+					</div>
+<br>
+<br>
+									=
+					<div>
+									=
+						<span style=3D"font-family:=E9=BB=91=
+=E4=BD=93;"><b>*************************************************************=
+****************************************************************************=
+***************</b></span>=20
+									=
+					</div>
+									=
+					<div>
+									=
+						<span style=3D"font-family:=E9=BB=91=
+=E4=BD=93;"><b>The information in this email is confidential and may be lega=
+lly privileged. If you have received this email in error or are not the inte=
+nded recipient,</b></span>=20
+									=
+					</div>
+									=
+					<div>
+									=
+						<span style=3D"font-family:=E9=BB=91=
+=E4=BD=93;"><b>please immediately notify the sender and delete this message f=
+rom your computer. Any use, distribution, or copying of this email other tha=
+n by the&nbsp;</b></span>=20
+									=
+					</div>
+									=
+					<div>
+									=
+						<span style=3D"font-family:=E9=BB=91=
+=E4=BD=93;"><b>intended recipient is strictly prohibited. All messages sent t=
+o and from us may be monitored to ensure compliance with internal policies a=
+nd to&nbsp;</b></span>=20
+									=
+					</div>
+									=
+					<div>
+									=
+						<span style=3D"font-family:=E9=BB=91=
+=E4=BD=93;"><b>protect our business.</b></span>=20
+									=
+					</div>
+									=
+					<div>
+									=
+						<span style=3D"font-family:=E9=BB=91=
+=E4=BD=93;"><b>Emails are not secure and cannot be guaranteed to be error fr=
+ee as they can be intercepted, amended, lost or destroyed, or contain viruse=
+s. Anyone</b></span>=20
+									=
+					</div>
+									=
+					<div>
+									=
+						<span style=3D"font-family:=E9=BB=91=
+=E4=BD=93;"><b>who communicates with us by email is taken to accept these ri=
+sks.</b></span>=20
+									=
+					</div>
+									=
+					<div>
+									=
+						<span style=3D"font-family:=E9=BB=91=
+=E4=BD=93;"><b>=E6=94=B6=E5=8F=91=E9=82=AE=E4=BB=B6=E8=80=85=E8=AF=B7=E6=B3=A8=
+=E6=84=8F:</b></span>=20
+									=
+					</div>
+									=
+					<div>
+									=
+						<span style=3D"font-family:=E9=BB=91=
+=E4=BD=93;"><b>=E6=9C=AC=E9=82=AE=E4=BB=B6=E5=90=AB=E6=B6=89=E5=AF=86=E4=BF=A1=
+=E6=81=AF=EF=BC=8C=E8=AF=B7=E4=BF=9D=E5=AE=88=E7=A7=98=E5=AF=86=EF=BC=8C=E8=8B=
+=A5=E8=AF=AF=E6=94=B6=E6=9C=AC=E9=82=AE=E4=BB=B6=EF=BC=8C=E8=AF=B7=E5=8A=A1=E5=
+=BF=85=E9=80=9A=E7=9F=A5=E5=8F=91=E9=80=81=E4=BA=BA=E5=B9=B6=E7=9B=B4=E6=8E=A5=
+=E5=88=A0=E5=8E=BB=EF=BC=8C=E4=B8=8D=E5=BE=97=E4=BD=BF=E7=94=A8=E3=80=81=E4=BC=
+=A0=E6=92=AD=E6=88=96=E5=A4=8D=E5=88=B6=E6=9C=AC=E9=82=AE=E4=BB=B6=E3=80=82<=
+/b></span>=20
+									=
+					</div>
+									=
+					<div>
+									=
+						<span style=3D"font-family:=E9=BB=91=
+=E4=BD=93;"><b>=E8=BF=9B=E5=87=BA=E9=82=AE=E4=BB=B6=E5=9D=87=E5=8F=97=E5=88=B0=
+=E6=9C=AC=E5=85=AC=E5=8F=B8=E5=90=88=E8=A7=84=E7=9B=91=E6=8E=A7=E3=80=82=E9=82=
+=AE=E4=BB=B6=E5=8F=AF=E8=83=BD=E5=8F=91=E7=94=9F=E8=A2=AB=E6=88=AA=E7=95=99=E3=
+=80=81=E8=A2=AB=E4=BF=AE=E6=94=B9=E3=80=81=E4=B8=A2=E5=A4=B1=E3=80=81=E8=A2=AB=
+=E7=A0=B4=E5=9D=8F=E6=88=96=E5=8C=85=E5=90=AB=E8=AE=A1=E7=AE=97=E6=9C=BA=E7=97=
+=85=E6=AF=92=E7=AD=89=E4=B8=8D=E5=AE=89=E5=85=A8=E6=83=85=E5=86=B5=E3=80=82<=
+/b></span>=20
+									=
+					</div>
+									=
+					<div>
+									=
+						<span style=3D"font-family:=E9=BB=91=
+=E4=BD=93;"><b>*************************************************************=
+****************************************************************************=
+***************</b></span>=20
+									=
+					</div>
+									=
+				</div>
+									=
+			</div>
+									=
+		</blockquote>
+									=
+	</blockquote>
+									</d=
+iv>
+<br>
+<br>
+									<di=
+v>
+									=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>************************=
+****************************************************************************=
+****************************************************</b></span>=20
+									</d=
+iv>
+									<di=
+v>
+									=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>The information in this e=
+mail is confidential and may be legally privileged. If you have received thi=
+s email in error or are not the intended recipient,</b></span>=20
+									</d=
+iv>
+									<di=
+v>
+									=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>please immediately notif=
+y the sender and delete this message from your computer. Any use, distributi=
+on, or copying of this email other than by the&nbsp;</b></span>=20
+									</d=
+iv>
+									<di=
+v>
+									=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>intended recipient is st=
+rictly prohibited. All messages sent to and from us may be monitored to ensu=
+re compliance with internal policies and to&nbsp;</b></span>=20
+									</d=
+iv>
+									<di=
+v>
+									=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>protect our business.</b=
+></span>=20
+									</d=
+iv>
+									<di=
+v>
+									=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>Emails are not secure an=
+d cannot be guaranteed to be error free as they can be intercepted, amended,=
+ lost or destroyed, or contain viruses. Anyone</b></span>=20
+									</d=
+iv>
+									<di=
+v>
+									=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>who communicates with us=
+ by email is taken to accept these risks.</b></span>=20
+									</d=
+iv>
+									<di=
+v>
+									=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>=E6=94=B6=E5=8F=91=E9=82=
+=AE=E4=BB=B6=E8=80=85=E8=AF=B7=E6=B3=A8=E6=84=8F:</b></span>=20
+									</d=
+iv>
+									<di=
+v>
+									=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>=E6=9C=AC=E9=82=AE=E4=BB=
+=B6=E5=90=AB=E6=B6=89=E5=AF=86=E4=BF=A1=E6=81=AF=EF=BC=8C=E8=AF=B7=E4=BF=9D=E5=
+=AE=88=E7=A7=98=E5=AF=86=EF=BC=8C=E8=8B=A5=E8=AF=AF=E6=94=B6=E6=9C=AC=E9=82=AE=
+=E4=BB=B6=EF=BC=8C=E8=AF=B7=E5=8A=A1=E5=BF=85=E9=80=9A=E7=9F=A5=E5=8F=91=E9=80=
+=81=E4=BA=BA=E5=B9=B6=E7=9B=B4=E6=8E=A5=E5=88=A0=E5=8E=BB=EF=BC=8C=E4=B8=8D=E5=
+=BE=97=E4=BD=BF=E7=94=A8=E3=80=81=E4=BC=A0=E6=92=AD=E6=88=96=E5=A4=8D=E5=88=B6=
+=E6=9C=AC=E9=82=AE=E4=BB=B6=E3=80=82</b></span>=20
+									</d=
+iv>
+									<di=
+v>
+									=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>=E8=BF=9B=E5=87=BA=E9=82=
+=AE=E4=BB=B6=E5=9D=87=E5=8F=97=E5=88=B0=E6=9C=AC=E5=85=AC=E5=8F=B8=E5=90=88=E8=
+=A7=84=E7=9B=91=E6=8E=A7=E3=80=82=E9=82=AE=E4=BB=B6=E5=8F=AF=E8=83=BD=E5=8F=91=
+=E7=94=9F=E8=A2=AB=E6=88=AA=E7=95=99=E3=80=81=E8=A2=AB=E4=BF=AE=E6=94=B9=E3=80=
+=81=E4=B8=A2=E5=A4=B1=E3=80=81=E8=A2=AB=E7=A0=B4=E5=9D=8F=E6=88=96=E5=8C=85=E5=
+=90=AB=E8=AE=A1=E7=AE=97=E6=9C=BA=E7=97=85=E6=AF=92=E7=AD=89=E4=B8=8D=E5=AE=89=
+=E5=85=A8=E6=83=85=E5=86=B5=E3=80=82</b></span>=20
+									</d=
+iv>
+									<di=
+v>
+									=
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>************************=
+****************************************************************************=
+****************************************************</b></span>=20
+									</d=
+iv>
+								</blockquot=
+e>
+							</div>
+<br>
+<br>
+							<div>
+								<span style=
+=3D"font-family:=E9=BB=91=E4=BD=93;"><b>************************************=
+****************************************************************************=
+****************************************</b></span>=20
+							</div>
+							<div>
+								<span style=
+=3D"font-family:=E9=BB=91=E4=BD=93;"><b>The information in this email is con=
+fidential and may be legally privileged. If you have received this email in e=
+rror or are not the intended recipient,</b></span>=20
+							</div>
+							<div>
+								<span style=
+=3D"font-family:=E9=BB=91=E4=BD=93;"><b>please immediately notify the sender=
+ and delete this message from your computer. Any use, distribution, or copyi=
+ng of this email other than by the&nbsp;</b></span>=20
+							</div>
+							<div>
+								<span style=
+=3D"font-family:=E9=BB=91=E4=BD=93;"><b>intended recipient is strictly prohi=
+bited. All messages sent to and from us may be monitored to ensure complianc=
+e with internal policies and to&nbsp;</b></span>=20
+							</div>
+							<div>
+								<span style=
+=3D"font-family:=E9=BB=91=E4=BD=93;"><b>protect our business.</b></span>=20
+							</div>
+							<div>
+								<span style=
+=3D"font-family:=E9=BB=91=E4=BD=93;"><b>Emails are not secure and cannot be g=
+uaranteed to be error free as they can be intercepted, amended, lost or dest=
+royed, or contain viruses. Anyone</b></span>=20
+							</div>
+							<div>
+								<span style=
+=3D"font-family:=E9=BB=91=E4=BD=93;"><b>who communicates with us by email is=
+ taken to accept these risks.</b></span>=20
+							</div>
+							<div>
+								<span style=
+=3D"font-family:=E9=BB=91=E4=BD=93;"><b>=E6=94=B6=E5=8F=91=E9=82=AE=E4=BB=B6=
+=E8=80=85=E8=AF=B7=E6=B3=A8=E6=84=8F:</b></span>=20
+							</div>
+							<div>
+								<span style=
+=3D"font-family:=E9=BB=91=E4=BD=93;"><b>=E6=9C=AC=E9=82=AE=E4=BB=B6=E5=90=AB=
+=E6=B6=89=E5=AF=86=E4=BF=A1=E6=81=AF=EF=BC=8C=E8=AF=B7=E4=BF=9D=E5=AE=88=E7=A7=
+=98=E5=AF=86=EF=BC=8C=E8=8B=A5=E8=AF=AF=E6=94=B6=E6=9C=AC=E9=82=AE=E4=BB=B6=EF=
+=BC=8C=E8=AF=B7=E5=8A=A1=E5=BF=85=E9=80=9A=E7=9F=A5=E5=8F=91=E9=80=81=E4=BA=BA=
+=E5=B9=B6=E7=9B=B4=E6=8E=A5=E5=88=A0=E5=8E=BB=EF=BC=8C=E4=B8=8D=E5=BE=97=E4=BD=
+=BF=E7=94=A8=E3=80=81=E4=BC=A0=E6=92=AD=E6=88=96=E5=A4=8D=E5=88=B6=E6=9C=AC=E9=
+=82=AE=E4=BB=B6=E3=80=82</b></span>=20
+							</div>
+							<div>
+								<span style=
+=3D"font-family:=E9=BB=91=E4=BD=93;"><b>=E8=BF=9B=E5=87=BA=E9=82=AE=E4=BB=B6=
+=E5=9D=87=E5=8F=97=E5=88=B0=E6=9C=AC=E5=85=AC=E5=8F=B8=E5=90=88=E8=A7=84=E7=9B=
+=91=E6=8E=A7=E3=80=82=E9=82=AE=E4=BB=B6=E5=8F=AF=E8=83=BD=E5=8F=91=E7=94=9F=E8=
+=A2=AB=E6=88=AA=E7=95=99=E3=80=81=E8=A2=AB=E4=BF=AE=E6=94=B9=E3=80=81=E4=B8=A2=
+=E5=A4=B1=E3=80=81=E8=A2=AB=E7=A0=B4=E5=9D=8F=E6=88=96=E5=8C=85=E5=90=AB=E8=AE=
+=A1=E7=AE=97=E6=9C=BA=E7=97=85=E6=AF=92=E7=AD=89=E4=B8=8D=E5=AE=89=E5=85=A8=E6=
+=83=85=E5=86=B5=E3=80=82</b></span>=20
+							</div>
+							<div>
+								<span style=
+=3D"font-family:=E9=BB=91=E4=BD=93;"><b>************************************=
+****************************************************************************=
+****************************************</b></span>=20
+							</div>
+						</blockquote>
+<br>
+<br>
+<br>
+					</div>
+<br>
+<br>
+					<div>
+						<span style=3D"font-family:=
+=E9=BB=91=E4=BD=93;"><b>****************************************************=
+****************************************************************************=
+************************</b></span>=20
+					</div>
+					<div>
+						<span style=3D"font-family:=
+=E9=BB=91=E4=BD=93;"><b>The information in this email is confidential and ma=
+y be legally privileged. If you have received this email in error or are not=
+ the intended recipient,</b></span>=20
+					</div>
+					<div>
+						<span style=3D"font-family:=
+=E9=BB=91=E4=BD=93;"><b>please immediately notify the sender and delete this=
+ message from your computer. Any use, distribution, or copying of this email=
+ other than by the&nbsp;</b></span>=20
+					</div>
+					<div>
+						<span style=3D"font-family:=
+=E9=BB=91=E4=BD=93;"><b>intended recipient is strictly prohibited. All messa=
+ges sent to and from us may be monitored to ensure compliance with internal p=
+olicies and to&nbsp;</b></span>=20
+					</div>
+					<div>
+						<span style=3D"font-family:=
+=E9=BB=91=E4=BD=93;"><b>protect our business.</b></span>=20
+					</div>
+					<div>
+						<span style=3D"font-family:=
+=E9=BB=91=E4=BD=93;"><b>Emails are not secure and cannot be guaranteed to be=
+ error free as they can be intercepted, amended, lost or destroyed, or conta=
+in viruses. Anyone</b></span>=20
+					</div>
+					<div>
+						<span style=3D"font-family:=
+=E9=BB=91=E4=BD=93;"><b>who communicates with us by email is taken to accept=
+ these risks.</b></span>=20
+					</div>
+					<div>
+						<span style=3D"font-family:=
+=E9=BB=91=E4=BD=93;"><b>=E6=94=B6=E5=8F=91=E9=82=AE=E4=BB=B6=E8=80=85=E8=AF=B7=
+=E6=B3=A8=E6=84=8F:</b></span>=20
+					</div>
+					<div>
+						<span style=3D"font-family:=
+=E9=BB=91=E4=BD=93;"><b>=E6=9C=AC=E9=82=AE=E4=BB=B6=E5=90=AB=E6=B6=89=E5=AF=86=
+=E4=BF=A1=E6=81=AF=EF=BC=8C=E8=AF=B7=E4=BF=9D=E5=AE=88=E7=A7=98=E5=AF=86=EF=BC=
+=8C=E8=8B=A5=E8=AF=AF=E6=94=B6=E6=9C=AC=E9=82=AE=E4=BB=B6=EF=BC=8C=E8=AF=B7=E5=
+=8A=A1=E5=BF=85=E9=80=9A=E7=9F=A5=E5=8F=91=E9=80=81=E4=BA=BA=E5=B9=B6=E7=9B=B4=
+=E6=8E=A5=E5=88=A0=E5=8E=BB=EF=BC=8C=E4=B8=8D=E5=BE=97=E4=BD=BF=E7=94=A8=E3=80=
+=81=E4=BC=A0=E6=92=AD=E6=88=96=E5=A4=8D=E5=88=B6=E6=9C=AC=E9=82=AE=E4=BB=B6=E3=
+=80=82</b></span>=20
+					</div>
+					<div>
+						<span style=3D"font-family:=
+=E9=BB=91=E4=BD=93;"><b>=E8=BF=9B=E5=87=BA=E9=82=AE=E4=BB=B6=E5=9D=87=E5=8F=97=
+=E5=88=B0=E6=9C=AC=E5=85=AC=E5=8F=B8=E5=90=88=E8=A7=84=E7=9B=91=E6=8E=A7=E3=80=
+=82=E9=82=AE=E4=BB=B6=E5=8F=AF=E8=83=BD=E5=8F=91=E7=94=9F=E8=A2=AB=E6=88=AA=E7=
+=95=99=E3=80=81=E8=A2=AB=E4=BF=AE=E6=94=B9=E3=80=81=E4=B8=A2=E5=A4=B1=E3=80=81=
+=E8=A2=AB=E7=A0=B4=E5=9D=8F=E6=88=96=E5=8C=85=E5=90=AB=E8=AE=A1=E7=AE=97=E6=9C=
+=BA=E7=97=85=E6=AF=92=E7=AD=89=E4=B8=8D=E5=AE=89=E5=85=A8=E6=83=85=E5=86=B5=E3=
+=80=82</b></span>=20
+					</div>
+					<div>
+						<span style=3D"font-family:=
+=E9=BB=91=E4=BD=93;"><b>****************************************************=
+****************************************************************************=
+************************</b></span>=20
+					</div>
+				</div>
+			</div>
+		</blockquote>
+	</blockquote>
+<br>
+<br>
+<br>
+</div>
+<br>
+<br>
+<div>
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>****************=
+****************************************************************************=
+************************************************************</b></span>
+</div>
+<div>
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>The information i=
+n this email is confidential and may be legally privileged. If you have rece=
+ived this email in error or are not the intended recipient,</b></span>
+</div>
+<div>
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>please immediate=
+ly notify the sender and delete this message from your computer. Any use, di=
+stribution, or copying of this email other than by the&nbsp;</b></span>
+</div>
+<div>
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>intended recipie=
+nt is strictly prohibited. All messages sent to and from us may be monitored=
+ to ensure compliance with internal policies and to&nbsp;</b></span>
+</div>
+<div>
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>protect our busi=
+ness.</b></span>
+</div>
+<div>
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>Emails are not s=
+ecure and cannot be guaranteed to be error free as they can be intercepted, a=
+mended, lost or destroyed, or contain viruses. Anyone</b></span>
+</div>
+<div>
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>who communicates=
+ with us by email is taken to accept these risks.</b></span>
+</div>
+<div>
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>=E6=94=B6=E5=8F=91=
+=E9=82=AE=E4=BB=B6=E8=80=85=E8=AF=B7=E6=B3=A8=E6=84=8F:</b></span>
+</div>
+<div>
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>=E6=9C=AC=E9=82=AE=
+=E4=BB=B6=E5=90=AB=E6=B6=89=E5=AF=86=E4=BF=A1=E6=81=AF=EF=BC=8C=E8=AF=B7=E4=BF=
+=9D=E5=AE=88=E7=A7=98=E5=AF=86=EF=BC=8C=E8=8B=A5=E8=AF=AF=E6=94=B6=E6=9C=AC=E9=
+=82=AE=E4=BB=B6=EF=BC=8C=E8=AF=B7=E5=8A=A1=E5=BF=85=E9=80=9A=E7=9F=A5=E5=8F=91=
+=E9=80=81=E4=BA=BA=E5=B9=B6=E7=9B=B4=E6=8E=A5=E5=88=A0=E5=8E=BB=EF=BC=8C=E4=B8=
+=8D=E5=BE=97=E4=BD=BF=E7=94=A8=E3=80=81=E4=BC=A0=E6=92=AD=E6=88=96=E5=A4=8D=E5=
+=88=B6=E6=9C=AC=E9=82=AE=E4=BB=B6=E3=80=82</b></span>
+</div>
+<div>
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>=E8=BF=9B=E5=87=BA=
+=E9=82=AE=E4=BB=B6=E5=9D=87=E5=8F=97=E5=88=B0=E6=9C=AC=E5=85=AC=E5=8F=B8=E5=90=
+=88=E8=A7=84=E7=9B=91=E6=8E=A7=E3=80=82=E9=82=AE=E4=BB=B6=E5=8F=AF=E8=83=BD=E5=
+=8F=91=E7=94=9F=E8=A2=AB=E6=88=AA=E7=95=99=E3=80=81=E8=A2=AB=E4=BF=AE=E6=94=B9=
+=E3=80=81=E4=B8=A2=E5=A4=B1=E3=80=81=E8=A2=AB=E7=A0=B4=E5=9D=8F=E6=88=96=E5=8C=
+=85=E5=90=AB=E8=AE=A1=E7=AE=97=E6=9C=BA=E7=97=85=E6=AF=92=E7=AD=89=E4=B8=8D=E5=
+=AE=89=E5=85=A8=E6=83=85=E5=86=B5=E3=80=82</b></span>
+</div>
+<div>
+	<span style=3D"font-family:=E9=BB=91=E4=BD=93;"><b>****************=
+****************************************************************************=
+************************************************************</b></span>
+</div></div><br><br><div><font face=3D"=E9=BB=91=E4=BD=93"><b>**************=
+****************************************************************************=
+**************************************************************</b></font></d=
+iv><div><font face=3D"=E9=BB=91=E4=BD=93"><b>The information in this email i=
+s confidential and may be legally privileged. If you have received this emai=
+l in error or are not the intended recipient,</b></font></div><div><font fac=
+e=3D"=E9=BB=91=E4=BD=93"><b>please immediately notify the sender and delete t=
+his message from your computer. Any use, distribution, or copying of this em=
+ail other than by the&nbsp;</b></font></div><div><font face=3D"=E9=BB=91=E4=BD=
+=93"><b>intended recipient is strictly prohibited. All messages sent to and f=
+rom us may be monitored to ensure compliance with internal policies and to&n=
+bsp;</b></font></div><div><font face=3D"=E9=BB=91=E4=BD=93"><b>protect our b=
+usiness.</b></font></div><div><font face=3D"=E9=BB=91=E4=BD=93"><b>Emails ar=
+e not secure and cannot be guaranteed to be error free as they can be interc=
+epted, amended, lost or destroyed, or contain viruses. Anyone</b></font></di=
+v><div><font face=3D"=E9=BB=91=E4=BD=93"><b>who communicates with us by emai=
+l is taken to accept these risks.</b></font></div><div><font face=3D"=E9=BB=91=
+=E4=BD=93"><b>=E6=94=B6=E5=8F=91=E9=82=AE=E4=BB=B6=E8=80=85=E8=AF=B7=E6=B3=A8=
+=E6=84=8F:</b></font></div><div><font face=3D"=E9=BB=91=E4=BD=93"><b>=E6=9C=AC=
+=E9=82=AE=E4=BB=B6=E5=90=AB=E6=B6=89=E5=AF=86=E4=BF=A1=E6=81=AF=EF=BC=8C=E8=AF=
+=B7=E4=BF=9D=E5=AE=88=E7=A7=98=E5=AF=86=EF=BC=8C=E8=8B=A5=E8=AF=AF=E6=94=B6=E6=
+=9C=AC=E9=82=AE=E4=BB=B6=EF=BC=8C=E8=AF=B7=E5=8A=A1=E5=BF=85=E9=80=9A=E7=9F=A5=
+=E5=8F=91=E9=80=81=E4=BA=BA=E5=B9=B6=E7=9B=B4=E6=8E=A5=E5=88=A0=E5=8E=BB=EF=BC=
+=8C=E4=B8=8D=E5=BE=97=E4=BD=BF=E7=94=A8=E3=80=81=E4=BC=A0=E6=92=AD=E6=88=96=E5=
+=A4=8D=E5=88=B6=E6=9C=AC=E9=82=AE=E4=BB=B6=E3=80=82</b></font></div><div><fo=
+nt face=3D"=E9=BB=91=E4=BD=93"><b>=E8=BF=9B=E5=87=BA=E9=82=AE=E4=BB=B6=E5=9D=
+=87=E5=8F=97=E5=88=B0=E6=9C=AC=E5=85=AC=E5=8F=B8=E5=90=88=E8=A7=84=E7=9B=91=E6=
+=8E=A7=E3=80=82=E9=82=AE=E4=BB=B6=E5=8F=AF=E8=83=BD=E5=8F=91=E7=94=9F=E8=A2=AB=
+=E6=88=AA=E7=95=99=E3=80=81=E8=A2=AB=E4=BF=AE=E6=94=B9=E3=80=81=E4=B8=A2=E5=A4=
+=B1=E3=80=81=E8=A2=AB=E7=A0=B4=E5=9D=8F=E6=88=96=E5=8C=85=E5=90=AB=E8=AE=A1=E7=
+=AE=97=E6=9C=BA=E7=97=85=E6=AF=92=E7=AD=89=E4=B8=8D=E5=AE=89=E5=85=A8=E6=83=85=
+=E5=86=B5=E3=80=82</b></font></div><div><font face=3D"=E9=BB=91=E4=BD=93"><b=
+>***************************************************************************=
+****************************************************************************=
+*</b></font></div></div></div></blockquote>
+</div></blockquote></body></html>=
+
+--Apple-Mail-302BAAEE-DA44-45E2-97BF-060FA5091D4B--

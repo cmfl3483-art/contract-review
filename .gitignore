@@ -1,0 +1,28 @@
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.claude/
+.kiro/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+.env
+.env.local
+.env.production
+
+# Qoder
+.qoder/
+
+# Local scripts / temp
+scripts/local/
+temp/
+*.tmp
+
+# Nginx local config
+nginx/local.conf

@@ -1,0 +1,46 @@
+.qad-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.qad-selection .qad-selection-item {
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 8px 12px !important;
+  transition: background 0.2s;
+}
+
+.qad-selection .qad-selection-item:hover {
+  background: #f5f7fa;
+}
+
+.qad-confirm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.qad-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.qad-label {
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+}
+
+.qad-value {
+  font-size: 14px;
+  color: #1f1f1f;
+  word-break: break-all;
+}
+
+.qad-opinion .ant-input,
+.qad-opinion textarea {
+  font-size: 14px;
+}

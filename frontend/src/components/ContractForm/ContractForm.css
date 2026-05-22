@@ -1,0 +1,141 @@
+.contract-form {
+  margin-top: 24px;
+}
+
+.contract-form .ant-form-item {
+  margin-bottom: 20px;
+}
+
+.contract-form .ant-form-item-label > label {
+  font-weight: 500;
+  color: #262626;
+}
+
+.contract-form .ant-input,
+.contract-form .ant-input-textarea textarea {
+  border-radius: 4px;
+}
+
+.contract-form .ant-input:focus,
+.contract-form .ant-input-textarea textarea:focus {
+  border-color: #1890ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.1);
+}
+
+.contract-form .ant-select-selector {
+  border-radius: 4px !important;
+}
+
+.contract-form .ant-select-focused .ant-select-selector {
+  border-color: #1890ff !important;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.1) !important;
+}
+
+.contract-form .ant-upload-drag {
+  border-radius: 4px;
+  background-color: #fafafa;
+  border: 1px dashed #d9d9d9;
+  transition: all 0.3s;
+}
+
+.contract-form .ant-upload-drag:hover {
+  border-color: #1890ff;
+  background-color: #f0f8ff;
+}
+
+.contract-form .ant-upload-drag-icon {
+  font-size: 48px;
+  color: #1890ff;
+  margin-bottom: 8px;
+}
+
+.contract-form .ant-upload-text {
+  font-size: 16px;
+  color: #262626;
+  margin-bottom: 4px;
+}
+
+.contract-form .ant-upload-hint {
+  font-size: 14px;
+  color: #8c8c8c;
+}
+
+.contract-form .picker-trigger {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contract-form .picker-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 6px;
+  background: #fafafa;
+  border: 1px dashed #e0e0e0;
+  border-radius: 4px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.contract-form .picker-tags .ant-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 2px 8px;
+}
+
+.contract-form .ant-upload-list {
+  margin-top: 16px;
+}
+
+.contract-form .ant-upload-list-item {
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+.contract-form .ant-upload-list-item:hover {
+  background-color: #fafafa;
+}
+
+/* Error state styling */
+.contract-form .ant-form-item-has-error .ant-input,
+.contract-form .ant-form-item-has-error .ant-input-textarea textarea,
+.contract-form .ant-form-item-has-error .ant-select-selector {
+  border-color: #ff4d4f !important;
+}
+
+.contract-form .ant-form-item-has-error .ant-input:focus,
+.contract-form .ant-form-item-has-error .ant-input-textarea textarea:focus,
+.contract-form .ant-form-item-has-error .ant-select-focused .ant-select-selector {
+  box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.1) !important;
+}
+
+.contract-form .ant-form-item-explain-error {
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Modal footer button styling */
+.ant-modal-footer .ant-btn {
+  border-radius: 4px;
+  height: 36px;
+  padding: 0 20px;
+  font-size: 14px;
+}
+
+.ant-modal-footer .ant-btn-primary {
+  background-color: #1890ff;
+  border-color: #1890ff;
+}
+
+.ant-modal-footer .ant-btn-primary:hover {
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+}
+
+.ant-modal-footer .ant-btn-default:hover {
+  color: #1890ff;
+  border-color: #1890ff;
+}

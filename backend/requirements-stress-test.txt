@@ -1,0 +1,19 @@
+# 压力测试依赖
+# Stress Testing Dependencies
+
+# Locust - 负载测试工具
+locust>=2.20.0
+
+# aiohttp - 异步 HTTP 客户端 (用于简单压力测试脚本)
+aiohttp>=3.9.0
+
+# python-socketio - WebSocket 客户端 (用于 WebSocket 压力测试)
+python-socketio[client]>=5.11.0
+
+# 性能监控和分析
+psutil>=5.9.0  # 系统资源监控
+memory-profiler>=0.61.0  # 内存分析
+py-spy>=0.3.14  # CPU 性能分析
+
+# 数据生成
+faker>=22.0.0  # 生成测试数据

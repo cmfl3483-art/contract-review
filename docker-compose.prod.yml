@@ -1,0 +1,186 @@
+# 生产环境 Docker Compose 配置
+# 使用方式：docker compose -f docker-compose.prod.yml up -d
+# 与本地开发配置的区别：
+#   1. 前端端口绑定到 127.0.0.1:8080（由宿主机 Nginx 反代，避免端口冲突）
+#   2. 注释掉 ./backend:/app volume 挂载（使用镜像内代码）
+#   3. 钉钉回调域名和 CORS 配置为生产域名
+#   4. celery_worker 和 frontend 增加了 healthcheck
+
+services:
+  # PostgreSQL 数据库
+  postgres:
+    image: postgres:15-alpine
+    container_name: contract_review_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: contract_review
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - contract_review_network
+
+  # Redis 缓存
+  redis:
+    image: redis:7-alpine
+    container_name: contract_review_redis
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - contract_review_network
+
+  # MinIO 对象存储
+  minio:
+    image: minio/minio:latest
+    container_name: contract_review_minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    networks:
+      - contract_review_network
+
+  # 后端服务
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: contract_review_backend
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5432/contract_review
+      REDIS_URL: redis://redis:6379/0
+      MINIO_ENDPOINT: minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+      MINIO_BUCKET: contract-attachments
+      MINIO_SECURE: "false"
+      SECRET_KEY: your-secret-key-change-in-production
+      ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 1440
+      DINGTALK_APP_KEY: ${DINGTALK_APP_KEY:-your-app-key}
+      DINGTALK_APP_SECRET: ${DINGTALK_APP_SECRET:-your-app-secret}
+      DINGTALK_CORP_ID: ${DINGTALK_CORP_ID:-your-corp-id}
+      DINGTALK_REDIRECT_URI: https://chenmin0922.online/api/auth/dingtalk/callback
+      CORS_ORIGINS: >-
+        ["https://chenmin0922.online"]
+      AI_PROVIDER: ${AI_PROVIDER:-deepseek}
+      AI_API_BASE: ${AI_API_BASE:-https://api.deepseek.com/v1}
+      AI_API_KEY: ${AI_API_KEY:-your-api-key}
+      AI_MODEL: ${AI_MODEL:-deepseek-chat}
+      CELERY_BROKER_URL: redis://redis:6379/1
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
+      ENVIRONMENT: production
+      LOG_LEVEL: INFO
+    ports:
+      - "8000:8000"
+    volumes:
+      - backend_logs:/app/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    networks:
+      - contract_review_network
+    restart: unless-stopped
+
+  # Celery Worker (异步任务处理)
+  celery_worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: contract_review_celery_worker
+    command: celery -A app.celery_app worker --loglevel=info
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5432/contract_review
+      REDIS_URL: redis://redis:6379/0
+      MINIO_ENDPOINT: minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+      MINIO_BUCKET: contract-attachments
+      MINIO_SECURE: "false"
+      AI_PROVIDER: ${AI_PROVIDER:-deepseek}
+      AI_API_BASE: ${AI_API_BASE:-https://api.deepseek.com/v1}
+      AI_API_KEY: ${AI_API_KEY:-your-api-key}
+      AI_MODEL: ${AI_MODEL:-deepseek-chat}
+      CELERY_BROKER_URL: redis://redis:6379/1
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
+      ENVIRONMENT: production
+      LOG_LEVEL: INFO
+    volumes:
+      - celery_logs:/app/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      backend:
+        condition: service_started
+    networks:
+      - contract_review_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "celery -A app.celery_app inspect ping -d celery@$$HOSTNAME || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # 前端服务
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: contract_review_frontend
+    ports:
+      - "127.0.0.1:8080:80"
+    depends_on:
+      - backend
+    networks:
+      - contract_review_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  postgres_data:
+  redis_data:
+  minio_data:
+  backend_logs:
+  celery_logs:
+
+networks:
+  contract_review_network:
+    driver: bridge

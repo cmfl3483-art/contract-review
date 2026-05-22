@@ -1,0 +1,15 @@
+.center-panel-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.center-panel-container > :first-child {
+  flex-shrink: 0;
+}
+
+.center-panel-container > :last-child {
+  flex: 1;
+  min-height: 0;
+}

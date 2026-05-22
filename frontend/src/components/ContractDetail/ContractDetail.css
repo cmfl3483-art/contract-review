@@ -1,0 +1,367 @@
+.contract-detail {
+  background-color: #fff;
+  border-bottom: 1px solid #e2e6ea;
+  flex-shrink: 0;
+}
+
+.contract-detail-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  min-height: 200px;
+}
+
+/* Header Section */
+.contract-detail-header {
+  padding: 16px 24px 8px;
+  background-color: #fff;
+  border-bottom: none;
+}
+
+.contract-title {
+  margin: 0 0 6px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2a3e;
+  line-height: 1.4;
+}
+
+.contract-description {
+  margin: 0;
+  font-size: 13px;
+  color: #5b6e8c;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+/* Section */
+.contract-section {
+  padding: 8px 24px;
+}
+
+.contract-detail-toggle {
+  margin: 8px 24px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #f5f7fa;
+  border: 1px dashed #d9e0ea;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #1890ff;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.contract-detail-toggle:hover {
+  background: #eff5fb;
+  border-color: #91caff;
+}
+
+.contract-detail-toggle:focus-visible {
+  outline: 2px solid #91caff;
+  outline-offset: 2px;
+}
+
+.section-title {
+  margin: 0 0 12px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2c7be5;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.attach-count {
+  font-weight: 400;
+  color: #8a99b0;
+  font-size: 12px;
+}
+
+/* Reviewer status (原型: 横向三步序列) */
+.reviewer-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  font-size: 12px;
+  padding: 10px 24px 16px;
+  border-top: 1px dashed #e2e6ea;
+  background: #fafbfd;
+}
+
+.reviewer-status > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reviewer-status .status-done {
+  color: #2ecc71;
+}
+
+.reviewer-status .status-pending {
+  color: #f39c12;
+}
+
+.reviewer-status .status-total {
+  color: #5b6e8c;
+}
+
+/* 我的待审区域 */
+.my-pending-reviews {
+  background: linear-gradient(135deg, #fff7e6 0%, #fffbe6 100%);
+  border: 1px solid #ffd591;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-top: 12px;
+}
+
+.my-pending-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.my-pending-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #d46b08;
+}
+
+.my-pending-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.my-pending-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border: 1px solid #ffe7ba;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.my-pending-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.my-pending-name {
+  font-size: 13px;
+  color: #595959;
+}
+
+/* Reviewers */
+.reviewers-group {
+  margin-bottom: 20px;
+}
+
+.reviewers-group:last-child {
+  margin-bottom: 0;
+}
+
+.reviewers-group-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #595959;
+}
+
+.reviewers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.reviewer-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background-color: #fafafa;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.reviewer-item:hover {
+  background-color: #f0f0f0;
+}
+
+.reviewer-name {
+  flex: 1;
+  font-size: 14px;
+  color: #262626;
+}
+
+/* Attachments */
+.attach-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.upload-btn {
+  background: #2c7be5;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s;
+}
+
+.upload-btn:hover {
+  background: #1f6bc5;
+}
+
+.attachment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.attachment-group {
+  background: #f8fafe;
+  border-radius: 10px;
+  padding: 10px 12px;
+  border-left: 3px solid #667eea;
+  transition: all 0.2s;
+}
+
+.attachment-group:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.attachment-group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.attachment-group-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: #1f2a3e;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.attachment-group-name i {
+  color: #667eea;
+}
+
+.attachment-versions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 20px;
+  margin-top: 8px;
+}
+
+.attachment-version {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: #5b6e8c;
+  padding: 4px 0;
+}
+
+.version-badge {
+  background: #667eea;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.version-time {
+  color: #8a99b0;
+}
+
+.version-uploader {
+  color: #5b6e8c;
+}
+
+.version-latest {
+  background: #2ecc71;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  margin-left: 4px;
+}
+
+.version-download {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: #e6f4ff;
+  color: #1677ff;
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.version-download:hover {
+  background: #1677ff;
+  color: #fff;
+}
+
+.attachments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.attachment-filename {
+  font-size: 14px;
+  font-weight: 500;
+  color: #262626;
+}
+
+/* Divider */
+.contract-detail .ant-divider {
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contract-detail-header {
+    padding: 16px;
+  }
+
+  .contract-section {
+    padding: 16px;
+  }
+
+  .contract-title {
+    font-size: 18px;
+  }
+}

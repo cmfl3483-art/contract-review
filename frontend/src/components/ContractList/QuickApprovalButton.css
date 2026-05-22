@@ -1,0 +1,70 @@
+/* QuickApprovalButton Component Styles */
+
+.quick-approval-button {
+  margin-top: 8px;
+  width: 100%;
+}
+
+.quick-approval-button:hover {
+  opacity: 0.9;
+}
+
+/* Selection Modal Styles */
+.pending-review-item {
+  padding: 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.pending-review-item:hover {
+  background-color: #f5f5f5;
+}
+
+.review-role {
+  font-weight: 500;
+  color: #1890ff;
+}
+
+.review-step {
+  color: #666;
+}
+
+.review-status {
+  color: #999;
+  font-size: 12px;
+}
+
+/* Confirmation Modal Styles */
+.approval-confirmation {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contract-info,
+.review-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-weight: 500;
+  color: #666;
+  font-size: 14px;
+}
+
+.info-value {
+  color: #333;
+  font-size: 14px;
+}
+
+.opinion-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.opinion-input .ant-input {
+  font-size: 14px;
+}

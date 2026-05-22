@@ -1,0 +1,29 @@
+.filter-bar {
+  width: 100%;
+}
+
+.filter-button {
+  transition: all 0.3s ease;
+}
+
+.filter-button:hover {
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+.filter-button-active {
+  transition: all 0.3s ease;
+}
+
+/* 确保徽章在按钮上方正确显示 */
+.filter-bar .ant-badge {
+  display: inline-block;
+}
+
+/* 徽章样式优化 */
+.filter-bar .ant-badge-count {
+  background-color: #ff4d4f;
+  box-shadow: 0 0 0 1px #fff;
+  /* 防止后续按钮遮挡红点 */
+  z-index: 2;
+}
