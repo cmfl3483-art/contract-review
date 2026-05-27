@@ -162,6 +162,24 @@ pg_dump -U postgres -d contract_review --no-owner --no-privileges --clean --if-e
 - `[-2, 6]` 贴角内嵌（推荐）
 - `.ant-badge-count { z-index: 2 }` 兜底
 
+### 17. 服务器侧热修必须回流到 git
+"在服务器上 `vim` 改一改让它跑起来"是高频陷阱：
+- 改完没提交 → CI/CD 重新拉代码就把热修覆盖了
+- 改完没提交 → 换台机器或重建容器就丢了
+- 改完没提交 → 别人 clone 仓库跑不起来
+
+典型案例：`backend/Dockerfile` 在服务器上加过腾讯镜像源加速 build（apt + pip），但没回流到 git。导致后续在 GitHub Actions 里全新构建时走默认源，apt-get install 卡 30+ 分钟。
+
+**规则**：所有服务器侧的临时改动**必须**当天回流到 git，不允许"我先这样能跑就好"。
+
+### 18. 长 SSH 命令在腾讯云会被踢
+`ssh ubuntu@server 'long-running-command'` 类型的连接，docker build 之类长时间无 stdout flush 会被腾讯云 SSH 网关切断（约 5 分钟 idle）。
+
+**对策**：
+- 短命令直接 SSH 跑
+- 长命令在服务器上写脚本 + `nohup setsid xxx.sh < /dev/null > /tmp/log 2>&1 & disown`，脱离 SSH session
+- 然后用独立的短 SSH 命令轮询 `/tmp/log` 看进度
+
 ## WebSocket 事件
 
 Socket.io 嵌在 FastAPI 中。前端 `frontend/src/config/socket.ts` 连接，加入房间 `user:{user_id}` 和 `contract:{contract_id}`。
