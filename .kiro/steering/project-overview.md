@@ -234,6 +234,29 @@ public_paths = [
 
 诊断信号：`docker logs <backend> | grep socket.io` 看到大量 `401 Unauthorized` 就是这个问题。
 
+### 22. Nginx 反代必须显式配 `/socket.io/` location 块
+**单有 `location /` 兜底是不够的**。socket.io 请求会落到 `/`，被代理到前端容器（nginx/static 服务器），不是 backend WebSocket 服务，前端 console 报 `WebSocket connection failed: bad response from server`。
+
+每个域名的 Nginx site config（`/etc/nginx/sites-available/<domain>`）必须显式包含：
+
+```nginx
+location /socket.io/ {
+    proxy_pass http://127.0.0.1:<backend_port>/socket.io/;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_set_header Host $host;
+    proxy_read_timeout 86400;
+    proxy_send_timeout 86400;
+}
+```
+
+**位置很重要**：必须在 `location /` 之前定义（Nginx 按 location 顺序匹配前缀）。
+
+诊断信号：浏览器 console 报 "There was a bad response from the server"，但服务器侧 backend 日志看不到 socket.io 请求（请求被前端 nginx 拿去返回 HTML 了）。
+
+仓库里的 nginx 配置参考：`nginx/chenmin0922.online.conf` (prod)、`nginx/chenmin.yunumall.com.conf` (test)。
+
 ## WebSocket 事件
 
 Socket.io 嵌在 FastAPI 中。前端 `frontend/src/config/socket.ts` 连接，加入房间 `user:{user_id}` 和 `contract:{contract_id}`。
