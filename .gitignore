@@ -4,25 +4,66 @@
 *.swp
 *.swo
 *~
-.claude/
-.kiro/
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Docker
+# Secrets - SSH keys, env files
+*.pem
+*.key
 .env
 .env.local
 .env.production
+.env.test
+.env.prod
+backend/.env
+backend/.env.test
+backend/.env.prod
+frontend/.env
+frontend/.env.local
+frontend/.env.production
 
-# Qoder
+# Node
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+backend/venv/
+backend/.pytest_cache/
+
+# Build output
+frontend/dist/
+backend/logs/
+backend/scripts/__pycache__/
+
+# AI / Agent tooling state (keep specs and steering, ignore tool state)
+.claude/
 .qoder/
+.kiro/.config.kiro
+.kiro/specs/*/.config.kiro
 
-# Local scripts / temp
+# Local debug / experiment files
+diagnose*.mjs
+test_revise.py
+htys4.html
+*.png
+*.jpg
+*.jpeg
+
+# Local nginx test config
+nginx/local.conf
+
+# Docker
+*.tar
+docker-volumes/
+
+# Misc archives
+YCHD2026-*/
+
+# Temp
 scripts/local/
 temp/
 *.tmp
-
-# Nginx local config
-nginx/local.conf
