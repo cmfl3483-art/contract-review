@@ -180,6 +180,23 @@ pg_dump -U postgres -d contract_review --no-owner --no-privileges --clean --if-e
 - 长命令在服务器上写脚本 + `nohup setsid xxx.sh < /dev/null > /tmp/log 2>&1 & disown`，脱离 SSH session
 - 然后用独立的短 SSH 命令轮询 `/tmp/log` 看进度
 
+### 19. 钉钉 API 错误结果会被缓存，权限开通后必须清缓存
+`dingtalk_contact_service` 把 `corp_access_token` 和 `contacts_full` 缓存到 Redis（前者 ~7200s，后者更短）。
+
+如果权限不足时调钉钉 API 失败，**空结果会被缓存**。后续即使在钉钉控制台开了权限，应用还在用空缓存，依然拉不到数据。
+
+清缓存命令：
+```bash
+sudo docker exec contract_review_redis redis-cli -n 3 DEL dingtalk:corp_access_token dingtalk:contacts_full  # prod (db 3)
+sudo docker exec contract_review_redis redis-cli -n 0 DEL dingtalk:corp_access_token dingtalk:contacts_full  # test (db 0)
+```
+
+钉钉 prod 应用 (`dingwbwrz9jazgvxzeyh`) 必需的权限清单：
+- `Contact.User.Read`（新版 API，登录拿用户信息）
+- `qyapi_get_department_info`（部门信息读取）
+- `qyapi_get_department_member`（部门成员读取）
+- 以及"应用信息 → 通讯录权限范围"必须设为"全部员工"或包含目标部门
+
 ## WebSocket 事件
 
 Socket.io 嵌在 FastAPI 中。前端 `frontend/src/config/socket.ts` 连接，加入房间 `user:{user_id}` 和 `contract:{contract_id}`。
