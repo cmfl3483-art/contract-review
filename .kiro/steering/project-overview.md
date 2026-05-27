@@ -216,6 +216,24 @@ sudo docker exec contract_review_redis redis-cli -n 0 DEL dingtalk:corp_access_t
   ```
 - 真要拆共享层独立管理，做"方案 B 升级版"：把 postgres/redis/minio 抽到 `docker-compose.shared.yml`，test/prod 都用 external network 引用
 
+### 21. Socket.IO 路径必须在 AuthMiddleware 公开路径里
+浏览器 WebSocket 升级请求**不支持自定义 HTTP header**（如 `Authorization: Bearer xxx`）。如果 FastAPI 的 AuthMiddleware 拦截 `/socket.io/` 路径，所有 WS 连接立刻 401，前端日志全是"实时通信连接失败,部分功能可能受影响,系统将自动尝试重新连接"，且永远连不上。
+
+正确做法：`auth_middleware.py` 的 `_is_public_path` 必须放行 `/socket.io/`，把鉴权交给 socket.io 协议自己的 `auth` 字段（前端 `io(url, { auth: { token } })`，后端 `socketio_server.connect` handler 中调 `verify_token`）。
+
+```python
+# auth_middleware.py
+public_paths = [
+    ...
+    "/socket.io/",
+    "/socket.io",
+]
+```
+
+安全性不下降：socket.io 的 `connect` handler 校验失败会返回 `False`，拒绝建立连接。
+
+诊断信号：`docker logs <backend> | grep socket.io` 看到大量 `401 Unauthorized` 就是这个问题。
+
 ## WebSocket 事件
 
 Socket.io 嵌在 FastAPI 中。前端 `frontend/src/config/socket.ts` 连接，加入房间 `user:{user_id}` 和 `contract:{contract_id}`。

@@ -460,3 +460,6 @@ open http://localhost:9001
 ---
 
 **注意**: 本项目仍在开发中,部分功能可能尚未完全实现。欢迎贡献代码和提出建议!
+
+
+<!-- CI/CD Pipeline Active. Last validated deployment: 2026-05-27 -->
