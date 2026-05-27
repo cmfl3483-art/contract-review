@@ -5,6 +5,11 @@ on:
     branches: [develop]
   workflow_dispatch:  # 允许手动触发
 
+# 同一时刻只能跑一个 test 部署
+concurrency:
+  group: deploy-test
+  cancel-in-progress: false
+
 jobs:
   deploy:
     name: Deploy to test environment
@@ -17,24 +22,34 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
+          command_timeout: 20m
           script_stop: true  # 任意命令失败就停止，避免半成品状态
           script: |
             set -e
             cd /home/ubuntu/contract-review
 
             echo "=== Pulling latest code from develop ==="
-            git fetch origin
-            git checkout develop
+            git fetch origin develop
+            git checkout develop 2>/dev/null || git checkout -B develop origin/develop
             git reset --hard origin/develop
 
             echo "=== Rebuilding test stack ==="
-            sudo docker compose -f docker-compose.yml up -d --build
+            docker compose -f docker-compose.yml up -d --build
+
+            echo "=== Waiting for backend to be ready ==="
+            for i in $(seq 1 30); do
+              if curl -fsS http://127.0.0.1:8000/health > /dev/null 2>&1; then
+                echo "backend ready"
+                break
+              fi
+              sleep 2
+            done
 
             echo "=== Running DB migrations ==="
-            sudo docker compose -f docker-compose.yml exec -T backend alembic upgrade head
+            docker compose -f docker-compose.yml exec -T backend alembic upgrade head
 
             echo "=== Verifying ==="
-            sudo docker compose -f docker-compose.yml ps
+            docker compose -f docker-compose.yml ps
             curl -fsS http://127.0.0.1:8000/health || (echo "test backend health check failed" && exit 1)
 
             echo "=== Test deployment done ==="
