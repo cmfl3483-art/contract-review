@@ -1,0 +1,40 @@
+name: Deploy to Test
+
+on:
+  push:
+    branches: [develop]
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  deploy:
+    name: Deploy to test environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script_stop: true  # 任意命令失败就停止，避免半成品状态
+          script: |
+            set -e
+            cd /home/ubuntu/contract-review
+
+            echo "=== Pulling latest code from develop ==="
+            git fetch origin
+            git checkout develop
+            git reset --hard origin/develop
+
+            echo "=== Rebuilding test stack ==="
+            sudo docker compose -f docker-compose.yml up -d --build
+
+            echo "=== Running DB migrations ==="
+            sudo docker compose -f docker-compose.yml exec -T backend alembic upgrade head
+
+            echo "=== Verifying ==="
+            sudo docker compose -f docker-compose.yml ps
+            curl -fsS http://127.0.0.1:8000/health || (echo "test backend health check failed" && exit 1)
+
+            echo "=== Test deployment done ==="

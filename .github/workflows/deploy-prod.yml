@@ -1,0 +1,56 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# 同一时刻只能跑一个 prod 部署，避免互相覆盖
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to production environment
+    runs-on: ubuntu-latest
+    # 可选：要求人工审批后才执行（在 GitHub repo settings → Environments → production 配置 protection rules）
+    environment: production
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script_stop: true
+          script: |
+            set -e
+
+            # prod 仓库目录（与 test 仓库分开，避免 git 操作互相干扰）
+            PROD_DIR=/home/ubuntu/contract-review-prod
+
+            if [ ! -d "$PROD_DIR" ]; then
+              echo "ERROR: $PROD_DIR does not exist. Please run initial setup script first." >&2
+              exit 1
+            fi
+
+            cd "$PROD_DIR"
+
+            echo "=== Pulling latest code from main ==="
+            git fetch origin
+            git checkout main
+            git reset --hard origin/main
+
+            echo "=== Rebuilding prod stack ==="
+            sudo docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod up -d --build
+
+            echo "=== Running DB migrations ==="
+            sudo docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod exec -T backend alembic upgrade head
+
+            echo "=== Verifying ==="
+            sudo docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod ps
+            curl -fsS http://127.0.0.1:8001/health || (echo "prod backend health check failed" && exit 1)
+
+            echo "=== Prod deployment done ==="
