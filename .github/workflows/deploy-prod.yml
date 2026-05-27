@@ -14,7 +14,7 @@ jobs:
   deploy:
     name: Deploy to production environment
     runs-on: ubuntu-latest
-    # 可选：要求人工审批后才执行（在 GitHub repo settings → Environments → production 配置 protection rules）
+    # 要求人工审批后才执行（在 GitHub repo settings → Environments → production 配置 protection rules）
     environment: production
     steps:
       - name: Deploy via SSH
@@ -24,33 +24,43 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
+          command_timeout: 20m
           script_stop: true
           script: |
             set -e
 
-            # prod 仓库目录（与 test 仓库分开，避免 git 操作互相干扰）
+            # prod 仓库目录（与 test 目录分开，避免 git 操作互相干扰）
             PROD_DIR=/home/ubuntu/contract-review-prod
 
-            if [ ! -d "$PROD_DIR" ]; then
-              echo "ERROR: $PROD_DIR does not exist. Please run initial setup script first." >&2
+            if [ ! -d "$PROD_DIR/.git" ]; then
+              echo "ERROR: $PROD_DIR is not a git repo. Please run initial setup script first." >&2
               exit 1
             fi
 
             cd "$PROD_DIR"
 
             echo "=== Pulling latest code from main ==="
-            git fetch origin
-            git checkout main
+            git fetch origin main
+            git checkout main 2>/dev/null || git checkout -B main origin/main
             git reset --hard origin/main
 
             echo "=== Rebuilding prod stack ==="
-            sudo docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod up -d --build
+            docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod up -d --build
+
+            echo "=== Waiting for backend to be ready ==="
+            for i in $(seq 1 30); do
+              if curl -fsS http://127.0.0.1:8001/health > /dev/null 2>&1; then
+                echo "backend ready"
+                break
+              fi
+              sleep 2
+            done
 
             echo "=== Running DB migrations ==="
-            sudo docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod exec -T backend alembic upgrade head
+            docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod exec -T backend alembic upgrade head
 
             echo "=== Verifying ==="
-            sudo docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod ps
+            docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod ps
             curl -fsS http://127.0.0.1:8001/health || (echo "prod backend health check failed" && exit 1)
 
             echo "=== Prod deployment done ==="
