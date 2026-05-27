@@ -197,6 +197,43 @@ sudo docker exec contract_review_redis redis-cli -n 0 DEL dingtalk:corp_access_t
 - `qyapi_get_department_member`（部门成员读取）
 - 以及"应用信息 → 通讯录权限范围"必须设为"全部员工"或包含目标部门
 
+### 20. test 的 docker-compose.yml 包含共享基础设施，改它要小心
+方案 B 共享基础设施意味着 `docker-compose.yml`（test 用）里**同时包含** postgres / redis / minio 和 test 的应用容器。这有连带风险：
+
+| 操作 | 影响 |
+|---|---|
+| 改 backend/celery/frontend 的代码或环境变量 | ✅ 只重启对应应用容器，不动共享层 |
+| 改 postgres/redis/minio 的服务定义（镜像版本/env/volume）| ⚠️ 重启共享层 → prod 短暂失连 |
+| `docker compose -f docker-compose.yml down` | 💀 全停 → prod 直接挂 |
+| `docker restart contract_review_postgres` | ⚠️ prod 短暂失连 |
+
+**规则**：
+- 日常 CI/CD 推 develop 改代码完全安全，docker compose 不会重启服务定义没变的容器
+- **不要在 develop 分支改 test compose 里 postgres/redis/minio 的服务定义**，要改先告知，并选低峰期
+- **不要在 test 目录跑 `docker compose down`**。要停 test 应用层用：
+  ```bash
+  docker compose -f docker-compose.yml stop backend celery_worker frontend
+  ```
+- 真要拆共享层独立管理，做"方案 B 升级版"：把 postgres/redis/minio 抽到 `docker-compose.shared.yml`，test/prod 都用 external network 引用
+
+### 21. Socket.IO 路径必须在 AuthMiddleware 公开路径里
+浏览器 WebSocket 升级请求**不支持自定义 HTTP header**（如 `Authorization: Bearer xxx`）。如果 FastAPI 的 AuthMiddleware 拦截 `/socket.io/` 路径，所有 WS 连接立刻 401，前端日志全是"实时通信连接失败,部分功能可能受影响,系统将自动尝试重新连接"，且永远连不上。
+
+正确做法：`auth_middleware.py` 的 `_is_public_path` 必须放行 `/socket.io/`，把鉴权交给 socket.io 协议自己的 `auth` 字段（前端 `io(url, { auth: { token } })`，后端 `socketio_server.connect` handler 中调 `verify_token`）。
+
+```python
+# auth_middleware.py
+public_paths = [
+    ...
+    "/socket.io/",
+    "/socket.io",
+]
+```
+
+安全性不下降：socket.io 的 `connect` handler 校验失败会返回 `False`，拒绝建立连接。
+
+诊断信号：`docker logs <backend> | grep socket.io` 看到大量 `401 Unauthorized` 就是这个问题。
+
 ## WebSocket 事件
 
 Socket.io 嵌在 FastAPI 中。前端 `frontend/src/config/socket.ts` 连接，加入房间 `user:{user_id}` 和 `contract:{contract_id}`。

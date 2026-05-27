@@ -103,7 +103,13 @@ class AuthMiddleware:
             "/docs",
             "/redoc",
             "/openapi.json",
-            "/health"
+            "/health",
+            # Socket.IO 走自己的 auth 协议（前端 io(...) 的 auth: { token } 字段，
+            # 由 socketio_server.py 的 connect handler 在 verify_token 中校验）。
+            # HTTP Authorization header 在 WebSocket 握手时浏览器原生不支持自定义 header，
+            # 故必须放行此路径让 socket.io 内部协议处理鉴权，否则所有 WS 连接 401。
+            "/socket.io/",
+            "/socket.io",
         ]
         
         for public_path in public_paths:
