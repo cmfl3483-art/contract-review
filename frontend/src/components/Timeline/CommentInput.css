@@ -1,15 +1,21 @@
-/* 底部评论输入框 */
+/* 底部评论输入框 - 用 sticky 钉在容器底部，不受布局塌陷影响 */
 .comment-input-area {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
   background: white;
   padding: 16px 24px;
   border-top: 1px solid #e2e6ea;
   display: flex;
   gap: 12px;
-  align-items: center;
+  align-items: flex-end;
+  flex-shrink: 0;
 }
 
 .comment-input-area input {
   flex: 1;
+  width: 100%;
+  box-sizing: border-box;
   background: #f1f4f9;
   border: 1px solid #e2e6ea;
   padding: 10px 16px;

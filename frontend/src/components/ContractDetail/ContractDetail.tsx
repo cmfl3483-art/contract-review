@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { Empty, Spin, Tag, Modal, Upload, Input, Button, message } from 'antd';
+import { useEffect, useState } from 'react';
+import { Alert, Empty, Spin, Tag, Modal, Upload, Input, Button, Space, message } from 'antd';
+import { AxiosError } from 'axios';
 import {
   CheckCircleOutlined,
   ClockCircleOutlined,
@@ -10,10 +11,12 @@ import {
   DownloadOutlined,
   FileTextOutlined,
   CheckOutlined,
+  EditOutlined,
 } from '@ant-design/icons';
 import { useSelectedContractStore } from '../../stores';
 import { useUserStore } from '../../stores/useUserStore';
 import { useContractDetail, useUploadAttachment } from '../../hooks';
+import { useReviseContract } from '../../hooks/useReviseContract';
 import { formatDateTime } from '../../utils/time';
 import { getAttachmentDownloadUrl, downloadAttachment } from '../../hooks/useAttachments';
 import QuickApprovalDialog from '../QuickApprovalDialog/QuickApprovalDialog';
@@ -24,6 +27,7 @@ const ContractDetail: React.FC = () => {
   const currentUser = useUserStore((s) => s.currentUser);
   const { data, isLoading, error } = useContractDetail(selectedContractId || undefined);
   const uploadAttachmentMutation = useUploadAttachment();
+  const reviseContractMutation = useReviseContract(selectedContractId || '');
 
   // 折叠/展开详情 (默认展开，折叠后仅显示合同名称)
   const [expanded, setExpanded] = useState(true);
@@ -33,6 +37,17 @@ const ContractDetail: React.FC = () => {
   const [uploadModalVisible, setUploadModalVisible] = useState(false);
   const [uploadVersion, setUploadVersion] = useState('');
   const [uploadFile, setUploadFile] = useState<File | null>(null);
+
+  // 编辑模式状态
+  const [isEditing, setIsEditing] = useState(false);
+  const [editName, setEditName] = useState('');
+  const [editContractNumber, setEditContractNumber] = useState('');
+  const [editDescription, setEditDescription] = useState('');
+
+  // 切换合同时退出编辑模式（避免编辑状态串到其他合同）
+  useEffect(() => {
+    setIsEditing(false);
+  }, [selectedContractId]);
 
   // 快速审批弹窗 (针对当前用户的某条 review)
   const [approvalReview, setApprovalReview] = useState<{
@@ -83,6 +98,89 @@ const ContractDetail: React.FC = () => {
     );
   };
 
+  // 进入编辑模式：用当前合同值填充编辑表单
+  const handleEnterEdit = () => {
+    if (!data?.contract) return;
+    setEditName(data.contract.name || '');
+    setEditContractNumber(data.contract.contractNumber || '');
+    setEditDescription(data.contract.description || '');
+    setIsEditing(true);
+  };
+
+  // 取消编辑：恢复原值并退出
+  const handleCancelEdit = () => {
+    if (data?.contract) {
+      setEditName(data.contract.name || '');
+      setEditDescription(data.contract.description || '');
+    }
+    setIsEditing(false);
+  };
+
+  // 保存编辑：仅传 dirty 字段
+  const handleSaveEdit = async () => {
+    if (!data?.contract) return;
+
+    const trimmedName = editName.trim();
+    if (trimmedName.length < 1 || trimmedName.length > 200) {
+      message.error('合同名称长度需在 1-200 字符');
+      return;
+    }
+    if (editDescription.length > 5000) {
+      message.error('合同描述长度不能超过 5000 字符');
+      return;
+    }
+
+    const payload: { name?: string; contract_number?: string; description?: string } = {};
+    const originalName = (data.contract.name || '').trim();
+    const originalContractNumber = (data.contract.contractNumber || '').trim();
+    const originalDescription = data.contract.description || '';
+
+    if (trimmedName !== originalName) {
+      payload.name = trimmedName;
+    }
+    if (editContractNumber.trim() !== originalContractNumber) {
+      payload.contract_number = editContractNumber.trim();
+    }
+    if (editDescription !== originalDescription) {
+      payload.description = editDescription;
+    }
+
+    // 没有任何变更，直接退出编辑模式
+    if (Object.keys(payload).length === 0) {
+      setIsEditing(false);
+      return;
+    }
+
+    try {
+      await reviseContractMutation.mutateAsync(payload);
+      message.success('保存成功，所有评审人需重新审批');
+      setIsEditing(false);
+    } catch (err) {
+      // 优先解析后端结构化错误（HTTP 422 detail = { field, limit }）
+      if (err instanceof AxiosError) {
+        const status = err.response?.status;
+        const detail = (err.response?.data as { detail?: unknown; error?: string } | undefined)
+          ?.detail;
+        if (status === 422 && detail && typeof detail === 'object') {
+          const { field, limit } = detail as { field?: string; limit?: string };
+          if (field || limit) {
+            message.error(
+              `字段 ${field || '未知'} 超出限制${limit ? `（${limit}）` : ''}`
+            );
+            return;
+          }
+        }
+        const errMsg =
+          (err.response?.data as { error?: string; message?: string } | undefined)?.error ||
+          (err.response?.data as { error?: string; message?: string } | undefined)?.message ||
+          err.message;
+        message.error(errMsg || '保存失败');
+        return;
+      }
+      message.error(err instanceof Error ? err.message : '保存失败');
+    }
+  };
+
   // 如果没有选中合同，显示空状态
   if (!selectedContractId) {
     return (
@@ -129,6 +227,13 @@ const ContractDetail: React.FC = () => {
 
   const { contract, reviewers, attachments } = data;
 
+  // 是否可编辑：仅发起人在 progress 状态下显示「编辑」按钮
+  const canEdit =
+    !!currentUser &&
+    !!contract.initiator &&
+    currentUser.id === contract.initiator.id &&
+    contract.status === 'progress';
+
   // 区分已审核和待审核的评审人
   const approvedReviewers = reviewers.filter((r) => r.status === 'approved');
   const pendingReviewers = reviewers.filter((r) => r.status !== 'approved');
@@ -150,11 +255,80 @@ const ContractDetail: React.FC = () => {
     <div className="contract-detail">
       {/* 标题 + 描述 */}
       <div className="contract-detail-header">
-        <h2 className="contract-title">{contract.name}</h2>
-        {expanded && contract.description && (
-          <p className="contract-description">
-            <span role="img" aria-label="file">📄</span> {contract.description}
-          </p>
+        {isEditing ? (
+          <div className="contract-edit-form">
+            <Alert
+              type="warning"
+              showIcon
+              message="修改后所有评审人需重新审批"
+              style={{ marginBottom: 12 }}
+            />
+            <div style={{ marginBottom: 8 }}>
+              <Input
+                value={editContractNumber}
+                maxLength={100}
+                placeholder="合同编号"
+                onChange={(e) => setEditContractNumber(e.target.value)}
+                disabled={reviseContractMutation.isPending}
+              />
+            </div>
+            <div style={{ marginBottom: 8 }}>
+              <Input
+                value={editName}
+                maxLength={200}
+                showCount
+                placeholder="合同名称"
+                onChange={(e) => setEditName(e.target.value)}
+                disabled={reviseContractMutation.isPending}
+              />
+            </div>
+            <div style={{ marginBottom: 8 }}>
+              <Input.TextArea
+                value={editDescription}
+                maxLength={5000}
+                showCount
+                rows={4}
+                placeholder="合同描述"
+                onChange={(e) => setEditDescription(e.target.value)}
+                disabled={reviseContractMutation.isPending}
+              />
+            </div>
+            <Space>
+              <Button
+                type="primary"
+                onClick={handleSaveEdit}
+                loading={reviseContractMutation.isPending}
+              >
+                保存
+              </Button>
+              <Button
+                onClick={handleCancelEdit}
+                disabled={reviseContractMutation.isPending}
+              >
+                取消
+              </Button>
+            </Space>
+          </div>
+        ) : (
+          <>
+            <div className="contract-title-row">
+              <h2 className="contract-title">{(contract.contractNumber ? contract.contractNumber + ' ' : '') + contract.name}</h2>
+              {canEdit && (
+                <Button
+                  size="small"
+                  icon={<EditOutlined />}
+                  onClick={handleEnterEdit}
+                >
+                  编辑
+                </Button>
+              )}
+            </div>
+            {expanded && contract.description && (
+              <p className="contract-description">
+                <span role="img" aria-label="file">📄</span> {contract.description}
+              </p>
+            )}
+          </>
         )}
       </div>
 

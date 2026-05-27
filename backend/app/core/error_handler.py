@@ -185,14 +185,23 @@ async def database_exception_handler(request: Request, exc: SQLAlchemyError) -> 
     request_id = str(uuid.uuid4())
     
     # 记录详细错误日志
+    orig_detail = getattr(exc, 'orig', None)
+    orig_str = f' | orig={repr(orig_detail)}' if orig_detail else ''
+    # 使用 exc.__traceback__ 手动获取完整 traceback
+    tb_list = traceback.format_exception(type(exc), exc, exc.__traceback__)
+    tb_str = ''.join(tb_list)
+    # 同时输出到 stderr 确保 Docker 日志捕获
+    import sys
+    sys.stderr.write(f"[DB ERROR] {type(exc).__name__}{orig_str}\n{tb_str}\n")
+    sys.stderr.flush()
     logger.error(
-        f"DatabaseError: {type(exc).__name__}",
+        f"DatabaseError: {type(exc).__name__}{orig_str}\n{tb_str}",
         extra={
             "request_id": request_id,
             "url": str(request.url),
             "method": request.method,
-            "error": str(exc),
-            "traceback": traceback.format_exc()
+            "error": repr(exc),
+            "traceback": tb_str
         }
     )
     

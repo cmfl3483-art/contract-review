@@ -4,6 +4,7 @@ import type { Comment } from '../../types/index';
 import { useAddComment } from '../../hooks';
 import { formatRelativeTime } from '../../utils/time';
 import ReplyList from './ReplyList';
+import MentionInput from './MentionInput';
 import './ReviewCard.css';
 
 interface TopLevelCommentCardProps {
@@ -13,43 +14,33 @@ interface TopLevelCommentCardProps {
 
 const TopLevelCommentCard: React.FC<TopLevelCommentCardProps> = ({ comment, contractId }) => {
   const [showReplyInput, setShowReplyInput] = useState(false);
-  const [replyContent, setReplyContent] = useState('');
 
   const addCommentMutation = useAddComment();
 
   const handleReply = () => {
     setShowReplyInput(!showReplyInput);
-    setReplyContent('');
   };
 
-  const handleSendReply = () => {
-    if (!replyContent.trim()) return;
+  const handleSendReply = (content: string, mentionedUserIds: string[]) => {
     addCommentMutation.mutate(
       {
         contractId,
         parentCommentId: comment.id,
-        content: replyContent.trim(),
+        content,
+        mentionedUserIds,
       },
       {
         onSuccess: () => {
           setShowReplyInput(false);
-          setReplyContent('');
         },
       }
     );
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendReply();
-    }
-  };
-
   const gradient = 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)';
 
   return (
-    <div className="comment-card">
+    <div className="comment-card" id={`anchor-${comment.id}`}>
       <div className="comment-header">
         <div className="comment-avatar" style={{ background: gradient }}>
           {comment.author?.name?.charAt(0) || '?'}
@@ -69,22 +60,14 @@ const TopLevelCommentCard: React.FC<TopLevelCommentCardProps> = ({ comment, cont
         </button>
       </div>
       {showReplyInput && (
-        <div className="reply-input-container">
-          <input
-            type="text"
-            placeholder={`回复 @${comment.author?.name || '未知用户'}...`}
-            value={replyContent}
-            onChange={(e) => setReplyContent(e.target.value)}
-            onKeyPress={handleKeyPress}
-            autoFocus
-          />
-          <button
-            onClick={handleSendReply}
-            disabled={!replyContent.trim() || addCommentMutation.isPending}
-          >
-            发送
-          </button>
-        </div>
+        <MentionInput
+          contractId={contractId}
+          placeholder={`回复 @${comment.author?.name || '未知用户'}...（输入 @ 提及）`}
+          autoFocus
+          disabled={addCommentMutation.isPending}
+          onSubmit={handleSendReply}
+          containerClassName="reply-input-container"
+        />
       )}
       {comment.replies && comment.replies.length > 0 && (
         <ReplyList replies={comment.replies} contractId={contractId} />

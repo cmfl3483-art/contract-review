@@ -15,11 +15,12 @@ export interface User {
 
 // Contract types
 export type ContractStatus = 'progress' | 'completed';
-export type FilterType = 'all' | '进行中' | '已完成' | '待我处理' | '抄送我' | '我发起的';
+export type FilterType = 'all' | '进行中' | '已完成' | '待我处理' | '抄送我' | '我发起的' | '我已审批';
 
 export interface Contract {
   id: string;
   name: string;
+  contractNumber?: string;
   description?: string;
   status: ContractStatus;
   initiatorId: string;
@@ -70,6 +71,7 @@ export interface Comment {
   likes: number;
   likedBy: string[];
   replies?: Comment[];
+  mentionedUserIds?: string[];
   createdAt: string;
   updatedAt: string;
 }
@@ -147,6 +149,47 @@ export interface ReviewsResponse {
   reviews: Review[];
   aiSummary: AISummary | null;
   topLevelComments: Comment[];
+}
+
+// Notification types
+export type NotificationType = 'review_approved' | 'comment_added' | 'comment_replied' | 'user_mentioned' | 'contract_revised';
+
+// Mentionable user (contract-scoped @ mention candidate)
+export interface MentionableUser {
+  id: string;
+  name: string;
+  avatar?: string;
+  department?: string;
+}
+
+// Contract revision audit log
+export interface ContractRevisionLog {
+  id: string;
+  contractId: string;
+  revisedBy: string;
+  changedFields: ('name' | 'description' | 'attachment')[];
+  revisedAt: string;
+}
+
+export interface Notification {
+  id: string;
+  type: NotificationType;
+  actorId: string;
+  actorName?: string;
+  actor?: User;
+  contractId: string;
+  contractName?: string;
+  anchorId?: string;
+  preview?: string;
+  isRead: boolean;
+  createdAt: string;
+}
+
+export interface NotificationListResponse {
+  notifications: Notification[];
+  total: number;
+  page: number;
+  pageSize: number;
 }
 
 // Form types

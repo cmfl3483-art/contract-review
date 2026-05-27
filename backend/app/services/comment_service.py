@@ -14,6 +14,7 @@ from app.models.contract import Contract
 from app.models.user import User
 from app.core.redis_client import redis_client
 from app.services.notification_service import notification_service
+from app.services.notification_service_v2 import notification_service_v2
 from app.utils.cache_invalidation import cache_invalidation
 
 
@@ -27,6 +28,7 @@ class CommentService:
         content: str,
         review_id: Optional[str] = None,
         parent_comment_id: Optional[str] = None,
+        mentioned_user_ids: Optional[List[str]] = None,
         db: AsyncSession = None
     ) -> Comment:
         """
@@ -38,6 +40,7 @@ class CommentService:
             content: 评论内容
             review_id: 评审ID(可选,回复评审意见时提供)
             parent_comment_id: 父评论ID(可选,嵌套回复时提供)
+            mentioned_user_ids: 被@提及的用户ID列表(可选)
             db: 数据库会话
             
         Returns:
@@ -63,7 +66,8 @@ class CommentService:
             author_id=uuid.UUID(author_id),
             content=content,
             likes=0,
-            liked_by=[]
+            liked_by=[],
+            mentioned_user_ids=mentioned_user_ids or [],
         )
         
         db.add(comment)
@@ -105,6 +109,11 @@ class CommentService:
                     "created_at": comment.created_at.isoformat()
                 }
             )
+        
+        # 触发持久化通知（新增）
+        await notification_service_v2.create_comment_added_notification(comment, db)
+        await notification_service_v2.create_comment_replied_notification(comment, db)
+        await notification_service_v2.create_mention_notifications(comment, db)
         
         return comment
     

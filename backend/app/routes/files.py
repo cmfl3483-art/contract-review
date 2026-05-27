@@ -5,12 +5,18 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, UploadFile, File
 from fastapi.responses import RedirectResponse, StreamingResponse
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
 from io import BytesIO
 from urllib.parse import quote
 
 from app.core.database import get_db
 from app.core.auth_middleware import get_current_user
+from app.models.contract import Contract, ContractStatus
 from app.services.file_service import FileService
+from app.services.contract_service import ContractService
+
+# 50MB 文件大小上限（需求 1.4）
+MAX_ATTACHMENT_SIZE_BYTES = 50 * 1024 * 1024
 
 
 def _build_content_disposition(file_name: str) -> str:
@@ -26,6 +32,7 @@ def _build_content_disposition(file_name: str) -> str:
 
 router = APIRouter(prefix="/api", tags=["文件"])
 file_service = FileService()
+contract_service = ContractService()
 
 
 @router.post("/contracts/{contract_id}/attachments")
@@ -50,15 +57,73 @@ async def upload_attachment(
     try:
         # 获取当前用户
         current_user = get_current_user(request)
-        
-        # 上传文件
+        user_id = current_user["user_id"]
+
+        # ---- 上传前校验（需求 1.1/1.2/1.3/1.4） ----
+        # 1. 校验合同存在
+        contract_result = await db.execute(
+            select(Contract).where(Contract.id == contract_id)
+        )
+        contract = contract_result.scalar_one_or_none()
+        if not contract:
+            raise HTTPException(status_code=404, detail="合同不存在")
+
+        # 2. 校验当前用户是发起人（非 Initiator → 403）
+        if str(contract.initiator_id) != str(user_id):
+            raise HTTPException(
+                status_code=403,
+                detail="仅合同发起人可上传附件",
+            )
+
+        # 3. 校验合同状态为 progress（非 progress → 409）
+        contract_status = (
+            contract.status.value
+            if isinstance(contract.status, ContractStatus)
+            else str(contract.status)
+        )
+        if contract_status != ContractStatus.PROGRESS.value:
+            raise HTTPException(
+                status_code=409,
+                detail="已完成的合同不允许新增附件",
+            )
+
+        # 4. 校验文件大小 ≤ 50MB（超过 → 422）
+        # 使用 file.file 句柄获取大小，不消耗流，便于后续 file_service 重新读取
+        try:
+            import os as _os
+            file.file.seek(0, _os.SEEK_END)
+            file_size = file.file.tell()
+            file.file.seek(0)
+        except Exception:
+            file_size = 0
+        if file_size > MAX_ATTACHMENT_SIZE_BYTES:
+            raise HTTPException(
+                status_code=422,
+                detail={
+                    "field": "file",
+                    "limit": "≤50MB",
+                    "actual_bytes": file_size,
+                },
+            )
+
+        # ---- 上传并落库 ----
         attachment = await file_service.upload_file(
             contract_id=contract_id,
-            uploader_id=current_user["user_id"],
+            uploader_id=user_id,
             file=file,
             db=db
         )
-        
+
+        # ---- 触发重审流程（需求 1.5/1.8/1.9/1.10）----
+        # 复用 ContractService.revise_contract：
+        # 同事务内重置 reviews + 写审计日志，事务后 Socket.IO 推送 + 通知 + 缓存失效
+        await contract_service.revise_contract(
+            contract_id=contract_id,
+            user_id=user_id,
+            attachment_added=True,
+            db=db,
+        )
+
         return {
             "success": True,
             "data": {
@@ -80,9 +145,12 @@ async def upload_attachment(
     except HTTPException as e:
         raise e
     except Exception as e:
+        import traceback
+        traceback.print_exc()
+        print(f"[UPLOAD ERROR] upload_attachment failed: {type(e).__name__}: {e}")
         raise HTTPException(
             status_code=500,
-            detail=f"上传附件失败: {str(e)}"
+            detail=f"上传附件失败: {type(e).__name__}: {str(e)}"
         )
 
 

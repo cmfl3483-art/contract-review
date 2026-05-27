@@ -56,7 +56,7 @@ const ContractCard: React.FC<ContractCardProps> = memo(({
       data-testid="contract-card"
     >
       <div className="contract-card-header">
-        <div className="contract-card-title">{contract.name}</div>
+        <div className="contract-card-title">{(contract.contractNumber ? contract.contractNumber + ' ' : '') + contract.name}</div>
         <Tag color={statusConfig.color}>{statusConfig.text}</Tag>
       </div>
 

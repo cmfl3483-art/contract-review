@@ -47,7 +47,10 @@ let reconnectNotificationKey: string | null = null;
  */
 export const getSocket = (token?: string): Socket => {
   if (!socket) {
-    socket = io(API_BASE_URL, {
+    // 生产环境 VITE_API_BASE_URL 为空字符串，直接用相对路径（当前域名）
+    // 开发环境用 localhost:8000
+    const socketUrl = API_BASE_URL || undefined;
+    socket = io(socketUrl as string, {
       path: '/socket.io',
       transports: ['websocket', 'polling'],
       autoConnect: false, // 手动控制连接
@@ -344,6 +347,42 @@ export const onPendingChanged = (
 
   return () => {
     socketInstance.off('pending:changed', callback);
+  };
+};
+
+/**
+ * 监听新通知事件
+ *
+ * @param callback - 回调函数
+ * @returns 取消监听的函数
+ */
+export const onNotificationNew = (
+  callback: SocketEventCallback<any>
+): UnsubscribeFunction => {
+  const socketInstance = getSocket();
+  socketInstance.on('notification:new', callback);
+  return () => {
+    socketInstance.off('notification:new', callback);
+  };
+};
+
+/**
+ * 监听合同被发起人修改重审事件
+ *
+ * @param callback - 回调函数，接收 { contractId, contractName, changedFields }
+ * @returns 取消监听的函数
+ */
+export const onContractRevised = (
+  callback: SocketEventCallback<{
+    contractId: string;
+    contractName: string;
+    changedFields: string[];
+  }>
+): UnsubscribeFunction => {
+  const socketInstance = getSocket();
+  socketInstance.on('contract:revised', callback);
+  return () => {
+    socketInstance.off('contract:revised', callback);
   };
 };
 

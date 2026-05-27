@@ -298,7 +298,7 @@ class AIService:
             name = r.reviewer.name if r.reviewer else "未知用户"
             status_text = "已通过" if r.status == ReviewStatus.APPROVED else "待审批"
             opinion_text = r.opinion.strip() if r.opinion else "（未发表意见）"
-            sections.append(f"- {name}（{r.role}）：{status_text} | 意见：{opinion_text}")
+            sections.append(f"- [review-{r.id}] {name}（{r.role}）：{status_text} | 意见：{opinion_text}")
         sections.append("")
 
         # ---- 3. 全部评论 ----
@@ -331,7 +331,7 @@ class AIService:
                     if parent_review:
                         pr_name = parent_review.reviewer.name if parent_review.reviewer else ""
                         reply_to = f" [评审-{pr_name}下评论]"
-                sections.append(f"- {author_name}{reply_to}：{c.content or ''}")
+                sections.append(f"- [comment-{c.id}] {author_name}{reply_to}：{c.content or ''}")
             sections.append("")
         else:
             sections.append("## 评论记录\n暂无评论。\n")
@@ -362,12 +362,20 @@ class AIService:
             "  列出每个待处理事项对应的责任人（姓名+角色）及当前状态。\n\n"
             "📋 具体推进事项\n"
             "  列出接下来需要推进的具体事项，明确谁需要做什么。\n\n"
-            "规则：\n"
+            "**引用规则（必须遵守）**：\n"
+            "1. 只有在明确引用**某条评审意见的具体内容**时，才使用 [ref:review-{review_id}] 标记。\n"
+            "2. 只有在明确引用**某条评论的具体内容**时，才使用 [ref:comment-{comment_id}] 标记。\n"
+            "3. **对于尚未发表意见的评审人**（意见为「未发表意见」状态的），不要添加任何引用标记。\n"
+            "4. 当一句话涉及多条引用时，可添加多个 [ref:...] 标记。\n"
+            "5. 当一句话无具体引用来源时，不追加标记。\n"
+            "6. {review_id} 与 {comment_id} 必须使用上下文中 [review-xxx] 或 [comment-xxx] 形式给出的实际 ID，禁止杜撰。\n"
+            "7. 标记格式：[ref:review-xxx] / [ref:comment-xxx]，不要加空格、不要加引号。\n\n"
+            "其他规则：\n"
             "1. 内容务必简洁，每条不超过两句话。\n"
             "2. 使用评审人和评论者的真实姓名。\n"
             "3. 如果风险已有应对措施，说明措施内容；未解决的标注「未解决」。\n"
             "4. 不要复述原文，要提炼核心意思。\n"
-            "5. 总字数控制在 300 字以内。"
+            "5. 总字数控制在 600 字以内（不含 [ref:...] 标记）。"
         )
 
         user_prompt = (
@@ -384,19 +392,36 @@ class AIService:
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt},
                 ],
-                max_tokens=600,
+                max_tokens=4096,
                 temperature=0.3,
             )
             answer = response.choices[0].message.content
-            return answer.strip() if answer else "抱歉，未能生成总结。"
+            finish_reason = response.choices[0].finish_reason
+            if finish_reason == 'length':
+                print(f"[WARNING] AI总结被截断(finish_reason=length, max_tokens=4096)，建议增大max_tokens")
+            if not answer or not answer.strip():
+                print(f"AI总结返回内容为空, finish_reason={finish_reason}")
+                return await self._summarize_progress_and_opinions(
+                    contract_id=str(contract.id),
+                    reviews=reviews,
+                    db=db,
+                )
+            # 验证引用标记，移除无法匹配的引用
+            answer = await self._validate_refs(answer, context)
+            return answer.strip()
         except Exception as e:
             print(f"AI总结调用失败: {str(e)}")
             # 降级：回退到 DB 直查
-            return await self._summarize_progress_and_opinions(
-                contract_id=str(contract.id),
-                reviews=reviews,
-                db=db,
-            )
+            try:
+                return await self._summarize_progress_and_opinions(
+                    contract_id=str(contract.id),
+                    reviews=reviews,
+                    db=db,
+                )
+            except Exception as e2:
+                print(f"DB直查总结也失败: {str(e2)}")
+                # 最后兜底：完全不依赖 DB 的纯文本总结
+                return self._build_fallback_summary(reviews)
 
     async def _ask_llm(self, question: str, context: str) -> str:
         """
@@ -412,6 +437,7 @@ class AIService:
             "3. 回答要简洁明了，重点突出，使用中文。\n"
             "4. 引用评审人或评论者时，请使用他们的真实姓名。\n"
             "5. 如果评论中有具体问题或风险，请明确指出并说明是谁提出的。"
+            "\n\n**引用规则**：当你在回答中引用某条评审意见或评论时，在引用句子之后追加结构化标记：[ref:review-{id}] 或 [ref:comment-{id}]，ID 必须严格使用上下文中给出的真实 ID。"
         )
 
         user_prompt = (
@@ -429,14 +455,90 @@ class AIService:
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt},
                 ],
-                max_tokens=800,
+                max_tokens=4096,
                 temperature=0.3,  # 低温度，减少幻觉
             )
             answer = response.choices[0].message.content
-            return answer.strip() if answer else "抱歉，未能生成回答。"
+            finish_reason = response.choices[0].finish_reason
+            if finish_reason == 'length':
+                print(f"[WARNING] LLM回答被截断(finish_reason=length, max_tokens=2048)，建议增大max_tokens")
+            if not answer or not answer.strip():
+                print(f"LLM回答返回内容为空, finish_reason={finish_reason}")
+                return "抱歉，未能生成回答。"
+            # 验证引用标记，移除无法匹配的引用
+            answer = await self._validate_refs(answer, context)
+            return answer.strip()
         except Exception as e:
             print(f"LLM调用失败: {str(e)}")
             return "抱歉，AI服务暂时不可用，请稍后重试。"
+
+    async def _validate_refs(self, response: str, context: str) -> str:
+        """
+        验证 AI 响应中的 [ref:...] 标记，移除无法匹配上下文中实际 ID 的引用。
+        防止 AI 幻觉产生不存在的引用导致前端显示「引用不可用」。
+        """
+        # 从上下文中提取所有有效 ID
+        valid_review_ids = set(re.findall(r'\[review-([^\]]+)\]', context))
+        valid_comment_ids = set(re.findall(r'\[comment-([^\]]+)\]', context))
+
+        def _replace_invalid(match):
+            ref_type = match.group(1)  # 'review' 或 'comment'
+            ref_id = match.group(2)
+            if ref_type == 'review' and ref_id in valid_review_ids:
+                return match.group(0)
+            if ref_type == 'comment' and ref_id in valid_comment_ids:
+                return match.group(0)
+            print(f"移除无效引用: [ref:{ref_type}-{ref_id}]")
+            return ''
+
+        response = re.sub(r'\[ref:(review|comment)-([^\]]+)\]', _replace_invalid, response)
+
+        # 移除不完整的引用标记（被截断的 [ref:... 缺少关闭的 ]）
+        # 例如：末尾被截断的 [ref:review-981de641-feef-4434-9e6f-c
+        response = re.sub(r'\[ref:(?:review|comment)-[^\]]*$', '', response)
+
+        return response
+
+    def _build_fallback_summary(self, reviews: list) -> str:
+        """完全不依赖 DB 的纯文本兜底总结"""
+        from app.models.review import ReviewStatus
+
+        approved = [r for r in reviews if r.status == ReviewStatus.APPROVED]
+        pending = [r for r in reviews if r.status != ReviewStatus.APPROVED]
+
+        lines: list[str] = []
+        lines.append("⚠️ 当前风险/问题")
+        if pending:
+            for r in pending:
+                name = r.reviewer.name if r.reviewer else "未知用户"
+                lines.append(f"  • {name}（{r.role}）尚未审批")
+        else:
+            lines.append("  暂无明显风险")
+
+        lines.append("")
+        lines.append("👤 责任归属人")
+        if pending:
+            for r in pending:
+                name = r.reviewer.name if r.reviewer else "未知用户"
+                status_text = "待审批" if r.status == ReviewStatus.PENDING else "审核中"
+                lines.append(f"  • {name}（{r.role}）— {status_text}")
+        elif approved:
+            lines.append("  所有评审人已通过")
+        else:
+            lines.append("  暂未配置评审人")
+
+        lines.append("")
+        lines.append("📋 具体推进事项")
+        if pending:
+            for r in pending:
+                name = r.reviewer.name if r.reviewer else "未知用户"
+                lines.append(f"  • {name}（{r.role}）需完成审批")
+        elif approved:
+            lines.append("  ✅ 全部评审已通过")
+        else:
+            lines.append("  暂无具体推进事项")
+
+        return "\n".join(lines)
 
     async def _summarize_progress_and_opinions(
         self,

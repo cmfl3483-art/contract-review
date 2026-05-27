@@ -1,20 +1,25 @@
 import { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
+import { message } from 'antd';
 import {
   connectSocket,
   disconnectSocket,
   joinContractRoom,
   leaveContractRoom,
   onContractUpdated,
+  onContractRevised,
   onReviewAdded,
   onCommentAdded,
   onReplyAdded,
   onLikeUpdated,
   onPendingChanged,
+  onNotificationNew,
   isConnected,
 } from '../config/socket';
 import { queryKeys } from '../config/queryClient';
 import { useUserStore } from '../stores/useUserStore';
+import { useNotificationStore } from '../stores/useNotificationStore';
+import type { Notification } from '../types';
 
 /**
  * Socket.IO 连接管理 Hook
@@ -152,6 +157,33 @@ export const useSocketEvents = () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.contracts.lists() });
     });
 
+    // 监听新通知事件
+    const notificationStore = useNotificationStore.getState();
+    const unsubscribeNotificationNew = onNotificationNew((data: Notification) => {
+      console.log('[Socket.IO Event] notification:new', data);
+      notificationStore.addNotification(data);
+    });
+
+    // 监听合同被发起人修改重审事件
+    const unsubscribeContractRevised = onContractRevised((data) => {
+      console.log('[Socket.IO Event] contract:revised', data);
+
+      // 刷新合同详情、评审记录、合同列表、待办数量缓存
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.contracts.detail(data.contractId),
+      });
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.reviews.list(data.contractId),
+      });
+      queryClient.invalidateQueries({ queryKey: queryKeys.contracts.lists() });
+      queryClient.invalidateQueries({ queryKey: queryKeys.pending.count() });
+
+      // 提示用户
+      message.warning(
+        `合同「${data.contractName}」已被发起人修改（${data.changedFields.join('、')}），请重新审批`
+      );
+    });
+
     // 清理函数:取消所有事件监听
     return () => {
       unsubscribeContractUpdated();
@@ -160,6 +192,8 @@ export const useSocketEvents = () => {
       unsubscribeReplyAdded();
       unsubscribeLikeUpdated();
       unsubscribePendingChanged();
+      unsubscribeNotificationNew();
+      unsubscribeContractRevised();
     };
   }, [queryClient]);
 };

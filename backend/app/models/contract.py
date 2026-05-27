@@ -40,6 +40,11 @@ class Contract(Base):
         nullable=False,
         comment="合同名称"
     )
+    contract_number: Mapped[str | None] = mapped_column(
+        String(100),
+        nullable=True,
+        comment="合同编号"
+    )
     description: Mapped[str | None] = mapped_column(
         Text,
         nullable=True,

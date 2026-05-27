@@ -18,6 +18,7 @@ function mapContractFromApi(c: any) {
   return {
     id: c.id,
     name: c.name,
+    contractNumber: c.contract_number ?? c.contractNumber,
     description: c.description,
     status: c.status,
     initiatorId: c.initiator?.id ?? c.initiator_id,

@@ -215,11 +215,7 @@ class DingTalkAuthService:
                 algorithms=[self.jwt_algorithm]
             )
             return payload
-        except jwt.ExpiredSignatureError:
-            # Token已过期
-            return None
-        except jwt.InvalidTokenError:
-            # Token无效
+        except JWTError:
             return None
     
     async def handle_callback(

@@ -4,8 +4,8 @@
 """
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
-from pydantic import BaseModel, Field
-from typing import Optional
+from pydantic import BaseModel, Field, field_validator
+from typing import Optional, List
 
 from app.core.database import get_db
 from app.core.auth_middleware import get_current_user
@@ -27,6 +27,14 @@ class AddCommentRequest(BaseModel):
     content: str = Field(..., min_length=1, max_length=2000, description="评论内容")
     review_id: Optional[str] = Field(None, description="评审ID(回复评审意见时提供)")
     parent_comment_id: Optional[str] = Field(None, description="父评论ID(嵌套回复时提供)")
+    mentioned_user_ids: Optional[List[str]] = Field(default=[], description="被@提及的用户ID列表，最多10个")
+
+    @field_validator("mentioned_user_ids")
+    @classmethod
+    def validate_mentioned_user_ids(cls, v):
+        if v and len(v) > 10:
+            raise ValueError("被@提及的用户ID列表最多10个")
+        return v or []
 
 
 @router.get("/contracts/{contract_id}/reviews")
@@ -172,6 +180,7 @@ async def add_comment(
             content=data.content,
             review_id=data.review_id,
             parent_comment_id=data.parent_comment_id,
+            mentioned_user_ids=data.mentioned_user_ids,
             db=db
         )
         

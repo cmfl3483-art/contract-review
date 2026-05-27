@@ -133,7 +133,7 @@ async def health_check():
 
 
 # 导入路由
-from app.routes import auth, contracts, reviews, files, ai, users, dingtalk
+from app.routes import auth, contracts, reviews, files, ai, users, dingtalk, notifications
 
 # 注册路由
 app.include_router(auth.router)
@@ -143,6 +143,7 @@ app.include_router(files.router)
 app.include_router(ai.router)
 app.include_router(users.router)
 app.include_router(dingtalk.router)
+app.include_router(notifications.router)
 
 # 挂载 Socket.IO 应用
 # Socket.IO 服务器挂载到 /socket.io 路径

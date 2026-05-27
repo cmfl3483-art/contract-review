@@ -1,7 +1,7 @@
 import { Button, Badge, Space } from 'antd';
 import './FilterBar.css';
 
-export type FilterType = 'all' | '进行中' | '已完成' | '待我处理' | '抄送我' | '我发起的';
+export type FilterType = 'all' | '进行中' | '已完成' | '待我处理' | '抄送我' | '我发起的' | '我已审批';
 
 interface FilterBarProps {
   activeFilter: FilterType;
@@ -21,6 +21,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
     { key: '待我处理', label: '待我处理' },
     { key: '抄送我', label: '抄送我' },
     { key: '我发起的', label: '我发起的' },
+    { key: '我已审批', label: '我已审批' },
   ];
 
   return (

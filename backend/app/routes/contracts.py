@@ -4,11 +4,16 @@
 """
 from fastapi import APIRouter, Depends, HTTPException, Request, Query
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
+from sqlalchemy.orm import selectinload
 from typing import Optional, List
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 from app.core.database import get_db
 from app.core.auth_middleware import get_current_user
+from app.models.contract import Contract, ContractStatus
+from app.models.review import Review
+from app.models.user import User
 from app.services.contract_service import ContractService
 from app.services.comment_service import CommentService
 
@@ -16,6 +21,37 @@ from app.services.comment_service import CommentService
 router = APIRouter(prefix="/api/contracts", tags=["合同"])
 contract_service = ContractService()
 comment_service = CommentService()
+
+
+def _serialize_contract(contract: Contract) -> dict:
+    """将 Contract ORM 对象序列化为 API 响应字典"""
+    status_value = (
+        contract.status.value
+        if isinstance(contract.status, ContractStatus)
+        else str(contract.status)
+    )
+
+    initiator = getattr(contract, "initiator", None)
+    initiator_data = None
+    if initiator is not None:
+        initiator_data = {
+            "id": str(initiator.id),
+            "name": initiator.name,
+            "avatar": getattr(initiator, "avatar", None),
+        }
+
+    return {
+        "id": str(contract.id),
+        "name": contract.name,
+        "contract_number": contract.contract_number,
+        "description": contract.description,
+        "status": status_value,
+        "initiator": initiator_data,
+        "cc_users": list(contract.cc_users or []),
+        "version": contract.version,
+        "created_at": contract.created_at.isoformat() if contract.created_at else None,
+        "updated_at": contract.updated_at.isoformat() if contract.updated_at else None,
+    }
 
 
 # Pydantic 模型定义
@@ -29,6 +65,7 @@ class ReviewerInput(BaseModel):
 class CreateContractRequest(BaseModel):
     """创建合同请求模型"""
     name: str = Field(..., min_length=1, max_length=200, description="合同名称")
+    contract_number: str = Field(..., min_length=1, max_length=100, description="合同编号")
     description: Optional[str] = Field(None, max_length=2000, description="合同描述")
     reviewers: List[ReviewerInput] = Field(..., min_items=1, description="评审人列表")
     cc_users: Optional[List[str]] = Field(default=[], description="抄送人ID列表")
@@ -75,6 +112,7 @@ async def create_contract(
         # 创建合同
         contract = await contract_service.create_contract(
             name=data.name,
+            contract_number=data.contract_number,
             initiator_id=current_user["user_id"],
             reviewers=reviewers,
             description=data.description,
@@ -190,6 +228,7 @@ async def get_contract_detail(
         contract_data = {
             "id": contract.id,
             "name": contract.name,
+            "contract_number": contract.contract_number,
             "description": contract.description,
             "status": contract.status,
             "initiator": {
@@ -257,11 +296,154 @@ async def get_contract_detail(
         )
 
 
+class ReviseContractRequest(BaseModel):
+    """合同修改请求模型 - 仅 Initiator 在 progress 阶段可调用"""
+    name: Optional[str] = Field(None, max_length=200, description="新合同名称")
+    contract_number: Optional[str] = Field(None, max_length=100, description="新合同编号")
+    description: Optional[str] = Field(None, max_length=5000, description="新合同描述")
+
+
+@router.patch("/{contract_id}")
+async def revise_contract(
+    contract_id: str,
+    request: Request,
+    data: ReviseContractRequest,
+    db: AsyncSession = Depends(get_db),
+):
+    """
+    合同发起人在 progress 阶段修改 name / description，触发重审流程。
+
+    业务约束（详见需求 1.1 ~ 1.4）：
+    - 仅 Initiator 可调用，否则 403
+    - status 必须为 progress，否则 409
+    - name 去除首尾空白后长度 1-200，description 长度 ≤ 5000，否则 422
+    - 实际值变更才会重置 reviews / 写审计日志（由 contract_service 处理）
+
+    Returns:
+        { "success": True, "data": { "contract": <serialized> } }
+    """
+    current_user = get_current_user(request)
+
+    try:
+        contract = await contract_service.revise_contract(
+            contract_id=contract_id,
+            user_id=current_user["user_id"],
+            new_name=data.name,
+            new_contract_number=data.contract_number,
+            new_description=data.description,
+            attachment_added=False,
+            db=db,
+        )
+
+        return {
+            "success": True,
+            "data": {
+                "contract": _serialize_contract(contract),
+            },
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        print(f"[ROUTE ERROR] revise_contract failed: {type(e).__name__}: {e}")
+        raise HTTPException(status_code=500, detail=f"修改合同失败: {type(e).__name__}: {str(e)}")
+
+
+@router.get("/{contract_id}/mentionable-users")
+async def get_mentionable_users(
+    contract_id: str,
+    request: Request,
+    search: Optional[str] = Query(None, description="按姓名子串过滤(去除首尾空白后长度1-50)"),
+    db: AsyncSession = Depends(get_db),
+):
+    """
+    获取当前合同的可 @ 提及用户列表。
+
+    业务约束（详见需求 2.1 ~ 2.3、2.7 ~ 2.9）：
+    - 候选范围 = {Initiator} ∪ {所有 Reviewer} ∪ {所有 CC_User}（按 ID 去重）
+    - 仅相关人员可调用，否则 403；合同不存在 404；未认证 401
+    - search 去除首尾空白后长度 1-50：按 name 不区分大小写子串匹配；空或未提供则返回全部
+    - 结果按 name 升序，最多 100 条
+    - 返回字段：id / name / avatar / department
+
+    Returns:
+        { "success": True, "data": { "users": [...] } }
+    """
+    current_user = get_current_user(request)
+    user_id = str(current_user["user_id"])
+
+    # 1. 加载合同（带 reviews + reviewer），不存在则 404
+    stmt = (
+        select(Contract)
+        .options(selectinload(Contract.reviews).selectinload(Review.reviewer))
+        .where(Contract.id == contract_id)
+    )
+    contract = (await db.execute(stmt)).scalar_one_or_none()
+
+    if contract is None:
+        raise HTTPException(status_code=404, detail="合同不存在")
+
+    # 2. 收集相关用户 ID（initiator + reviewers + cc_users），按 ID 去重
+    related_ids: set[str] = set()
+    related_ids.add(str(contract.initiator_id))
+    for review in contract.reviews or []:
+        related_ids.add(str(review.reviewer_id))
+    for cc_id in contract.cc_users or []:
+        if cc_id:
+            related_ids.add(str(cc_id))
+
+    # 3. 权限：当前用户必须在相关人员集合中
+    if user_id not in related_ids:
+        raise HTTPException(status_code=403, detail="您不是该合同的相关人员")
+
+    # 4. 批量加载 User 信息
+    if related_ids:
+        users_stmt = select(User).where(User.id.in_(list(related_ids)))
+        users = (await db.execute(users_stmt)).scalars().all()
+    else:
+        users = []
+
+    # 5. 应用 search 过滤：strip 后长度 1-50 时按 name 不区分大小写子串匹配；
+    #    空字符串或未提供则返回完整并集
+    search_value = (search or "").strip()
+    if 1 <= len(search_value) <= 50:
+        lower = search_value.lower()
+        users = [u for u in users if lower in (u.name or "").lower()]
+
+    # 6. 按 name 升序排序，截断至最多 100 条
+    users = sorted(users, key=lambda u: (u.name or ""))
+    users = users[:100]
+
+    return {
+        "success": True,
+        "data": {
+            "users": [
+                {
+                    "id": str(u.id),
+                    "name": u.name,
+                    "avatar": u.avatar,
+                    "department": u.department,
+                }
+                for u in users
+            ],
+        },
+    }
+
+
 class AddCommentRequest(BaseModel):
     """添加评论请求模型"""
     content: str = Field(..., min_length=1, max_length=5000, description="评论内容")
     review_id: Optional[str] = Field(None, description="评审ID(回复评审意见时提供)")
     parent_comment_id: Optional[str] = Field(None, description="父评论ID(嵌套回复时提供)")
+    mentioned_user_ids: Optional[List[str]] = Field(default=[], description="被@提及的用户ID列表，最多10个")
+
+    @field_validator("mentioned_user_ids")
+    @classmethod
+    def validate_mentioned_user_ids(cls, v):
+        if v and len(v) > 10:
+            raise ValueError("被@提及的用户ID列表最多10个")
+        return v or []
 
 
 @router.post("/{contract_id}/comments")
@@ -299,6 +481,7 @@ async def add_comment(
             content=data.content,
             review_id=data.review_id,
             parent_comment_id=data.parent_comment_id,
+            mentioned_user_ids=data.mentioned_user_ids,
             db=db
         )
         

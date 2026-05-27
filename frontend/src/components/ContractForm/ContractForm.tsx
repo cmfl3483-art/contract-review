@@ -24,6 +24,7 @@ interface ReviewerInput {
 
 interface CreateContractData {
   name: string;
+  contract_number: string;
   description?: string;
   reviewers: ReviewerInput[];
   cc_users: string[];
@@ -119,6 +120,7 @@ const ContractForm: React.FC<ContractFormProps> = ({ visible, onClose }) => {
 
       const formData: CreateContractData = {
         name: values.name,
+        contract_number: values.contract_number,
         description: values.description,
         reviewers,
         cc_users: ccUserUsers.map((u) => u.id),
@@ -240,6 +242,18 @@ const ContractForm: React.FC<ContractFormProps> = ({ visible, onClose }) => {
         autoComplete="off"
         className="contract-form"
       >
+        {/* 合同编号 - 必填 */}
+        <Form.Item
+          label="合同编号"
+          name="contract_number"
+          rules={[
+            { required: true, message: '请输入合同编号' },
+            { max: 100, message: '合同编号不能超过100个字符' },
+          ]}
+        >
+          <Input placeholder="请输入合同编号，如 HT-2026-001" />
+        </Form.Item>
+
         {/* 合同名称 - 必填 */}
         <Form.Item
           label="合同名称"

@@ -42,3 +42,7 @@ export {
 // 性能优化相关 hooks
 export { useThrottle } from './useThrottle';
 export { useImageLazyLoad } from './useImageLazyLoad';
+
+// @ 提及相关 hooks
+export { useMention } from './useMention';
+export type { UseMentionReturn } from './useMention';

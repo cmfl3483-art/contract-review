@@ -1,0 +1,9 @@
+.highlight-flash {
+  animation: highlightFlash 3s ease-out;
+}
+
+@keyframes highlightFlash {
+  0% { background-color: #fffbe6; }
+  30% { background-color: #fffbe6; }
+  100% { background-color: transparent; }
+}

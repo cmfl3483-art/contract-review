@@ -3,19 +3,22 @@
 实现合同CRUD、筛选、搜索和待办统计功能
 """
 from typing import List, Optional, Dict, Any
+from fastapi import HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, func, or_, and_
+from sqlalchemy import select, func, or_, and_, update
 from sqlalchemy.orm import selectinload
 from datetime import datetime
 import uuid
 import logging
 
-from app.models.contract import Contract
-from app.models.review import Review
+from app.models.contract import Contract, ContractStatus
+from app.models.review import Review, ReviewStatus
 from app.models.user import User
 from app.models.attachment import Attachment
+from app.models.contract_revision_log import ContractRevisionLog
 from app.core.redis_client import redis_client
 from app.services.notification_service import notification_service
+from app.services.notification_service_v2 import notification_service_v2
 from app.utils.cache_invalidation import cache_invalidation
 from app.core.exceptions import ConflictError
 
@@ -27,6 +30,7 @@ class ContractService:
     async def create_contract(
         self,
         name: str,
+        contract_number: str,
         initiator_id: str,
         reviewers: List[Dict[str, str]],
         description: Optional[str] = None,
@@ -69,6 +73,7 @@ class ContractService:
                 contract = Contract(
                     id=str(uuid.uuid4()),
                     name=name,
+                    contract_number=contract_number,
                     description=description,
                     status="progress",
                     initiator_id=initiator_id,
@@ -137,7 +142,7 @@ class ContractService:
         
         Args:
             user_id: 当前用户ID
-            filter_type: 筛选类型 (all/进行中/已完成/待我处理/抄送我/我发起的)
+            filter_type: 筛选类型 (all/进行中/已完成/待我处理/抄送我/我发起的/我已审批)
             search_keyword: 搜索关键词
             page: 页码
             limit: 每页数量
@@ -199,6 +204,7 @@ class ContractService:
                 {
                     "id": str(c.id),
                     "name": c.name,
+                    "contract_number": c.contract_number,
                     "description": c.description,
                     "status": c.status,
                     "version": c.version,
@@ -416,6 +422,252 @@ class ContractService:
         
         return contract
     
+    async def revise_contract(
+        self,
+        contract_id: str,
+        user_id: str,
+        new_name: Optional[str] = None,
+        new_contract_number: Optional[str] = None,
+        new_description: Optional[str] = None,
+        attachment_added: bool = False,
+        db: AsyncSession = None,
+    ) -> Contract:
+        """
+        合同发起人在 progress 阶段修改关键字段，触发重审流程。
+        
+        - 锁住合同行避免并发
+        - 校验权限（404/403/409）和输入（422）
+        - 仅在实际值变更时执行：UPDATE contracts、UPDATE reviews SET status='pending'、
+          INSERT contract_revision_logs（同事务原子）
+        - 保留 reviews.opinion 与 comments 不删除、不覆盖
+        - 保持 contract.status = "progress" 不变
+        - 事务提交后：Socket.IO 推送 contract:revised + 持久化通知 + 清缓存
+        - 若无任何字段实际变更，直接返回原合同，不重置 reviews / 不写日志 / 不推送
+        
+        Args:
+            contract_id: 合同 ID
+            user_id: 当前操作用户 ID
+            new_name: 新合同名（None 表示不修改 name）
+            new_description: 新合同描述（None 表示不修改 description）
+            attachment_added: 是否新增了附件（由文件上传路径传 True）
+            db: 数据库会话
+        
+        Returns:
+            更新后的 Contract 对象
+        
+        Raises:
+            HTTPException(404): 合同不存在
+            HTTPException(403): 非合同发起人
+            HTTPException(409): 合同已完成
+            HTTPException(422): 输入超限
+        """
+        # ------------------------------------------------------------------ #
+        # 第一步：在事务内加锁、校验、检测变更、持久化
+        # ------------------------------------------------------------------ #
+        # 1. 锁住合同行（FOR UPDATE 避免并发修改，只锁 contracts 表避免 LEFT JOIN 冲突）
+        stmt = select(Contract).where(Contract.id == contract_id).with_for_update(of=Contract)
+        result = await db.execute(stmt)
+        contract = result.scalar_one_or_none()
+        
+        if not contract:
+            raise HTTPException(status_code=404, detail="合同不存在")
+        
+        # 2. 权限校验
+        if str(contract.initiator_id) != str(user_id):
+            raise HTTPException(status_code=403, detail="仅合同发起人可修改")
+        
+        # 3. 状态校验
+        contract_status = (
+            contract.status.value
+            if isinstance(contract.status, ContractStatus)
+            else str(contract.status)
+        )
+        if contract_status == ContractStatus.COMPLETED.value:
+            raise HTTPException(status_code=409, detail="已完成的合同不允许修改")
+        
+        # 4. 输入校验 + 实际值变更检测
+        changed_fields: List[str] = []
+        new_name_value: Optional[str] = None
+        new_contract_number_value: Optional[str] = None
+        new_description_value: Optional[str] = None
+        
+        if new_name is not None:
+            normalized_name = new_name.strip()
+            if not (1 <= len(normalized_name) <= 200):
+                raise HTTPException(
+                    status_code=422,
+                    detail={"field": "name", "limit": "1-200 字符"},
+                )
+            current_name = (contract.name or "").strip()
+            if normalized_name != current_name:
+                new_name_value = normalized_name
+                changed_fields.append("name")
+        
+        if new_contract_number is not None:
+            if len(new_contract_number) > 100:
+                raise HTTPException(
+                    status_code=422,
+                    detail={"field": "contract_number", "limit": "≤100 字符"},
+                )
+            current_contract_number = (contract.contract_number or "").strip()
+            if new_contract_number.strip() != current_contract_number:
+                new_contract_number_value = new_contract_number.strip()
+                changed_fields.append("contract_number")
+        
+        if new_description is not None:
+            if len(new_description) > 5000:
+                raise HTTPException(
+                    status_code=422,
+                    detail={"field": "description", "limit": "≤5000 字符"},
+                )
+            current_description = (contract.description or "").strip()
+            normalized_description = (new_description or "").strip()
+            if normalized_description != current_description:
+                new_description_value = new_description
+                changed_fields.append("description")
+        
+        if attachment_added:
+            changed_fields.append("attachment")
+        
+        # 5. 没有实际变更 → 直接返回，不触发任何重审动作
+        if not changed_fields:
+            return contract
+        
+        # 6. 同事务内：UPDATE contracts、UPDATE reviews、INSERT contract_revision_logs
+        try:
+            now = datetime.utcnow()
+            
+            if new_name_value is not None:
+                contract.name = new_name_value
+            if new_contract_number_value is not None:
+                contract.contract_number = new_contract_number_value
+            if new_description_value is not None:
+                contract.description = new_description_value
+            contract.updated_at = now
+            # status 保持 progress 不变（不修改 contract.status）
+            
+            # 重置所有 reviews 为 pending（保留 opinion 字段）
+            await db.execute(
+                update(Review)
+                .where(Review.contract_id == contract.id)
+                .values(status=ReviewStatus.PENDING.value, updated_at=now)
+            )
+            
+            # 写审计日志
+            log = ContractRevisionLog(
+                id=uuid.uuid4(),
+                contract_id=contract.id,
+                revised_by=user_id,
+                changed_fields=changed_fields,
+                revised_at=now,
+            )
+            db.add(log)
+            
+            await db.commit()
+        except Exception as e:
+            await db.rollback()
+            logger.error(
+                f"合同重审事务失败,已回滚: contract_id={contract_id}, error={e}"
+            )
+            raise
+        
+        await db.refresh(contract)
+        
+        # ------------------------------------------------------------------ #
+        # 第二步：事务外的副作用（失败不回滚事务）
+        # ------------------------------------------------------------------ #
+        # 7. 加载所有评审人 ID（用于推送和清缓存）
+        reviewer_ids = await self._get_contract_reviewer_ids(contract.id, db)
+        
+        # 8. Socket.IO 推送 + 持久化通知
+        try:
+            await self._notify_revision(
+                contract=contract,
+                changed_fields=changed_fields,
+                reviewer_ids=reviewer_ids,
+                db=db,
+            )
+        except Exception as e:
+            logger.error(
+                f"合同重审通知推送失败: contract_id={contract_id}, error={e}"
+            )
+        
+        # 9. 清缓存（合同列表、待办数量、合同详情）
+        try:
+            affected_user_ids = list(
+                {str(contract.initiator_id), *[str(rid) for rid in reviewer_ids],
+                 *[str(uid) for uid in (contract.cc_users or [])]}
+            )
+            await cache_invalidation.invalidate_contract_updated(
+                contract_id=str(contract.id),
+                affected_user_ids=affected_user_ids,
+            )
+        except Exception as e:
+            logger.error(
+                f"合同重审缓存失效失败: contract_id={contract_id}, error={e}"
+            )
+        
+        return contract
+    
+    async def _get_contract_reviewer_ids(
+        self, contract_id, db: AsyncSession
+    ) -> List[str]:
+        """加载合同所有评审人 ID（去重）"""
+        result = await db.execute(
+            select(Review.reviewer_id).where(Review.contract_id == contract_id)
+        )
+        return [str(row[0]) for row in result.all()]
+    
+    async def _notify_revision(
+        self,
+        contract: Contract,
+        changed_fields: List[str],
+        reviewer_ids: List[str],
+        db: AsyncSession,
+    ) -> None:
+        """
+        合同重审副作用：Socket.IO 推送 + 持久化通知。
+        
+        - 通过 sio.emit('contract:revised', ..., room=f'user:{reviewer_id}')
+          向每个评审人推送
+        - 调用 notification_service_v2.create_contract_revised_notifications
+          持久化通知（actor==recipient 时由该方法自动跳过）
+        """
+        from app.core.socketio_server import sio
+        
+        payload = {
+            "contractId": str(contract.id),
+            "contractName": contract.name,
+            "changedFields": changed_fields,
+        }
+        
+        for reviewer_id in reviewer_ids:
+            try:
+                await sio.emit(
+                    "contract:revised",
+                    payload,
+                    room=f"user:{reviewer_id}",
+                )
+            except Exception as e:
+                # 单个推送失败不影响其他评审人
+                logger.warning(
+                    f"contract:revised 推送失败: reviewer_id={reviewer_id}, error={e}"
+                )
+        
+        # 持久化通知
+        try:
+            await notification_service_v2.create_contract_revised_notifications(
+                contract=contract,
+                changed_fields=changed_fields,
+                db=db,
+            )
+            await db.commit()
+        except Exception as e:
+            await db.rollback()
+            logger.error(
+                f"创建 contract_revised 通知失败: contract_id={contract.id}, error={e}"
+            )
+    
     async def get_pending_count(
         self,
         user_id: str,
@@ -457,6 +709,17 @@ class ContractService:
         
         return count
     
+    def _build_visibility_subquery(self, user_id: str):
+        """构建当前用户可见合同的子查询（需求4：数据权限隔离）"""
+        from sqlalchemy import union
+        # 我发起的
+        initiated = select(Contract.id).where(Contract.initiator_id == user_id)
+        # 抄送我的
+        cc_to_me = select(Contract.id).where(Contract.cc_users.contains([user_id]))
+        # 我是评审人的（无论状态）
+        as_reviewer = select(Review.contract_id).where(Review.reviewer_id == user_id)
+        return union(initiated, cc_to_me, as_reviewer)
+
     async def _apply_filter(
         self,
         query,
@@ -468,12 +731,18 @@ class ContractService:
         应用筛选条件
         性能优化: 使用复合索引加速查询
         """
-        if filter_type == "进行中":
-            # 使用索引 ix_contracts_status
-            query = query.where(Contract.status == "progress")
+        if filter_type == "all":
+            # 需求4: 只返回与当前用户有关的合同（数据权限隔离）
+            visible = self._build_visibility_subquery(user_id)
+            query = query.where(Contract.id.in_(visible))
+        elif filter_type == "进行中":
+            # 使用索引 ix_contracts_status + 需求4权限过滤
+            visible = self._build_visibility_subquery(user_id)
+            query = query.where(and_(Contract.status == "progress", Contract.id.in_(visible)))
         elif filter_type == "已完成":
-            # 使用索引 ix_contracts_status
-            query = query.where(Contract.status == "completed")
+            # 使用索引 ix_contracts_status + 需求4权限过滤
+            visible = self._build_visibility_subquery(user_id)
+            query = query.where(and_(Contract.status == "completed", Contract.id.in_(visible)))
         elif filter_type == "待我处理":
             # 使用索引 ix_reviews_reviewer_status_contract
             # 查询包含当前用户待处理评审项的合同
@@ -490,7 +759,16 @@ class ContractService:
         elif filter_type == "我发起的":
             # 筛选由当前用户发起的合同
             query = query.where(Contract.initiator_id == user_id)
-        
+        elif filter_type == "我已审批":
+            # 需求3: 筛选当前用户已审批通过的合同（去重）
+            subquery = select(Review.contract_id).where(
+                and_(
+                    Review.reviewer_id == user_id,
+                    Review.status == "approved"
+                )
+            ).distinct()
+            query = query.where(Contract.id.in_(subquery))
+
         return query
     
     async def _apply_search(

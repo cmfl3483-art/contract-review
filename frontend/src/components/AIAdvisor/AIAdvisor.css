@@ -1,7 +1,8 @@
 .ai-advisor {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
   height: 100%;
+  overflow: hidden;
 }
 
 .ai-advisor-header {
@@ -22,9 +23,9 @@
 }
 
 .ai-advisor-messages {
-  flex: 1;
   overflow-y: auto;
   padding: 16px;
+  min-height: 0;
 }
 
 .welcome-message {
@@ -74,4 +75,59 @@
 .ai-advisor-input {
   padding: 16px;
   border-top: 1px solid #e8e8e8;
+}
+
+/* 可折叠消息容器 */
+.collapsible-message {
+  position: relative;
+}
+
+.collapsible-message.collapsed .collapsible-content {
+  max-height: 220px;
+  overflow: hidden;
+}
+
+.collapsible-message .fade-mask {
+  position: absolute;
+  bottom: 28px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, white);
+  pointer-events: none;
+}
+
+.collapsible-message .toggle-btn {
+  display: block;
+  margin-top: 4px;
+  background: none;
+  border: none;
+  color: #1677ff;
+  cursor: pointer;
+  padding: 4px 0;
+  font-size: 13px;
+}
+
+.collapsible-message .toggle-btn:hover {
+  color: #4096ff;
+  text-decoration: underline;
+}
+
+/* AI 引用链接 */
+.ai-ref-link {
+  color: #1677ff;
+  cursor: pointer;
+  text-decoration: underline dotted;
+  margin: 0 2px;
+}
+
+.ai-ref-link:hover {
+  color: #4096ff;
+  text-decoration: underline;
+}
+
+.ai-ref-invalid {
+  color: #999;
+  font-style: italic;
+  margin: 0 2px;
 }

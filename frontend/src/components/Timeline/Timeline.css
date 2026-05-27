@@ -1,15 +1,16 @@
 .timeline-container {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: 0;
   background: #f5f7fa;
+  overflow: hidden;
 }
 
 .timeline {
-  flex: 1;
   overflow-y: auto;
   padding: 20px 24px;
+  min-height: 0;
 }
 
 /* 滚动条样式 */

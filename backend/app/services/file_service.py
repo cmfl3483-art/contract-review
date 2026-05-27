@@ -147,7 +147,7 @@ class FileService:
         )
         
         db.add(attachment)
-        await db.commit()
+        await db.flush()
         await db.refresh(attachment)
         
         # 清除缓存 - 使用统一的缓存失效策略

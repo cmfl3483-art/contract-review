@@ -136,18 +136,21 @@ export function useAddComment() {
       reviewId,
       parentCommentId,
       content,
+      mentionedUserIds,
     }: {
       contractId: string;
       reviewId?: string;
       parentCommentId?: string;
       content: string;
+      mentionedUserIds?: string[];
     }) => {
       const response = await axios.post<ApiResponse<{ comment: Comment }>>(
         `${API_BASE_URL}${API_ENDPOINTS.CONTRACTS.COMMENTS(contractId)}`,
         { 
           review_id: reviewId,  // 使用蛇形命名
           parent_comment_id: parentCommentId,  // 使用蛇形命名
-          content 
+          content,
+          mentioned_user_ids: mentionedUserIds ?? [],  // 新增 @ 提及用户 ID 列表
         }
       );
 

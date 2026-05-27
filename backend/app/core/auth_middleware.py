@@ -4,6 +4,7 @@ JWT认证中间件
 """
 from fastapi import Request, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.responses import JSONResponse
 from typing import Optional
 from app.services.dingtalk_auth_service import DingTalkAuthService
 
@@ -36,9 +37,9 @@ class AuthMiddleware:
         token = self._extract_token(request)
         
         if not token:
-            raise HTTPException(
+            return JSONResponse(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="未提供认证Token",
+                content={"success": False, "error": "未提供认证Token", "code": "UNAUTHORIZED"},
                 headers={"WWW-Authenticate": "Bearer"}
             )
         
@@ -46,9 +47,9 @@ class AuthMiddleware:
         payload = self.auth_service.verify_jwt_token(token)
         
         if not payload:
-            raise HTTPException(
+            return JSONResponse(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Token无效或已过期",
+                content={"success": False, "error": "Token无效或已过期", "code": "UNAUTHORIZED"},
                 headers={"WWW-Authenticate": "Bearer"}
             )
         
@@ -95,6 +96,10 @@ class AuthMiddleware:
             "/api/auth/dingtalk/login",
             "/api/auth/dingtalk/callback",
             "/api/auth/login",
+            "/api/docs",
+            "/api/redoc",
+            "/api/openapi.json",
+            "/api/health",
             "/docs",
             "/redoc",
             "/openapi.json",

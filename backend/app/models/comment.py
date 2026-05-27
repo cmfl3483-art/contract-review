@@ -83,6 +83,14 @@ class Comment(Base):
         comment="点赞用户ID列表"
     )
 
+    # 被@提及的用户
+    mentioned_user_ids: Mapped[list[str]] = mapped_column(
+        ARRAY(String),
+        nullable=False,
+        default=list,
+        comment="被@提及的用户ID列表"
+    )
+
     # 时间戳
     created_at: Mapped[datetime] = mapped_column(
         DateTime,

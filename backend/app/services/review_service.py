@@ -17,6 +17,7 @@ from app.models.ai_summary import AISummary
 from app.core.redis_client import redis_client
 from app.services.comment_service import CommentService
 from app.services.notification_service import notification_service
+from app.services.notification_service_v2 import notification_service_v2
 from app.utils.cache_invalidation import cache_invalidation
 
 # 配置日志
@@ -273,6 +274,8 @@ class ReviewService:
                     "created_at": review.created_at.isoformat()
                 }
             )
+            # 触发持久化通知（新增）
+            await notification_service_v2.create_review_approved_notification(review, db)
             
             # 清除相关缓存 - 使用统一的缓存失效策略
             # 获取所有评审人ID用于批量清除待办缓存
@@ -370,6 +373,7 @@ class ReviewService:
         content: str,
         review_id: Optional[str] = None,
         parent_comment_id: Optional[str] = None,
+        mentioned_user_ids: Optional[List[str]] = None,  # 新增
         db: AsyncSession = None
     ) -> Comment:
         """
@@ -381,6 +385,7 @@ class ReviewService:
             content: 评论内容
             review_id: 评审ID(可选,回复评审意见时提供)
             parent_comment_id: 父评论ID(可选,嵌套回复时提供)
+            mentioned_user_ids: 被@提及的用户ID列表(可选)
             db: 数据库会话
             
         Returns:
@@ -392,6 +397,7 @@ class ReviewService:
             content=content,
             review_id=review_id,
             parent_comment_id=parent_comment_id,
+            mentioned_user_ids=mentioned_user_ids,  # 新增
             db=db
         )
     

@@ -12,6 +12,8 @@ from app.models.review import Review, ReviewStatus
 from app.models.comment import Comment
 from app.models.attachment import Attachment
 from app.models.ai_summary import AISummary, ApprovalStatus
+from app.models.notification import Notification, NotificationType
+from app.models.contract_revision_log import ContractRevisionLog
 
 __all__ = [
     "Base",
@@ -24,4 +26,7 @@ __all__ = [
     "Attachment",
     "AISummary",
     "ApprovalStatus",
+    "Notification",
+    "NotificationType",
+    "ContractRevisionLog",
 ]

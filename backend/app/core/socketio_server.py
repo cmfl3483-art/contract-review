@@ -56,7 +56,7 @@ async def verify_token(token: str) -> Optional[str]:
             settings.SECRET_KEY,
             algorithms=[settings.ALGORITHM]
         )
-        user_id: str = payload.get("sub")
+        user_id: str = payload.get("user_id") or payload.get("sub")
         if user_id is None:
             return None
         return user_id

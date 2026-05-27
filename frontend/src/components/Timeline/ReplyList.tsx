@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { MessageOutlined } from '@ant-design/icons';
 import type { Comment } from '../../types/index';
 import { useAddComment } from '../../hooks';
 import { formatRelativeTime } from '../../utils/time';
+import { useFocusedAnchorStore } from '../../stores/useFocusedAnchorStore';
+import MentionInput from './MentionInput';
 import './ReplyList.css';
 
 interface ReplyListProps {
@@ -31,40 +33,46 @@ function flattenReplies(items: Comment[], replyToName?: string): FlatReply[] {
 
 const ReplyList: React.FC<ReplyListProps> = ({ replies, contractId, reviewId }) => {
   const flatList = flattenReplies(replies);
+  const focusedAnchorId = useFocusedAnchorStore((s) => s.anchorId);
+
+  // 如果聚焦的 anchor 在被折叠区域里（索引 >= 2），需要展开
+  const focusedInCollapsed = useMemo(() => {
+    if (!focusedAnchorId) return false;
+    const idx = flatList.findIndex((f) => f.comment.id === focusedAnchorId);
+    return idx >= 2;
+  }, [focusedAnchorId, flatList]);
+
   const [collapsed, setCollapsed] = useState(flatList.length > 2);
   const [replyingTo, setReplyingTo] = useState<string | null>(null);
-  const [replyContent, setReplyContent] = useState('');
+
+  // 当聚焦的 anchor 在折叠区域时，自动展开
+  useEffect(() => {
+    if (focusedInCollapsed) {
+      setCollapsed(false);
+    }
+  }, [focusedInCollapsed]);
 
   const addCommentMutation = useAddComment();
 
   const handleReply = (commentId: string) => {
     setReplyingTo(commentId);
-    setReplyContent('');
   };
 
-  const handleSendReply = (parentCommentId: string) => {
-    if (!replyContent.trim()) return;
+  const handleSendReply = (parentCommentId: string) => (content: string, mentionedUserIds: string[]) => {
     addCommentMutation.mutate(
       {
         contractId,
         reviewId,
         parentCommentId,
-        content: replyContent.trim(),
+        content,
+        mentionedUserIds,
       },
       {
         onSuccess: () => {
           setReplyingTo(null);
-          setReplyContent('');
         },
       }
     );
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent, parentCommentId: string) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendReply(parentCommentId);
-    }
   };
 
   const displayed = collapsed ? flatList.slice(0, 2) : flatList;
@@ -84,7 +92,7 @@ const ReplyList: React.FC<ReplyListProps> = ({ replies, contractId, reviewId }) 
   return (
     <div className="replies-container">
       {displayed.map(({ comment: reply, replyToName }, index) => (
-        <div key={reply.id} className="reply-card">
+        <div key={reply.id} className="reply-card" id={`anchor-${reply.id}`}>
           <div className="reply-row">
             <div
               className="reply-avatar"
@@ -110,22 +118,14 @@ const ReplyList: React.FC<ReplyListProps> = ({ replies, contractId, reviewId }) 
             </button>
           </div>
           {replyingTo === reply.id && (
-            <div className="reply-input-sub">
-              <input
-                type="text"
-                placeholder={`回复 @${reply.author?.name || '未知用户'}...`}
-                value={replyContent}
-                onChange={(e) => setReplyContent(e.target.value)}
-                onKeyPress={(e) => handleKeyPress(e, reply.id)}
-                autoFocus
-              />
-              <button
-                onClick={() => handleSendReply(reply.id)}
-                disabled={!replyContent.trim() || addCommentMutation.isPending}
-              >
-                发送
-              </button>
-            </div>
+            <MentionInput
+              contractId={contractId}
+              placeholder={`回复 @${reply.author?.name || '未知用户'}...（输入 @ 提及）`}
+              autoFocus
+              disabled={addCommentMutation.isPending}
+              onSubmit={handleSendReply(reply.id)}
+              containerClassName="reply-input-sub"
+            />
           )}
         </div>
       ))}

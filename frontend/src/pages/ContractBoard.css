@@ -1,15 +1,33 @@
+/* 占满父容器 (MainLayout 的 Content)，不用 100vh */
+.contract-board-root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* 中间面板：纵向排列 ContractDetail + Timeline */
 .center-panel-container {
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
+  min-height: 0;
 }
 
+/* ContractDetail：自适应高度，最多占一半，超出滚动 */
 .center-panel-container > :first-child {
   flex-shrink: 0;
+  max-height: 50%;
+  overflow-y: auto;
 }
 
+/* Timeline 包裹器：占满剩余空间 */
 .center-panel-container > :last-child {
   flex: 1;
   min-height: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
 }

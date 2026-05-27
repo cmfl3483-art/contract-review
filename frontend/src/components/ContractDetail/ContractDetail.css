@@ -27,6 +27,23 @@
   line-height: 1.4;
 }
 
+.contract-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.contract-title-row .contract-title {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.contract-edit-form {
+  display: flex;
+  flex-direction: column;
+}
+
 .contract-description {
   margin: 0;
   font-size: 13px;
