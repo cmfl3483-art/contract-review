@@ -1,27 +1,34 @@
-# 使用 Python 3.11 官方镜像作为基础镜像
+# 后端镜像 - 针对腾讯云 + 国内网络优化
+# 关键优化：
+#   - apt 源切换为 mirrors.tencent.com（国内访问慢则在 build 时报错）
+#   - pip 源切换为 mirrors.tencent.com（PyPI 直连慢得离奇）
+#   - 移除不必要的 gcc / postgresql-client（slim 镜像 + asyncpg 已含驱动，不用编译）
+#   - --no-install-recommends 减少冗余包
+#   - PIP_DEFAULT_TIMEOUT=300 避免 PyPI 慢导致超时
+#
+# 历史教训：之前因 .gitignore 或其他原因这份优化没进 git，
+#         本地 Dockerfile 是旧的、服务器上是优化的，导致 CI/CD 重 build 时
+#         走老 Dockerfile，apt-get install 因网络慢卡 30+ 分钟。
+
 FROM python:3.11-slim
 
-# 设置工作目录
 WORKDIR /app
 
-# 设置环境变量
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PIP_NO_CACHE_DIR=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PIP_DEFAULT_TIMEOUT=300
 
-# 安装系统依赖
-RUN apt-get update && apt-get install -y \
-    gcc \
-    postgresql-client \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+# 系统依赖：使用腾讯镜像源加速；slim + asyncpg 不需要 gcc / postgresql-client
+RUN sed -i 's|deb.debian.org|mirrors.tencent.com|g' /etc/apt/sources.list.d/debian.sources && \
+    apt-get update && apt-get install -y --no-install-recommends \
+        curl && \
+    rm -rf /var/lib/apt/lists/*
 
-# 复制依赖文件
+# 先复制 requirements.txt 单独装，让 docker layer cache 在 requirements 不变时跳过 pip install
 COPY requirements.txt .
-
-# 安装 Python 依赖
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt -i https://mirrors.tencent.com/pypi/simple/
 
 # 复制项目文件
 COPY . .
@@ -33,10 +40,8 @@ RUN mkdir -p /app/logs
 RUN useradd -m -u 1000 appuser && \
     chown -R appuser:appuser /app
 
-# 切换到非 root 用户
 USER appuser
 
-# 暴露端口
 EXPOSE 8000
 
 # 健康检查
