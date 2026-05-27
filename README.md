@@ -406,12 +406,23 @@ open http://localhost:9001
 
 ## 📚 相关文档
 
-- [后端开发完成总结](./BACKEND_COMPLETE.md)
-- [实施进度](./IMPLEMENTATION_PROGRESS.md)
-- [Docker配置说明](./DOCKER_SETUP.md)
-- [需求文档](./.kiro/specs/contract-pre-review/requirements.md)
-- [技术设计](./.kiro/specs/contract-pre-review/design.md)
-- [任务列表](./.kiro/specs/contract-pre-review/tasks.md)
+### 当前权威文档
+- **[双环境部署 + CI/CD 完整指南](./docs/DUAL_ENV_DEPLOYMENT.md)** — 架构设计、踩坑、决策依据
+- **[CI/CD 速查卡片](./docs/CICD_QUICK_REFERENCE.md)** — 日常命令查询
+- **[Prod 一次性搭建 SOP](./docs/PROD_DEPLOYMENT_SOP.md)** — 从零搭 prod 步骤
+- **[钉钉登录实现指南](./docs/archive/钉钉授权登录实现指南_项目版.md)** — OAuth 接入细节
+- **[CLAUDE.md](./CLAUDE.md)** — 给 AI 助手的技术约定
+
+### Spec（功能规范）
+- [合同预审看板系统](./.kiro/specs/contract-pre-review/) — 项目底座（requirements / design / tasks）
+- [协作能力增强](./.kiro/specs/contract-enhancements/) — @ 提及、通知中心、筛选、权限
+- [合同修改与 AI 改进](./.kiro/specs/contract-revision-and-ai-improvements/) — 重审、引用标记、折叠
+
+### 项目级 Steering（自动加载）
+- [项目总览](./.kiro/steering/project-overview.md) — 19 条关键约定 + 踩坑速查
+
+### 历史文档归档
+- [docs/archive/](./docs/archive/) — 早期开发记录、修复笔记、任务打卡（多数已过时）
 
 ## 🤝 贡献指南
 
@@ -449,6 +460,3 @@ open http://localhost:9001
 ---
 
 **注意**: 本项目仍在开发中,部分功能可能尚未完全实现。欢迎贡献代码和提出建议!
-
-
-<!-- CI/CD Pipeline Active. Last validated deployment: 2026-05-27 -->
