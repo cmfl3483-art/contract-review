@@ -86,9 +86,9 @@ services:
       DINGTALK_APP_KEY: ${DINGTALK_APP_KEY:-your-app-key}
       DINGTALK_APP_SECRET: ${DINGTALK_APP_SECRET:-your-app-secret}
       DINGTALK_CORP_ID: ${DINGTALK_CORP_ID:-your-corp-id}
-      DINGTALK_REDIRECT_URI: https://chenmin0922.online/api/auth/dingtalk/callback
+      DINGTALK_REDIRECT_URI: https://chenmin.yunumall.com/api/auth/dingtalk/callback
       CORS_ORIGINS: >-
-        ["https://chenmin0922.online"]
+        ["https://chenmin.yunumall.com"]
       AI_PROVIDER: ${AI_PROVIDER:-deepseek}
       AI_API_BASE: ${AI_API_BASE:-https://api.deepseek.com/v1}
       AI_API_KEY: ${AI_API_KEY:-your-api-key}
