@@ -2,6 +2,26 @@
 
 > 已经熟悉架构？只想查命令？看这一页就够。完整设计文档见 [DUAL_ENV_DEPLOYMENT.md](./DUAL_ENV_DEPLOYMENT.md)。
 
+## 🚨 共享基础设施警示（重要）
+
+`docker-compose.yml`（test 用）里同时包含 **postgres / redis / minio**（共享层）和 test 应用容器。这有连带风险：
+
+| 操作 | 影响 |
+|---|---|
+| 日常推 develop 改代码 / 改 backend 环境变量 | ✅ 安全，只重启对应应用容器 |
+| 改 postgres/redis/minio 的服务定义（镜像版本/env/volume）| ⚠️ 重启共享层 → **prod 短暂失连** |
+| `docker compose -f docker-compose.yml down` | 💀 全停 → **prod 直接挂** |
+| `docker restart contract_review_postgres` | ⚠️ **prod 也会失连** |
+
+**铁律**：
+1. 不在 test 目录跑 `docker compose down`
+2. 不重启 `contract_review_postgres` / `redis` / `minio`，除非你确认能接受 prod 几秒失连
+3. 真要停 test 应用层，用：
+   ```bash
+   docker compose -f docker-compose.yml stop backend celery_worker frontend
+   ```
+4. 改 test compose 里 postgres/redis/minio 的定义前先告知团队、选低峰期
+
 ## 🌳 分支策略
 
 | 分支 | 触发什么 | 域名 |

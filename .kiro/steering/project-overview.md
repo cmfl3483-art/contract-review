@@ -197,6 +197,25 @@ sudo docker exec contract_review_redis redis-cli -n 0 DEL dingtalk:corp_access_t
 - `qyapi_get_department_member`（部门成员读取）
 - 以及"应用信息 → 通讯录权限范围"必须设为"全部员工"或包含目标部门
 
+### 20. test 的 docker-compose.yml 包含共享基础设施，改它要小心
+方案 B 共享基础设施意味着 `docker-compose.yml`（test 用）里**同时包含** postgres / redis / minio 和 test 的应用容器。这有连带风险：
+
+| 操作 | 影响 |
+|---|---|
+| 改 backend/celery/frontend 的代码或环境变量 | ✅ 只重启对应应用容器，不动共享层 |
+| 改 postgres/redis/minio 的服务定义（镜像版本/env/volume）| ⚠️ 重启共享层 → prod 短暂失连 |
+| `docker compose -f docker-compose.yml down` | 💀 全停 → prod 直接挂 |
+| `docker restart contract_review_postgres` | ⚠️ prod 短暂失连 |
+
+**规则**：
+- 日常 CI/CD 推 develop 改代码完全安全，docker compose 不会重启服务定义没变的容器
+- **不要在 develop 分支改 test compose 里 postgres/redis/minio 的服务定义**，要改先告知，并选低峰期
+- **不要在 test 目录跑 `docker compose down`**。要停 test 应用层用：
+  ```bash
+  docker compose -f docker-compose.yml stop backend celery_worker frontend
+  ```
+- 真要拆共享层独立管理，做"方案 B 升级版"：把 postgres/redis/minio 抽到 `docker-compose.shared.yml`，test/prod 都用 external network 引用
+
 ## WebSocket 事件
 
 Socket.io 嵌在 FastAPI 中。前端 `frontend/src/config/socket.ts` 连接，加入房间 `user:{user_id}` 和 `contract:{contract_id}`。

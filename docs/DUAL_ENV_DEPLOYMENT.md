@@ -87,6 +87,27 @@ prod 全部绑定 127.0.0.1，由宿主 Nginx 反代到外网。
 
 历史教训（CLAUDE.md 已写）：本项目踩过"bind mount 被注释掉但 rsync 改了文件"的坑，运行的是镜像内旧代码。所以**保留 bind mount + 强制 git pull** 是当前最稳的做法。
 
+### 共享层连带影响速查
+
+方案 B 共享基础设施意味着 test 的 `docker-compose.yml` 同时管着 postgres/redis/minio。日常 CI/CD 推 develop 是安全的（docker compose 智能识别哪些服务定义没变就不重启），但有几种操作会拖累 prod：
+
+| 操作 | 触发 docker compose 重建？ | prod 影响 |
+|---|---|---|
+| 改 backend/celery/frontend 镜像构建上下文 | 这些服务重建 | ❌ 不影响 |
+| 改 backend 的 environment 段 | backend 重启 | ❌ 不影响 |
+| 改 backend 的 volume 挂载 | backend 重建 | ❌ 不影响 |
+| **改 postgres/redis/minio 的镜像版本** | 共享层重建 | ⚠️ 数秒失连 |
+| **改 postgres/redis/minio 的 environment** | 共享层重建 | ⚠️ 数秒失连 |
+| **改 postgres/redis/minio 的 volume** | 共享层重建 | ⚠️ 数秒失连，⚠️ 数据迁移风险 |
+| **`docker compose down`** | 全停 | 💀 完全挂 |
+| **`docker restart contract_review_postgres`** | 重启 postgres | ⚠️ 数秒失连 |
+
+防护规则（已写进 steering #20）：
+1. 不要在 test 目录跑 `docker compose down`
+2. 改 postgres/redis/minio 的服务定义前先告知团队，选低峰期
+3. 真要停 test 应用层只用 `docker compose -f docker-compose.yml stop backend celery_worker frontend`，不要 `down`
+4. 如果以后频繁要动共享层，可以做"方案 B 升级版"：把 postgres/redis/minio 抽到 `docker-compose.shared.yml`，test 和 prod 都通过 external network 引用，彻底分离
+
 ## 3. 完整架构
 
 ```
