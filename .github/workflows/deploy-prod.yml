@@ -24,8 +24,8 @@ jobs:
       # 完全绕过服务器访问 GitHub 的网络问题
       - name: Package code
         run: |
-          git archive --format=tar.gz HEAD -o /tmp/deploy.tar.gz
-          echo "Package size: $(du -sh /tmp/deploy.tar.gz)"
+          tar -czf deploy.tar.gz --exclude='.git' --exclude='node_modules' .
+          echo "Package size: $(du -sh deploy.tar.gz)"
 
       - name: Upload package to server
         uses: appleboy/scp-action@v0.1.7
@@ -34,9 +34,8 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          source: /tmp/deploy.tar.gz
+          source: deploy.tar.gz
           target: /tmp/
-          strip_components: 2
 
       - name: Deploy on server
         uses: appleboy/ssh-action@v1.0.3
