@@ -52,15 +52,11 @@ jobs:
               $SRC/ $DEPLOY_DIR/
             rm -rf $SRC
 
-            echo "=== [2/5] Rebuild frontend (no-cache) ==="
-            docker compose -f $DEPLOY_DIR/docker-compose.yml build --no-cache frontend
+            echo "=== [2/5] Rebuild backend & frontend (no-cache) ==="
+            docker compose -f $DEPLOY_DIR/docker-compose.yml build --no-cache backend frontend
 
-            echo "=== [3/5] Install backend dependencies & restart ==="
-            # 先启动 backend（bind mount 已同步新代码）
+            echo "=== [3/5] Restart backend & frontend ==="
             docker compose -f $DEPLOY_DIR/docker-compose.yml up -d backend frontend
-            # 安装 requirements.txt 中新增的依赖（openpyxl 等），然后重启使其生效
-            docker compose -f $DEPLOY_DIR/docker-compose.yml exec -T backend pip install -r /app/requirements.txt -q
-            docker compose -f $DEPLOY_DIR/docker-compose.yml restart backend
 
             echo "=== [4/5] Waiting for backend ==="
             for i in $(seq 1 30); do
