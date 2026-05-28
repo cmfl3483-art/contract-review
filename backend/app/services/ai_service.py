@@ -802,7 +802,7 @@ class AIService:
                         max_tokens=4096,
                         temperature=0.2,
                     ),
-                    timeout=60,  # R4.12
+                    timeout=120,  # R4.12 - 大合同+多规则时 AI 响应可能超过 60s
                 )
             except asyncio.TimeoutError:
                 raise  # 直接抛给上层，触发 R3.15

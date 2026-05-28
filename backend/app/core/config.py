@@ -45,7 +45,7 @@ class Settings(BaseSettings):
     AI_API_BASE: str = "https://api.deepseek.com/v1"
     AI_API_KEY: str = ""
     AI_MODEL: str = "deepseek-chat"
-    AI_TIMEOUT: int = 60
+    AI_TIMEOUT: int = 120
     
     # Celery 配置
     CELERY_BROKER_URL: str = "redis://localhost:6379/1"
