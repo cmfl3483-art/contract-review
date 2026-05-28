@@ -66,6 +66,13 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+# 注册全局异常处理器
+# 统一处理各种异常,返回标准化的错误响应
+# 包括: 自定义异常、HTTP异常、验证异常、数据库异常等
+# 注意: 必须在所有中间件之前注册（最外层），以便能捕获中间件抛出的异常
+# steering #2: register_exception_handlers 先于 add_middleware 调用
+register_exception_handlers(app)
+
 # 配置 CORS 中间件
 # CORS (Cross-Origin Resource Sharing) 允许前端应用跨域访问 API
 # 
@@ -87,12 +94,6 @@ app.add_middleware(
     allow_methods=["*"],  # 允许所有 HTTP 方法
     allow_headers=["*"],  # 允许所有 HTTP 头
 )
-
-# 注册全局异常处理器
-# 统一处理各种异常,返回标准化的错误响应
-# 包括: 自定义异常、HTTP异常、验证异常、数据库异常等
-# 注意: 必须在中间件之前注册,以便能捕获中间件抛出的异常
-register_exception_handlers(app)
 
 # 配置认证中间件
 # JWT Token 验证中间件,用于保护需要认证的 API 端点
@@ -133,7 +134,7 @@ async def health_check():
 
 
 # 导入路由
-from app.routes import auth, contracts, reviews, files, ai, users, dingtalk, notifications
+from app.routes import auth, contracts, reviews, files, ai, users, dingtalk, notifications, compliance
 
 # 注册路由
 app.include_router(auth.router)
@@ -144,6 +145,7 @@ app.include_router(ai.router)
 app.include_router(users.router)
 app.include_router(dingtalk.router)
 app.include_router(notifications.router)
+app.include_router(compliance.router)
 
 # 挂载 Socket.IO 应用
 # Socket.IO 服务器挂载到 /socket.io 路径

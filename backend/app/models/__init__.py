@@ -14,6 +14,14 @@ from app.models.attachment import Attachment
 from app.models.ai_summary import AISummary, ApprovalStatus
 from app.models.notification import Notification, NotificationType
 from app.models.contract_revision_log import ContractRevisionLog
+from app.models.compliance import (
+    ComplianceRuleSet,
+    ComplianceRule,
+    ComplianceCheckResult,
+    RuleType,
+    RuleSeverity,
+    ComplianceCheckStatus,
+)
 
 __all__ = [
     "Base",
@@ -29,4 +37,10 @@ __all__ = [
     "Notification",
     "NotificationType",
     "ContractRevisionLog",
+    "ComplianceRuleSet",
+    "ComplianceRule",
+    "ComplianceCheckResult",
+    "RuleType",
+    "RuleSeverity",
+    "ComplianceCheckStatus",
 ]

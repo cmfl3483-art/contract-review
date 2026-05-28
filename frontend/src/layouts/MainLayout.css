@@ -24,6 +24,27 @@
   gap: 16px;
 }
 
+.main-header-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 24px;
+}
+
+.main-header-nav-link {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.main-header-nav-link:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 .main-header-actions .anticon {
   color: white;
   font-size: 20px;
