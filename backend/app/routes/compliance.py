@@ -767,7 +767,26 @@ async def list_compliance_checks(
     - 销售仅返回本人记录；法务/运营返回全集（R5.10/5.12）
     - 返回 {"success": True, "data": {"items": [...], "total": ..., "page": ..., "page_size": ...}}
     """
+    from datetime import datetime, timedelta
+    from sqlalchemy import update as sa_update
+    from app.models.compliance import ComplianceCheckResult, ComplianceCheckStatus
+
     user = request.state.user
+
+    # 自动清理超过 10 分钟还是 pending 的孤儿记录（Celery task 丢失）
+    try:
+        timeout_threshold = datetime.utcnow() - timedelta(minutes=10)
+        await db.execute(
+            sa_update(ComplianceCheckResult)
+            .where(
+                ComplianceCheckResult.status == ComplianceCheckStatus.PENDING,
+                ComplianceCheckResult.requested_at < timeout_threshold,
+            )
+            .values(status=ComplianceCheckStatus.FAILED, error_message="task_lost")
+        )
+        await db.commit()
+    except Exception:
+        pass  # 清理失败不影响正常查询
 
     try:
         result = await compliance_service.list_checks(
