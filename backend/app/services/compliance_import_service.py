@@ -212,7 +212,8 @@ class ComplianceImportService:
             })
 
         # 2. 反序列化规则列表
-        parsed_rows = json.loads(raw)
+        # redis_client.get() 已自动 json.loads，raw 直接是 list
+        parsed_rows = raw if isinstance(raw, list) else json.loads(raw)
 
         # 3. rule_set 存在性校验
         rule_set = await self._get_rule_set(rule_set_id, db)
