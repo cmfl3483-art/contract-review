@@ -17,7 +17,28 @@ jobs:
     # 要求人工审批后才执行（在 GitHub repo settings → Environments → production 配置 protection rules）
     environment: production
     steps:
-      - name: Deploy via SSH
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 由 GitHub Actions runner 打包代码，通过 scp 推到服务器
+      # 完全绕过服务器访问 GitHub 的网络问题
+      - name: Package code
+        run: |
+          git archive --format=tar.gz HEAD -o /tmp/deploy.tar.gz
+          echo "Package size: $(du -sh /tmp/deploy.tar.gz)"
+
+      - name: Upload package to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          source: /tmp/deploy.tar.gz
+          target: /tmp/
+          strip_components: 2
+
+      - name: Deploy on server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -28,38 +49,30 @@ jobs:
           script_stop: true
           script: |
             set -e
-
-            # prod 仓库目录（与 test 目录分开，避免 git 操作互相干扰）
             PROD_DIR=/home/ubuntu/contract-review-prod
 
-            if [ ! -d "$PROD_DIR/.git" ]; then
-              echo "ERROR: $PROD_DIR is not a git repo. Please run initial setup script first." >&2
-              exit 1
-            fi
+            echo "=== [1/5] Extracting code ==="
+            cd $PROD_DIR
+            tar -xzf /tmp/deploy.tar.gz --overwrite
+            rm -f /tmp/deploy.tar.gz
 
-            cd "$PROD_DIR"
+            echo "=== [2/5] Rebuild prod stack (no-cache frontend) ==="
+            docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod build --no-cache frontend
+            docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod up -d backend frontend
 
-            echo "=== Pulling latest code from main ==="
-            git fetch origin main
-            git checkout main 2>/dev/null || git checkout -B main origin/main
-            git reset --hard origin/main
-
-            echo "=== Rebuilding prod stack ==="
-            docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod up -d --build
-
-            echo "=== Waiting for backend to be ready ==="
+            echo "=== [3/5] Waiting for backend to be ready ==="
             for i in $(seq 1 30); do
               if curl -fsS http://127.0.0.1:8001/health > /dev/null 2>&1; then
-                echo "backend ready"
+                echo "backend ready after ${i}x2s"
                 break
               fi
               sleep 2
             done
 
-            echo "=== Running DB migrations ==="
+            echo "=== [4/5] Running DB migrations ==="
             docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod exec -T backend alembic upgrade head
 
-            echo "=== Verifying ==="
+            echo "=== [5/5] Verifying ==="
             docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod ps
             curl -fsS http://127.0.0.1:8001/health || (echo "prod backend health check failed" && exit 1)
 
