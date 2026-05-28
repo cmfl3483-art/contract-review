@@ -18,6 +18,8 @@ import type {
   CreateRuleDto,
   UpdateRuleDto,
   ListChecksParams,
+  ImportPreviewResponse,
+  ImportConfirmResponse,
 } from '../types/compliance';
 
 // ─────────────────────────────────────────────
@@ -281,5 +283,85 @@ export function useComplianceCheckPolling(checkId: string, enabled: boolean) {
     refetchIntervalInBackground: false,
     staleTime: 0,
     gcTime: 5 * 60 * 1000,
+  });
+}
+
+// ─────────────────────────────────────────────
+// Excel 批量导入 hooks（追加到文件末尾）
+// ─────────────────────────────────────────────
+
+/**
+ * 下载 Excel 模板（blob 下载，遵循 steering 约定 #9）
+ * 不使用 useMutation，直接返回触发函数，由组件调用
+ */
+export function useDownloadRulesTemplate() {
+  return async (ruleSetId: string): Promise<void> => {
+    const response = await axiosInstance.get(
+      `/api/compliance/rule-sets/${ruleSetId}/rules/template`,
+      { responseType: 'blob' }
+    );
+    const url = URL.createObjectURL(new Blob([response.data]));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'compliance_rules_template.xlsx';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+}
+
+/**
+ * 上传 Excel 并获取解析预览
+ */
+export function useImportRulesPreview() {
+  return useMutation({
+    mutationFn: ({
+      ruleSetId,
+      file,
+    }: {
+      ruleSetId: string;
+      file: File;
+    }): Promise<ImportPreviewResponse> => {
+      const formData = new FormData();
+      formData.append('file', file);
+      return unwrap<ImportPreviewResponse>(
+        axiosInstance.post(
+          `/api/compliance/rule-sets/${ruleSetId}/rules/import/preview`,
+          formData
+        )
+      );
+    },
+  });
+}
+
+/**
+ * 确认导入并批量写入规则
+ */
+export function useImportRulesConfirm() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({
+      ruleSetId,
+      previewSessionToken,
+    }: {
+      ruleSetId: string;
+      previewSessionToken: string;
+    }): Promise<ImportConfirmResponse> =>
+      unwrap<ImportConfirmResponse>(
+        axiosInstance.post(
+          `/api/compliance/rule-sets/${ruleSetId}/rules/import/confirm`,
+          { preview_session_token: previewSessionToken }
+        )
+      ),
+    onSuccess: (_data, variables) => {
+      // 刷新规则列表（使 TanStack Query 对应 queryKey 失效）
+      queryClient.invalidateQueries({
+        queryKey: complianceKeys.rules(variables.ruleSetId),
+      });
+      queryClient.invalidateQueries({
+        queryKey: complianceKeys.ruleSets(),
+      });
+    },
   });
 }

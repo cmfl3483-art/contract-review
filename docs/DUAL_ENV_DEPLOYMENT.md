@@ -10,8 +10,9 @@
 - **域名**：test → `chenmin.yunumall.com`，prod → `chenmin0922.online`
 - **钉钉**：两个独立应用，AppKey 各自独立配回调
 - **代码**：单仓库双分支：`develop` → 自动部署 test，`main` → 审批后部署 prod
-- **CI/CD**：GitHub Actions + SSH，从 push 到部署完成约 1 分钟
-- **服务器目录**：test 在 `/home/ubuntu/contract-review/`，prod 在 `/home/ubuntu/contract-review-prod/`，**两个目录都是独立 git repo**
+- **CI/CD**：GitHub Actions + scp 推代码 + SSH，从 push 到部署完成约 8-10 分钟（前端 `--no-cache` build 耗时）
+- **服务器目录**：test 在 `/home/ubuntu/contract-review/`，prod 在 `/home/ubuntu/contract-review-prod/`
+- **⚠️ 腾讯云服务器无法访问 GitHub**：CI/CD 改为由 GitHub runner 打包代码通过 scp 推到服务器，服务器不再需要访问 GitHub
 
 完整架构图、命令、踩坑见后文。
 
@@ -434,7 +435,37 @@ prod 用 `openssl rand -base64 32` 重新生成，存进 `.env.prod`。
 
 **修复**：换成 `curl`（alpine 也没装但容易装；或者用 nginx 的 stub_status 模块）。本项目改用 `["CMD", "curl", "-f", "http://localhost/"]` — 实测 alpine nginx 镜像里有 curl。
 
-## 8. 网址与凭据汇总
+### 坑 9：腾讯云服务器无法访问 GitHub（2026-05-28 新增）
+
+**症状**：CI/CD workflow 里 `git fetch origin develop` 报 `RPC failed; curl 56 Recv failure: Connection timed out` + `fatal: early EOF`，3 次重试全失败。
+
+**根因**：腾讯云服务器访问 `github.com:443` 网络不通，不是偶发抖动，是持续性问题。
+
+**解决方案**：改变 CI/CD 方向——由 GitHub Actions runner（网络正常）打包代码，通过 `scp-action` 推到服务器，服务器只需接受 SSH 连接，不需要访问任何外网。
+
+**关键实现**：
+```yaml
+# deploy-test.yml 核心步骤
+- uses: actions/checkout@v4          # runner 上 checkout 代码
+- uses: appleboy/scp-action@v0.1.7   # scp 推到服务器 /tmp/deploy_src/
+  with:
+    source: "."                       # 上传整个 workspace（注意必须是 "." 不是绝对路径）
+    target: /tmp/deploy_src/
+- uses: appleboy/ssh-action@v1.0.3   # SSH 进服务器执行 rsync + docker build
+  with:
+    script: |
+      rsync -a --delete --exclude='.env' /tmp/deploy_src/ /home/ubuntu/contract-review/
+      docker compose build --no-cache frontend
+      docker compose up -d backend frontend
+      docker compose exec -T backend alembic upgrade head
+```
+
+**踩过的坑**：
+- `source: /tmp/deploy.tar.gz`（绝对路径）→ scp-action 在 workspace 里找，找不到 → 空包
+- 先 `tar -czf deploy.tar.gz .` 再 scp → `tar: .: file changed as we read it`（tar 把自己打进去了）
+- 正确做法：`source: "."` 直接上传 workspace，不需要手动打包
+
+**影响**：部署时间从 ~1 分钟增加到 ~8-10 分钟（前端 `--no-cache` build 耗时）。
 
 | 项 | 值 |
 |---|---|

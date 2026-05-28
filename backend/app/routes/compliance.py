@@ -3,7 +3,10 @@
 Compliance check API routes - rule sets, rules, and check operations
 """
 
+import io
+
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
+from fastapi.responses import StreamingResponse
 from pydantic import ValidationError
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -13,6 +16,7 @@ from app.schemas.compliance import (
     UpdateRuleSetRequest,
 )
 from app.services.ai_service import AIService
+from app.services.compliance_import_service import ComplianceImportService
 from app.services.compliance_service import ComplianceService
 from app.services.text_extractor import TextExtractor
 
@@ -29,6 +33,7 @@ compliance_service = ComplianceService(
     ai_service=_ai_service,
     text_extractor=_text_extractor,
 )
+compliance_import_service = ComplianceImportService()
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -807,3 +812,99 @@ async def recheck_compliance(
         raise HTTPException(status_code=500, detail=f"重新检查失败: {str(e)}")
 
     return {"success": True, "data": _serialize_check_result(check_result)}
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Excel 批量导入路由（追加，零侵入既有路由）
+# ──────────────────────────────────────────────────────────────────────────────
+
+
+@router.get(
+    "/rule-sets/{rule_set_id}/rules/template",
+    summary="下载合规规则 Excel 模板",
+)
+async def download_rules_template(
+    rule_set_id: str,
+    request: Request,
+    db: AsyncSession = Depends(get_db),
+):
+    """
+    下载标准 Excel 模板文件。仅法务/运营可操作（R1.4）。
+    - rule_set_id 不存在返回 404（R1.6）
+    - Content-Disposition 遵循 RFC 5987 编码（约定 #5）
+    """
+    user = request.state.user
+    require_admin(user)
+    await compliance_import_service._get_rule_set(rule_set_id, db)
+    xlsx_bytes = compliance_import_service.generate_template()
+    return StreamingResponse(
+        io.BytesIO(xlsx_bytes),
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={
+            "Content-Disposition": "attachment; filename*=UTF-8''compliance_rules_template.xlsx"
+        },
+    )
+
+
+@router.post(
+    "/rule-sets/{rule_set_id}/rules/import/preview",
+    summary="上传 Excel 并获取解析预览",
+)
+async def import_rules_preview(
+    rule_set_id: str,
+    request: Request,
+    db: AsyncSession = Depends(get_db),
+):
+    """
+    上传 Excel 文件，解析并返回预览数据（不写入数据库）。仅法务/运营可操作（R2.9）。
+    - 返回 { "success": True, "data": { "preview_session_token": ..., "rules": [...], "total_count": ... } }
+    """
+    user = request.state.user
+    require_admin(user)
+    form = await request.form()
+    file = form.get("file")
+    if file is None:
+        raise HTTPException(422, detail={
+            "code": "import_invalid_file",
+            "message": "缺少必填字段 file",
+        })
+    file_data: bytes = await file.read()
+    result = await compliance_import_service.parse_and_preview(
+        file_data=file_data,
+        file_mime_type=file.content_type or "",
+        file_size=len(file_data),
+        rule_set_id=rule_set_id,
+        db=db,
+    )
+    return {"success": True, "data": result}
+
+
+@router.post(
+    "/rule-sets/{rule_set_id}/rules/import/confirm",
+    summary="确认导入并批量写入规则",
+)
+async def import_rules_confirm(
+    rule_set_id: str,
+    request: Request,
+    db: AsyncSession = Depends(get_db),
+):
+    """
+    确认导入，将预览数据批量写入数据库。仅法务/运营可操作（R3.7）。
+    - 请求体：{ "preview_session_token": "..." }
+    - 返回 { "success": True, "data": { "imported_count": ..., "rule_set_id": ... } }
+    """
+    user = request.state.user
+    require_admin(user)
+    body = await request.json()
+    token = body.get("preview_session_token")
+    if not token:
+        raise HTTPException(422, detail={
+            "code": "import_preview_expired",
+            "message": "缺少必填字段 preview_session_token",
+        })
+    result = await compliance_import_service.confirm_import(
+        rule_set_id=rule_set_id,
+        preview_session_token=token,
+        db=db,
+    )
+    return {"success": True, "data": result}
