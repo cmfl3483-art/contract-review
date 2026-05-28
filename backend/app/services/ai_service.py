@@ -735,7 +735,8 @@ class AIService:
 - 当某 rule_type=number/name/description 对应的字段初稿为 null 或空字符串，
   不要为该字段类型输出 violation，仅 rule_type=file 不受字段初稿影响
 - 必须使用规则的真实 id，不要杜撰
-- text_truncated=true 时，可在 description 中提示「正文被截断，可能影响判断」"""
+- text_truncated=true 时，可在 description 中提示「正文被截断，可能影响判断」
+- 你的回复必须是且仅是一个合法的 JSON 对象，不要包含任何 markdown 代码块、前缀说明或后缀说明"""
 
     async def check_compliance(
         self,
@@ -801,11 +802,12 @@ class AIService:
                             },
                             {"role": "user", "content": user_content},
                         ],
-                        response_format={"type": "json_object"},
+                        # response_format 不传：deepseek-v4-pro 不支持该参数，传了会返回空内容
+                        # 改为依赖 system prompt 中的 JSON 格式指令
                         max_tokens=4096,
                         temperature=0,
                     ),
-                    timeout=270,  # R4.12 - 单次请求最长等 4.5 分钟（SDK max_retries=0，不会叠加）
+                    timeout=270,
                 )
             except asyncio.TimeoutError:
                 raise  # 直接抛给上层，触发 R3.15
