@@ -3,6 +3,7 @@ import { Table, Tag, Button, Space, Popconfirm, Tooltip } from 'antd';
 import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
+import { formatToBeijing } from '../../utils/time';
 import { useRuleSets, useDeleteRuleSet } from '../../hooks/useCompliance';
 import type { RuleSet } from '../../types/compliance';
 
@@ -56,7 +57,7 @@ const RuleSetTable: React.FC<RuleSetTableProps> = ({ onEdit, onViewDetail, onCre
       dataIndex: 'created_at',
       key: 'created_at',
       width: 160,
-      render: (val: string) => dayjs(val).format('YYYY-MM-DD HH:mm'),
+      render: (val: string) => formatToBeijing(val),
     },
     {
       title: '操作',

@@ -3,6 +3,7 @@ import { Table, Tag, Select, Space, Tooltip } from 'antd';
 import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined, WarningOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
+import { formatToBeijing } from '../../utils/time';
 import { useComplianceChecks } from '../../hooks/useCompliance';
 import type { ComplianceCheckSummary, ComplianceCheckStatus } from '../../types/compliance';
 
@@ -105,7 +106,7 @@ const ComplianceCheckList: React.FC<ComplianceCheckListProps> = ({ scope = 'mine
       dataIndex: 'requested_at',
       key: 'requested_at',
       width: 160,
-      render: (val: string) => dayjs(val).format('YYYY-MM-DD HH:mm'),
+      render: (val: string) => formatToBeijing(val),
     },
   ];
 

@@ -84,6 +84,10 @@ async def run_compliance_check_task(self, check_id: str) -> None:
             return
 
         # ── 2. 从 MinIO 拉取文件 ─────────────────────────────────────────────
+        # Celery worker 是独立进程，minio_client 需要在使用前确保已连接
+        if minio_client.client is None:
+            minio_client.connect()
+
         file_data = minio_client.get_file(check.file_storage_key)
         if file_data is None:
             logger.error(f"[compliance_task] file not found in MinIO: {check.file_storage_key}")

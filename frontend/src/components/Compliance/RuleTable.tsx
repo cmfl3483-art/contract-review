@@ -5,6 +5,7 @@ import RuleImportModal from './RuleImportModal';
 import { useDownloadRulesTemplate } from '../../hooks/useCompliance';
 import type { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
+import { formatToBeijing } from '../../utils/time';
 import { useRules, useDeleteRule } from '../../hooks/useCompliance';
 import type { Rule, RuleType, RuleSeverity } from '../../types/compliance';
 
@@ -66,9 +67,9 @@ const RuleTable: React.FC<RuleTableProps> = ({ ruleSetId, onEdit, onCreateClick 
   const columns: ColumnsType<Rule> = [
     {
       title: '序号',
-      dataIndex: 'order',
-      key: 'order',
+      key: 'index',
       width: 60,
+      render: (_: unknown, __: Rule, index: number) => index + 1,
     },
     {
       title: '规则类型',
@@ -104,7 +105,7 @@ const RuleTable: React.FC<RuleTableProps> = ({ ruleSetId, onEdit, onCreateClick 
       dataIndex: 'created_at',
       key: 'created_at',
       width: 160,
-      render: (val: string) => dayjs(val).format('YYYY-MM-DD HH:mm'),
+      render: (val: string) => formatToBeijing(val),
     },
     {
       title: '操作',

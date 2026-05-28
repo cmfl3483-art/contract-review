@@ -3,6 +3,7 @@ import { Button, Descriptions, Divider, Result, Spin, Tag, Typography } from 'an
 import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
+import { formatToBeijing } from '../../utils/time';
 import { useComplianceCheckPolling, useRecheckCompliance } from '../../hooks/useCompliance';
 import TruncatedNotice from '../../components/Compliance/TruncatedNotice';
 import ComplianceSuggestions from '../../components/Compliance/ComplianceSuggestions';
@@ -121,11 +122,11 @@ const ComplianceCheckDetailPage: React.FC = () => {
             {check.rule_set_name ?? <Text type="secondary">—</Text>}
           </Descriptions.Item>
           <Descriptions.Item label="提交时间">
-            {dayjs(check.requested_at).format('YYYY-MM-DD HH:mm:ss')}
+            {formatToBeijing(check.requested_at, 'YYYY-MM-DD HH:mm:ss')}
           </Descriptions.Item>
           <Descriptions.Item label="完成时间">
             {check.completed_at
-              ? dayjs(check.completed_at).format('YYYY-MM-DD HH:mm:ss')
+              ? formatToBeijing(check.completed_at, 'YYYY-MM-DD HH:mm:ss')
               : <Text type="secondary">—</Text>}
           </Descriptions.Item>
           <Descriptions.Item label="提交人">

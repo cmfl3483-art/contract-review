@@ -12,6 +12,41 @@ function normalizeIsoString(s: string): string {
 }
 
 /**
+ * 将后端 UTC 时间字符串格式化为北京时间（Asia/Shanghai）。
+ * 用于替代直接调用 dayjs(val).format(...)，确保时区正确。
+ *
+ * @param dateString - 后端返回的 ISO 8601 字符串（可能无时区后缀）
+ * @param fmt - 格式化模板（默认：YYYY-MM-DD HH:mm）
+ */
+export function formatToBeijing(dateString: string | null | undefined, fmt = 'YYYY-MM-DD HH:mm'): string {
+  if (!dateString) return '—';
+  const normalized = normalizeIsoString(dateString);
+  // new Date() 解析 UTC 字符串后，toLocaleString 转北京时间
+  const date = new Date(normalized);
+  if (isNaN(date.getTime())) return dateString;
+  // 用 Intl.DateTimeFormat 转北京时间各字段
+  const fmt8 = new Intl.DateTimeFormat('zh-CN', {
+    timeZone: 'Asia/Shanghai',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  }).formatToParts(date);
+  const p: Record<string, string> = {};
+  fmt8.forEach(({ type, value }) => { p[type] = value; });
+  return fmt
+    .replace('YYYY', p.year)
+    .replace('MM', p.month)
+    .replace('DD', p.day)
+    .replace('HH', p.hour === '24' ? '00' : p.hour)
+    .replace('mm', p.minute)
+    .replace('ss', p.second);
+}
+
+/**
  * 格式化相对时间
  * @param dateString - ISO 8601 格式的日期字符串
  * @returns 相对时间字符串（刚刚、N分钟前、N小时前、N天前等）
