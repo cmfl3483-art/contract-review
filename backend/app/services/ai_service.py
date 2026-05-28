@@ -34,10 +34,13 @@ class AIService:
     
     def __init__(self):
         # 初始化OpenAI兼容客户端
+        # max_retries=0：禁用 SDK 内置重试，由上层 for attempt in range(2) 控制
+        # timeout=300：单次请求最长等待 5 分钟
         self.client = AsyncOpenAI(
             api_key=settings.AI_API_KEY,
             base_url=settings.AI_API_BASE,
-            timeout=settings.AI_TIMEOUT
+            timeout=settings.AI_TIMEOUT,
+            max_retries=0,
         )
         self.model = settings.AI_MODEL
     
@@ -802,7 +805,7 @@ class AIService:
                         max_tokens=4096,
                         temperature=0.2,
                     ),
-                    timeout=120,  # R4.12 - 大合同+多规则时 AI 响应可能超过 60s
+                    timeout=270,  # R4.12 - 单次请求最长等 4.5 分钟（SDK max_retries=0，不会叠加）
                 )
             except asyncio.TimeoutError:
                 raise  # 直接抛给上层，触发 R3.15
