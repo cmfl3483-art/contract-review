@@ -52,11 +52,11 @@ jobs:
               $SRC/ $DEPLOY_DIR/
             rm -rf $SRC
 
-            echo "=== [2/5] Rebuild backend & frontend (no-cache) ==="
-            docker compose -f $DEPLOY_DIR/docker-compose.yml build --no-cache backend frontend
+            echo "=== [2/5] Rebuild backend & frontend & celery_worker (no-cache) ==="
+            docker compose -f $DEPLOY_DIR/docker-compose.yml build --no-cache backend frontend celery_worker
 
-            echo "=== [3/5] Restart backend & frontend ==="
-            docker compose -f $DEPLOY_DIR/docker-compose.yml up -d backend frontend
+            echo "=== [3/5] Restart backend & frontend & celery_worker ==="
+            docker compose -f $DEPLOY_DIR/docker-compose.yml up -d backend frontend celery_worker
 
             echo "=== [4/5] Waiting for backend ==="
             for i in $(seq 1 30); do
