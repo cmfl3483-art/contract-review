@@ -803,7 +803,7 @@ class AIService:
                         ],
                         response_format={"type": "json_object"},
                         max_tokens=4096,
-                        temperature=0.2,
+                        temperature=0,
                     ),
                     timeout=270,  # R4.12 - 单次请求最长等 4.5 分钟（SDK max_retries=0，不会叠加）
                 )
