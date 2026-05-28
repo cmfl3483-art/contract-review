@@ -736,6 +736,7 @@ class AIService:
   不要为该字段类型输出 violation，仅 rule_type=file 不受字段初稿影响
 - 必须使用规则的真实 id，不要杜撰
 - text_truncated=true 时，可在 description 中提示「正文被截断，可能影响判断」
+- violations 数组中只列出真正违规的条款，合规的规则不要列出，即使合规也不要输出"无需修改"类的条目
 - 你的回复必须是且仅是一个合法的 JSON 对象，不要包含任何 markdown 代码块、前缀说明或后缀说明"""
 
     async def check_compliance(
@@ -821,9 +822,11 @@ class AIService:
                 parsed = json.loads(raw)
                 return self._postprocess(parsed, rules, drafts, extracted_text)
             except (json.JSONDecodeError, ValueError, KeyError):
+                import logging
+                logging.getLogger(__name__).error(f"AI JSON parse failed, raw={repr(raw[:500])}")
                 if attempt == 1:
                     raise ComplianceAIInvalidResponseError("ai_invalid_response")
-                continue  # 第一次失败，进入第二次重试
+                continue
 
         # 不应到达此处，但为了类型检查
         raise ComplianceAIInvalidResponseError("ai_invalid_response")
