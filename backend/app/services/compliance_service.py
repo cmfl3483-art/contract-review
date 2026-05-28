@@ -11,6 +11,7 @@ from datetime import datetime
 from typing import Optional
 
 from sqlalchemy import func, select, update
+from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import HTTPException
 
@@ -714,8 +715,7 @@ class ComplianceService:
             check_result.status = ComplianceCheckStatus.FAILED
             check_result.error_message = "ai_invalid_response"
             await db.commit()
-            await db.refresh(check_result)
-            return check_result
+            return await self._reload_check_result(check_result.id, db)
 
         # ── 更新为 completed ──────────────────────────────────────────────────
         check_result.status = ComplianceCheckStatus.COMPLETED
@@ -725,9 +725,7 @@ class ComplianceService:
         check_result.compliance_score = ai_result["compliance_score"]
         check_result.completed_at = datetime.utcnow()
         await db.commit()
-        await db.refresh(check_result)
-
-        return check_result
+        return await self._reload_check_result(check_result.id, db)
 
     # ──────────────────────────────────────────────────────────────────────────
     # 重新检查
@@ -803,6 +801,24 @@ class ComplianceService:
     # 查询单条检查记录
     # ──────────────────────────────────────────────────────────────────────────
 
+    async def _reload_check_result(
+        self, check_id, db: AsyncSession
+    ) -> ComplianceCheckResult:
+        """commit 后重新查询 check_result，eager load rule_set.rules 和 requester。"""
+        from app.models.compliance import ComplianceRuleSet, ComplianceRule
+        from app.models.user import User
+        result = await db.execute(
+            select(ComplianceCheckResult)
+            .where(ComplianceCheckResult.id == check_id)
+            .options(
+                selectinload(ComplianceCheckResult.rule_set).selectinload(
+                    ComplianceRuleSet.rules
+                ),
+                selectinload(ComplianceCheckResult.requester),
+            )
+        )
+        return result.scalar_one()
+
     async def get_check(
         self,
         check_id: str,
@@ -822,8 +838,13 @@ class ComplianceService:
             HTTPException(403): 销售角色无权查看他人记录
         """
         result = await db.execute(
-            select(ComplianceCheckResult).where(
-                ComplianceCheckResult.id == uuid.UUID(str(check_id))
+            select(ComplianceCheckResult)
+            .where(ComplianceCheckResult.id == uuid.UUID(str(check_id)))
+            .options(
+                selectinload(ComplianceCheckResult.rule_set).selectinload(
+                    ComplianceRuleSet.rules
+                ),
+                selectinload(ComplianceCheckResult.requester),
             )
         )
         check_result = result.scalar_one_or_none()
