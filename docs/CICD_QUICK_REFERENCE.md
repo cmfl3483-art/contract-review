@@ -177,7 +177,8 @@ docker exec contract_review_redis redis-cli -n 0 DEL dingtalk:corp_access_token 
 **Q: 我推到 develop 但 test 没更新？**
 1. 看 https://github.com/cmfl3483-art/contract-review/actions 是否触发
 2. 如果触发了但 fail，点进去看是哪一步报错
-3. 90% 是 SSH 连接问题或 docker build 失败 → SSH 上服务器看 `/tmp/prod_build.log` 之类
+3. 注意：**腾讯云服务器无法访问 GitHub**，CI/CD 已改为 scp 推代码方案，不再依赖服务器 git pull
+4. 前端 `--no-cache` build 需要 8-10 分钟，属正常现象
 
 **Q: 推到 main 没看到部署？**
 环境保护规则要求 reviewer 审批。打开 Actions 页面找 `Waiting` 状态的那条，手动 Approve。
@@ -214,19 +215,23 @@ GitHub Actions 是 `script_stop: true`，失败会停在出错那步。**之前�
 ### 手动部署 test
 ```bash
 ssh -i kaifa.pem ubuntu@124.222.219.177
-cd /home/ubuntu/contract-review
-git fetch origin && git reset --hard origin/develop
-docker compose up -d --build
-docker compose exec backend alembic upgrade head
+# ⚠️ 服务器无法访问 GitHub，不能用 git fetch
+# 改用本地打包 scp 推送：
+git -C /本地项目路径 archive --format=tar.gz HEAD -o /tmp/deploy.tar.gz
+scp -i kaifa.pem /tmp/deploy.tar.gz ubuntu@124.222.219.177:/tmp/
+ssh -i kaifa.pem ubuntu@124.222.219.177 '
+  cd /home/ubuntu/contract-review
+  tar -xzf /tmp/deploy.tar.gz --overwrite
+  docker compose build --no-cache frontend
+  docker compose up -d backend frontend
+  docker compose exec -T backend alembic upgrade head
+'
 ```
 
 ### 手动部署 prod
 ```bash
-ssh -i kaifa.pem ubuntu@124.222.219.177
-cd /home/ubuntu/contract-review-prod
-git fetch origin && git reset --hard origin/main
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod up -d --build
-docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod exec backend alembic upgrade head
+# 同上，替换目标目录为 /home/ubuntu/contract-review-prod
+# 并使用 docker-compose.prod.yml --env-file .env.prod -p prod
 ```
 
 ### 重启某个容器（不要一上来就重建整套）
