@@ -3,6 +3,8 @@ AI服务层
 实现智能总结生成和合同顾问问答功能
 支持DeepSeek API和自部署模型
 """
+import asyncio
+import json
 from typing import List, Dict, Any, Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -15,6 +17,16 @@ from app.models.comment import Comment
 from app.models.ai_summary import AISummary
 from app.core.config import settings
 from app.core.redis_client import redis_client
+
+
+class ComplianceAIError(Exception):
+    """AI 服务一般错误（网络异常、模型 API 错误响应等）"""
+    pass
+
+
+class ComplianceAIInvalidResponseError(Exception):
+    """AI 返回内容无法解析为合法 JSON 结构（两次重试均失败）"""
+    pass
 
 
 class AIService:
@@ -679,6 +691,291 @@ class AIService:
 
         return "\n".join(lines)
     
+    # ──────────────────────────────────────────────────────────────────
+    #  合规检查 (Requirement 3 + 4)
+    # ──────────────────────────────────────────────────────────────────
+
+    _COMPLIANCE_SYSTEM_PROMPT = """你是「合同合规检查助理」。请基于「合同规范」「合同文件正文」「字段初稿」三类输入，
+逐条比对并产出合规检查结果。
+
+【输入】
+1. 规则集合（每条规则给出 id / rule_type / title / requirement / severity）：
+   - rule_type ∈ {number, name, description, file}
+     · number → 规则作用于「合同编号字段初稿」
+     · name → 规则作用于「合同名称字段初稿」+ 合同正文
+     · description → 规则作用于「合同描述字段初稿」+ 合同正文
+     · file → 规则作用于「合同文件正文」
+   - severity ∈ {must, should}
+2. 合同文件正文（extracted_contract_text，可能是 null 表示无文本）
+3. 文件是否被截断（text_truncated）
+4. 三个字段初稿：number_draft / name_draft / description_draft（可能为 null）
+
+【输出严格 JSON】（只输出 JSON，不要任何前后说明）：
+{
+  "violations": [
+    {
+      "rule_id": "<必须为输入规则集合中的实际 id>",
+      "location": "<必须与该 rule_id 对应规则的 rule_type 完全一致>",
+      "excerpt": "<不超过 500 字符，location=number/name/description 时取自字段初稿；location=file 时取自 extracted_contract_text 相关片段；允许为空字符串>",
+      "description": "<不超过 500 字符，具体说明违反点>",
+      "suggestion": "<不超过 500 字符，给出修改建议>",
+      "severity": "<必须与对应规则 severity 完全一致，must 或 should>"
+    }
+  ],
+  "suggested_name": "<1-200 字符，符合规范的合同名称>",
+  "suggested_description": "<0-2000 字符，符合规范的合同描述，允许空字符串>"
+}
+
+【约束】
+- 不要输出 suggested_number 字段（合同编号由系统发号器生成）
+- 不要输出 compliance_score 字段（由后端基于 violations 与 severity 计算，LLM 不参与打分）
+- 当某 rule_type=number/name/description 对应的字段初稿为 null 或空字符串，
+  不要为该字段类型输出 violation，仅 rule_type=file 不受字段初稿影响
+- 必须使用规则的真实 id，不要杜撰
+- text_truncated=true 时，可在 description 中提示「正文被截断，可能影响判断」"""
+
+    async def check_compliance(
+        self,
+        *,
+        rules: list,
+        extracted_text: str,
+        text_truncated: bool,
+        number_draft: Optional[str],
+        name_draft: Optional[str],
+        description_draft: Optional[str],
+    ) -> dict:
+        """
+        执行合规检查。
+
+        Args:
+            rules: ComplianceRule 对象列表（或含 id/rule_type/severity/title/requirement 的 dict 列表）
+            extracted_text: 从合同文件抽取的纯文本
+            text_truncated: 文本是否被截断
+            number_draft: 合同编号初稿（可为 None）
+            name_draft: 合同名称初稿（可为 None）
+            description_draft: 合同描述初稿（可为 None）
+
+        Returns:
+            {
+                "violations": [...],
+                "suggested_name": str,
+                "suggested_description": str,
+                "compliance_score": int,
+            }
+
+        Raises:
+            asyncio.TimeoutError: AI 调用超时 → R3.15 ai_timeout (504)
+            ComplianceAIError: 一般 AI 错误 → R3.16 (502)
+            ComplianceAIInvalidResponseError: JSON 解析两次失败 → R4.11
+        """
+        drafts = {
+            "number_draft": number_draft,
+            "name_draft": name_draft,
+            "description_draft": description_draft,
+        }
+
+        # R4.10: 无规则时跳过模型调用
+        if not rules:
+            return self._fallback_no_rules(drafts, extracted_text)
+
+        # 构建用户消息
+        user_content = self._build_compliance_user_message(
+            rules=rules,
+            extracted_text=extracted_text,
+            text_truncated=text_truncated,
+            drafts=drafts,
+        )
+
+        for attempt in range(2):  # R4.11: 最多重试 1 次
+            try:
+                response = await asyncio.wait_for(
+                    self.client.chat.completions.create(
+                        model=self.model,
+                        messages=[
+                            {
+                                "role": "system",
+                                "content": self._COMPLIANCE_SYSTEM_PROMPT,
+                            },
+                            {"role": "user", "content": user_content},
+                        ],
+                        response_format={"type": "json_object"},
+                        max_tokens=4096,
+                        temperature=0.2,
+                    ),
+                    timeout=60,  # R4.12
+                )
+            except asyncio.TimeoutError:
+                raise  # 直接抛给上层，触发 R3.15
+            except Exception as e:
+                raise ComplianceAIError(str(e))
+
+            raw = response.choices[0].message.content or ""
+            try:
+                parsed = json.loads(raw)
+                return self._postprocess(parsed, rules, drafts, extracted_text)
+            except (json.JSONDecodeError, ValueError, KeyError):
+                if attempt == 1:
+                    raise ComplianceAIInvalidResponseError("ai_invalid_response")
+                continue  # 第一次失败，进入第二次重试
+
+        # 不应到达此处，但为了类型检查
+        raise ComplianceAIInvalidResponseError("ai_invalid_response")
+
+    def _fallback_no_rules(self, drafts: dict, extracted_text: str) -> dict:
+        """R4.10: 无规则时的兜底返回"""
+        name_draft = drafts.get("name_draft") or ""
+        description_draft = drafts.get("description_draft") or ""
+
+        if name_draft.strip():
+            suggested_name = name_draft[:200]
+        else:
+            suggested_name = (
+                extracted_text.replace("\n", " ").strip()[:200] or "未命名合同"
+            )
+
+        suggested_description = description_draft[:2000] if description_draft else ""
+
+        return {
+            "violations": [],
+            "suggested_name": suggested_name,
+            "suggested_description": suggested_description,
+            "compliance_score": 100,
+        }
+
+    def _build_compliance_user_message(
+        self,
+        *,
+        rules: list,
+        extracted_text: str,
+        text_truncated: bool,
+        drafts: dict,
+    ) -> str:
+        """构建发给 LLM 的用户消息"""
+        # 规则列表
+        rules_lines = []
+        for r in rules:
+            if hasattr(r, "id"):
+                # ORM 对象
+                rule_id = str(r.id)
+                rule_type = r.rule_type.value if hasattr(r.rule_type, "value") else str(r.rule_type)
+                severity = r.severity.value if hasattr(r.severity, "value") else str(r.severity)
+                title = r.title
+                requirement = r.requirement
+            else:
+                # dict
+                rule_id = str(r.get("id", ""))
+                rule_type = r.get("rule_type", "")
+                severity = r.get("severity", "")
+                title = r.get("title", "")
+                requirement = r.get("requirement", "")
+
+            rules_lines.append(
+                f"  - id={rule_id}, rule_type={rule_type}, severity={severity}, "
+                f"title={title}, requirement={requirement}"
+            )
+
+        rules_text = "\n".join(rules_lines)
+
+        number_draft = drafts.get("number_draft")
+        name_draft = drafts.get("name_draft")
+        description_draft = drafts.get("description_draft")
+
+        return f"""【规则集合】
+{rules_text}
+
+【合同文件正文】
+{extracted_text or 'null'}
+
+【文件是否被截断】
+{str(text_truncated).lower()}
+
+【字段初稿】
+number_draft: {number_draft if number_draft else 'null'}
+name_draft: {name_draft if name_draft else 'null'}
+description_draft: {description_draft if description_draft else 'null'}"""
+
+    def _postprocess(
+        self,
+        parsed: dict,
+        rules: list,
+        drafts: dict,
+        extracted_text: str,
+    ) -> dict:
+        """
+        R4.3 / R4.4 / R4.6 / R4.7 / R4.8:
+        - rule_id 过滤
+        - location 与 rule_type 一致性校验
+        - 字段初稿为空时丢弃对应 location 的违规
+        - severity 强制对齐规则真值
+        - 字段长度截断
+        - suggested_name 兜底
+        """
+        # 构建 rule_map（支持 ORM 对象和 dict）
+        rule_map = {}
+        for r in rules:
+            if hasattr(r, "id"):
+                rid = str(r.id)
+                rule_map[rid] = {
+                    "rule_type": r.rule_type.value if hasattr(r.rule_type, "value") else str(r.rule_type),
+                    "severity": r.severity.value if hasattr(r.severity, "value") else str(r.severity),
+                    "title": r.title,
+                }
+            else:
+                rid = str(r.get("id", ""))
+                rule_map[rid] = {
+                    "rule_type": r.get("rule_type", ""),
+                    "severity": r.get("severity", ""),
+                    "title": r.get("title", ""),
+                }
+
+        violations = []
+        for v in parsed.get("violations", []):
+            rid = v.get("rule_id")
+            rule = rule_map.get(str(rid) if rid else "")
+            if rule is None:
+                continue  # R4.3: rule_id 不在集合中 → 丢弃
+
+            if v.get("location") != rule["rule_type"]:
+                continue  # R4.3: location 与 rule_type 不一致 → 丢弃
+
+            # R4.6/R4.7/R4.8: 字段初稿为空时丢弃对应 location 的违规
+            location = v.get("location", "")
+            if location in ("number", "name", "description"):
+                draft_val = drafts.get(f"{location}_draft")
+                if not draft_val or not str(draft_val).strip():
+                    continue
+
+            violations.append(
+                {
+                    "rule_id": str(rid),
+                    "location": location,
+                    "excerpt": (v.get("excerpt") or "")[:500],
+                    "description": (v.get("description") or "")[:500],
+                    "suggestion": (v.get("suggestion") or "")[:500],
+                    "severity": rule["severity"],  # 强制对齐规则 severity（R4.5）
+                }
+            )
+
+        # R4.4: suggested_name 长度归一化与兜底
+        suggested_name = (parsed.get("suggested_name") or "")[:200]
+        if not suggested_name.strip():
+            name_draft = drafts.get("name_draft") or ""
+            if name_draft.strip():
+                suggested_name = name_draft[:200]
+            else:
+                suggested_name = (
+                    extracted_text.replace("\n", " ").strip()[:200] or "未命名合同"
+                )
+
+        suggested_description = (parsed.get("suggested_description") or "")[:2000]
+
+        return {
+            "violations": violations,
+            "suggested_name": suggested_name,
+            "suggested_description": suggested_description,
+            "compliance_score": _compute_compliance_score(violations),  # R4.13
+        }
+
     async def generate_summary_with_ai(
         self,
         contract_id: str,
@@ -745,3 +1042,23 @@ class AIService:
         except Exception as e:
             print(f"AI生成总结失败: {str(e)}")
             return None
+
+
+def _compute_compliance_score(violations: list) -> int:
+    """
+    R4.13: 100 起扣，must -10/条，should -2/条，clamp 到 [0, 100]。
+
+    Args:
+        violations: violation dict 列表，每项含 severity 字段
+
+    Returns:
+        0..100 的整数合规评分
+    """
+    score = 100
+    for v in violations:
+        severity = v.get("severity", "")
+        if severity == "must":
+            score -= 10
+        elif severity == "should":
+            score -= 2
+    return max(0, min(100, score))

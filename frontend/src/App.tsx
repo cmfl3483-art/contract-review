@@ -14,6 +14,11 @@ import './App.css';
 
 // Lazy load pages for code splitting
 const ContractBoard = lazy(() => import('./pages/ContractBoard'));
+const ComplianceListPage = lazy(() => import('./pages/Compliance/ComplianceListPage'));
+const ComplianceCheckNewPage = lazy(() => import('./pages/Compliance/ComplianceCheckNewPage'));
+const ComplianceCheckDetailPage = lazy(() => import('./pages/Compliance/ComplianceCheckDetailPage'));
+const RuleSetListPage = lazy(() => import('./pages/Compliance/admin/RuleSetListPage'));
+const RuleSetDetailPage = lazy(() => import('./pages/Compliance/admin/RuleSetDetailPage'));
 
 // Loading component for Suspense fallback
 const PageLoader = () => (
@@ -81,6 +86,11 @@ function App() {
               <Suspense fallback={<PageLoader />}>
                 <Routes>
                   <Route path="/" element={<ContractBoard />} />
+                  <Route path="/compliance" element={<ComplianceListPage />} />
+                  <Route path="/compliance/check/new" element={<ComplianceCheckNewPage />} />
+                  <Route path="/compliance/check/:checkId" element={<ComplianceCheckDetailPage />} />
+                  <Route path="/compliance/admin/rule-sets" element={<RuleSetListPage />} />
+                  <Route path="/compliance/admin/rule-sets/:ruleSetId" element={<RuleSetDetailPage />} />
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
               </Suspense>
