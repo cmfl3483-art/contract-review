@@ -5,7 +5,6 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# 同一时刻只能跑一个 prod 部署，避免互相覆盖
 concurrency:
   group: deploy-prod
   cancel-in-progress: false
@@ -14,10 +13,24 @@ jobs:
   deploy:
     name: Deploy to production environment
     runs-on: ubuntu-latest
-    # 要求人工审批后才执行（在 GitHub repo settings → Environments → production 配置 protection rules）
     environment: production
     steps:
-      - name: Deploy via SSH
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 在 GitHub runner 上打包，绕过服务器访问 GitHub 网络问题
+      - name: Package and upload code
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          source: "."
+          target: /tmp/deploy_src_prod/
+          rm: true
+
+      - name: Deploy on server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -29,29 +42,23 @@ jobs:
           script: |
             set -e
             PROD_DIR=/home/ubuntu/contract-review-prod
+            SRC=/tmp/deploy_src_prod
 
-            if [ ! -d "$PROD_DIR/.git" ]; then
-              echo "ERROR: $PROD_DIR is not a git repo. Please run initial setup script first." >&2
-              exit 1
-            fi
+            echo "=== [1/5] Syncing code ==="
+            rsync -a --delete \
+              --exclude='.env' \
+              --exclude='.env.prod' \
+              --exclude='node_modules' \
+              $SRC/ $PROD_DIR/
+            rm -rf $SRC
 
-            cd "$PROD_DIR"
+            echo "=== [2/5] Rebuild frontend (no-cache) ==="
+            docker compose -f $PROD_DIR/docker-compose.prod.yml --env-file $PROD_DIR/.env.prod -p prod build --no-cache frontend
 
-            echo "=== Pulling latest code from main ==="
-            # 腾讯云访问 GitHub 不稳定，最多重试 3 次
-            for i in 1 2 3; do
-              git fetch origin main && break
-              echo "git fetch attempt $i failed, retrying in 10s..."
-              sleep 10
-            done
-            git checkout main 2>/dev/null || git checkout -B main origin/main
-            git reset --hard origin/main
+            echo "=== [3/5] Restart backend & frontend ==="
+            docker compose -f $PROD_DIR/docker-compose.prod.yml --env-file $PROD_DIR/.env.prod -p prod up -d backend frontend
 
-            echo "=== Rebuilding prod stack ==="
-            docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod build --no-cache frontend
-            docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod up -d backend frontend
-
-            echo "=== Waiting for backend to be ready ==="
+            echo "=== [4/5] Waiting for backend ==="
             for i in $(seq 1 30); do
               if curl -fsS http://127.0.0.1:8001/health > /dev/null 2>&1; then
                 echo "backend ready"
@@ -60,11 +67,9 @@ jobs:
               sleep 2
             done
 
-            echo "=== Running DB migrations ==="
-            docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod exec -T backend alembic upgrade head
+            echo "=== [5/5] DB migrations ==="
+            docker compose -f $PROD_DIR/docker-compose.prod.yml --env-file $PROD_DIR/.env.prod -p prod exec -T backend alembic upgrade head
 
             echo "=== Verifying ==="
-            docker compose -f docker-compose.prod.yml --env-file .env.prod -p prod ps
-            curl -fsS http://127.0.0.1:8001/health || (echo "prod backend health check failed" && exit 1)
-
+            curl -fsS http://127.0.0.1:8001/health || (echo "health check failed" && exit 1)
             echo "=== Prod deployment done ==="
