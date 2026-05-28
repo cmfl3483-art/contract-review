@@ -27,18 +27,20 @@ from app.services.text_extractor import TextExtractor, TextExtractionError
 logger = logging.getLogger(__name__)
 
 # Celery worker 独立的数据库连接（不复用 FastAPI 的 get_db）
-_engine = create_async_engine(
-    settings.DATABASE_URL,
-    echo=False,
-    pool_pre_ping=True,
-    pool_size=5,
-    max_overflow=10,
-)
-_async_session_factory = sessionmaker(
-    _engine,
-    class_=AsyncSession,
-    expire_on_commit=False,
-)
+# 注意：不在模块级别创建 engine，避免 asyncio event loop 冲突
+# 每次任务执行时通过 _get_db_session() 按需创建
+
+
+def _make_session_factory():
+    """每次调用创建新的 engine + sessionmaker，避免跨 event loop 的连接池冲突。"""
+    engine = create_async_engine(
+        settings.DATABASE_URL,
+        echo=False,
+        pool_pre_ping=True,
+        pool_size=2,
+        max_overflow=5,
+    )
+    return sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
 
 class AsyncTask(Task):
@@ -71,7 +73,7 @@ async def run_compliance_check_task(self, check_id: str) -> None:
     """
     logger.info(f"[compliance_task] start check_id={check_id}")
 
-    async with _async_session_factory() as db:
+    async with _make_session_factory()() as db:
         # ── 1. 读取 pending 记录 ──────────────────────────────────────────────
         result = await db.execute(
             select(ComplianceCheckResult).where(
