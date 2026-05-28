@@ -24,6 +24,9 @@ const axiosInstance = axios.create({
   },
 });
 
+// 合规检查接口需要等待 AI 处理，单独设置更长的超时
+const COMPLIANCE_CHECK_TIMEOUT = 150000; // 150 seconds
+
 // Request retry configuration
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1000; // 1 second

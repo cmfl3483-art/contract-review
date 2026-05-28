@@ -84,7 +84,11 @@ const ComplianceCheckForm: React.FC<ComplianceCheckFormProps> = ({ onSuccess }) 
       </Form.Item>
 
       {/* 规则集合选择 */}
-      <Form.Item label="规则集合" name="rule_set_id">
+      <Form.Item
+        label="规则集合"
+        name="rule_set_id"
+        rules={[{ required: true, message: '请选择规则集合' }]}
+      >
         <RuleSetSelector />
       </Form.Item>
 

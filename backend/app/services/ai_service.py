@@ -807,6 +807,8 @@ class AIService:
             except asyncio.TimeoutError:
                 raise  # 直接抛给上层，触发 R3.15
             except Exception as e:
+                import logging
+                logging.getLogger(__name__).error(f"DeepSeek API error: {type(e).__name__}: {e}")
                 raise ComplianceAIError(str(e))
 
             raw = response.choices[0].message.content or ""

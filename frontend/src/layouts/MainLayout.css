@@ -61,7 +61,7 @@
   margin-top: 64px;
   margin-bottom: 48px;
   flex: 1;
-  overflow: hidden;
+  overflow-y: auto;
   display: flex;
 }
 
