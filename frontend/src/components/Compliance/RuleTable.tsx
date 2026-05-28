@@ -1,6 +1,8 @@
-import React, { useMemo } from 'react';
-import { Table, Tag, Button, Space, Popconfirm, Tooltip } from 'antd';
-import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
+import React, { useMemo, useState } from 'react';
+import { Table, Tag, Button, Space, Popconfirm, Tooltip, message } from 'antd';
+import { EditOutlined, DeleteOutlined, PlusOutlined, DownloadOutlined, ImportOutlined } from '@ant-design/icons';
+import RuleImportModal from './RuleImportModal';
+import { useDownloadRulesTemplate } from '../../hooks/useCompliance';
 import type { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
 import { useRules, useDeleteRule } from '../../hooks/useCompliance';
@@ -34,6 +36,20 @@ interface RuleTableProps {
 const RuleTable: React.FC<RuleTableProps> = ({ ruleSetId, onEdit, onCreateClick }) => {
   const { data: rules, isLoading } = useRules(ruleSetId);
   const deleteRule = useDeleteRule();
+  const [importModalOpen, setImportModalOpen] = useState(false);
+  const [downloading, setDownloading] = useState(false);
+  const downloadTemplate = useDownloadRulesTemplate();
+
+  const handleDownloadTemplate = async () => {
+    setDownloading(true);
+    try {
+      await downloadTemplate(ruleSetId);
+    } catch {
+      message.error('模板下载失败，请重试');
+    } finally {
+      setDownloading(false);
+    }
+  };
 
   // 按 rule_type → order → created_at 排序
   const sorted = useMemo(() => {
@@ -123,7 +139,20 @@ const RuleTable: React.FC<RuleTableProps> = ({ ruleSetId, onEdit, onCreateClick 
 
   return (
     <div>
-      <div style={{ marginBottom: 16, display: 'flex', justifyContent: 'flex-end' }}>
+      <div style={{ marginBottom: 16, display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+        <Button
+          icon={<DownloadOutlined />}
+          loading={downloading}
+          onClick={handleDownloadTemplate}
+        >
+          下载模板
+        </Button>
+        <Button
+          icon={<ImportOutlined />}
+          onClick={() => setImportModalOpen(true)}
+        >
+          批量导入
+        </Button>
         <Button type="primary" icon={<PlusOutlined />} onClick={onCreateClick}>
           新建规则
         </Button>
@@ -135,6 +164,11 @@ const RuleTable: React.FC<RuleTableProps> = ({ ruleSetId, onEdit, onCreateClick 
         loading={isLoading}
         pagination={false}
         size="middle"
+      />
+      <RuleImportModal
+        ruleSetId={ruleSetId}
+        open={importModalOpen}
+        onClose={() => setImportModalOpen(false)}
       />
     </div>
   );

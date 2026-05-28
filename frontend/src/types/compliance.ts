@@ -155,3 +155,47 @@ export interface ListChecksParams {
   page_size?: number;
   status?: ComplianceCheckStatus;
 }
+
+// ─────────────────────────────────────────────
+// Excel 批量导入相关类型
+// ─────────────────────────────────────────────
+
+/** 预览接口返回的单条规则（含 Excel 行号） */
+export interface ImportPreviewRule {
+  row_number: number;
+  rule_type: RuleType;
+  title: string;
+  requirement: string;
+  severity: RuleSeverity;
+  order: number;
+}
+
+/** 预览接口响应 */
+export interface ImportPreviewResponse {
+  preview_session_token: string;
+  rules: ImportPreviewRule[];
+  total_count: number;
+}
+
+/** 确认导入接口响应 */
+export interface ImportConfirmResponse {
+  imported_count: number;
+  rule_set_id: string;
+}
+
+/** 行级校验错误 */
+export interface ImportRowError {
+  row_number: number;
+  field: string;
+  message: string;
+}
+
+/** 422 校验失败响应体 detail */
+export interface ImportValidationError {
+  code: string;
+  message: string;
+  errors?: ImportRowError[];
+  current_count?: number;
+  import_count?: number;
+  limit?: number;
+}
