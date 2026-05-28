@@ -11,8 +11,8 @@ import { getComplianceErrorText } from '../../components/Compliance/ErrorMessage
 
 const { Title, Text } = Typography;
 
-/** 轮询上限：90 秒 */
-const POLLING_TIMEOUT_MS = 90 * 1000;
+/** 轮询上限：5 分钟（AI 异步处理可能需要较长时间） */
+const POLLING_TIMEOUT_MS = 5 * 60 * 1000;
 
 const ComplianceCheckDetailPage: React.FC = () => {
   const { checkId } = useParams<{ checkId: string }>();

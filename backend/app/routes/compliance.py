@@ -611,6 +611,41 @@ def _serialize_check_result(check_result) -> dict:
     }
 
 
+def _serialize_check_result_simple(check_result) -> dict:
+    """
+    轻量版序列化：用于 create_pending_check 返回，不访问关联对象。
+    前端只需要 id 和 status 来跳转详情页。
+    """
+    return {
+        "id": str(check_result.id),
+        "status": (
+            check_result.status.value
+            if hasattr(check_result.status, "value")
+            else check_result.status
+        ),
+        "file_name": check_result.file_name,
+        "file_size": check_result.file_size,
+        "file_mime_type": check_result.file_mime_type,
+        "extracted_text": "",
+        "text_truncated": False,
+        "number_draft": check_result.number_draft,
+        "name_draft": check_result.name_draft,
+        "description_draft": check_result.description_draft,
+        "violations": [],
+        "suggested_name": None,
+        "suggested_description": None,
+        "compliance_score": None,
+        "rule_set_id": str(check_result.rule_set_id) if check_result.rule_set_id else None,
+        "rule_set_name": None,
+        "requested_by": {"id": None, "name": None, "avatar": None},
+        "requested_at": (
+            check_result.requested_at.isoformat() if check_result.requested_at else None
+        ),
+        "completed_at": None,
+        "error_message": None,
+    }
+
+
 def _serialize_check_summary(item) -> dict:
     """
     将 ComplianceCheckResult ORM 对象序列化为列表摘要字典。
@@ -647,20 +682,22 @@ async def perform_compliance_check(
     db: AsyncSession = Depends(get_db),
 ):
     """
-    发起合规检查（multipart/form-data）。
+    发起合规检查（multipart/form-data）。异步模式：立即返回 pending 记录，
+    AI 检查由 Celery worker 后台完成，前端轮询状态。
 
     Form fields:
     - file: UploadFile（必填）
     - number_draft: str（可选）
     - name_draft: str（可选）
     - description_draft: str（可选）
-    - rule_set_id: str（可选，不传则使用当前生效的规则集合）
+    - rule_set_id: str（必填）
 
     - 仅销售/法务/运营可操作（R3.8）
-    - 返回 {"success": True, "data": {...}}
+    - 返回 {"success": True, "data": {...}}  status=pending
     """
-    from fastapi import UploadFile, Form
+    from fastapi import UploadFile
     from fastapi.datastructures import FormData
+    from app.tasks.compliance_tasks import run_compliance_check_task
 
     user = request.state.user
     require_compliance_user(user)
@@ -686,7 +723,8 @@ async def perform_compliance_check(
     file_data: bytes = await file.read()
 
     try:
-        check_result = await compliance_service.perform_check(
+        # 步骤 1-5：校验 + MinIO 上传 + 插入 pending 记录，立即返回
+        check_result = await compliance_service.create_pending_check(
             file_data=file_data,
             file_name=file.filename or "unknown",
             file_size=len(file_data),
@@ -701,9 +739,13 @@ async def perform_compliance_check(
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"合规检查失败: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"合规检查提交失败: {str(e)}")
 
-    return {"success": True, "data": _serialize_check_result(check_result)}
+    # 步骤 6-9：投递 Celery task，后台异步执行
+    run_compliance_check_task.delay(str(check_result.id))
+
+    # 返回 pending 状态的记录，前端跳转详情页轮询
+    return {"success": True, "data": _serialize_check_result_simple(check_result)}
 
 
 @router.get("/checks", summary="查询合规检查历史列表")

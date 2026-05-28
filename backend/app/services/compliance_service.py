@@ -524,6 +524,95 @@ class ComplianceService:
     # 合规检查主流程
     # ──────────────────────────────────────────────────────────────────────────
 
+    async def create_pending_check(
+        self,
+        *,
+        user_id: str,
+        file_data: bytes,
+        file_name: str,
+        file_size: int,
+        file_mime_type: str,
+        number_draft: Optional[str],
+        name_draft: Optional[str],
+        description_draft: Optional[str],
+        rule_set_id: Optional[str],
+        db: AsyncSession,
+    ) -> ComplianceCheckResult:
+        """
+        创建 pending 状态的合规检查记录，立即返回（不等待 AI）。
+
+        执行步骤 1-5（零副作用校验 → MinIO 上传 → 插入 pending 记录 → commit）。
+        步骤 6-9（文本抽取 + AI + 写回）由 Celery task 异步完成。
+
+        Raises:
+            HTTPException(429): 频控超限
+            HTTPException(422): 不支持的文件类型 / 文件过大
+            HTTPException(404): rule_set_id 不存在
+            HTTPException(409): 无生效规则集合
+        """
+        # ── 步骤 1：频控校验 ──────────────────────────────────────────────────
+        await self._enforce_rate_limit(user_id)
+
+        # ── 步骤 2：MIME / 文件大小校验（零副作用区域）────────────────────────
+        if file_mime_type not in COMPLIANCE_FILE_MIME_WHITELIST:
+            raise HTTPException(status_code=422, detail="不支持的文件类型")
+
+        if file_size > COMPLIANCE_FILE_SIZE_LIMIT:
+            raise HTTPException(status_code=422, detail="文件大小超过 50MB 限制")
+
+        # ── 步骤 3：解析 rule_set_id（零副作用区域）──────────────────────────
+        if rule_set_id is not None:
+            result = await db.execute(
+                select(ComplianceRuleSet).where(
+                    ComplianceRuleSet.id == uuid.UUID(str(rule_set_id))
+                )
+            )
+            rule_set = result.scalar_one_or_none()
+            if rule_set is None:
+                raise HTTPException(status_code=404, detail="规范集合不存在")
+        else:
+            rule_set = await self._resolve_active_rule_set(db)
+            if rule_set is None:
+                raise HTTPException(
+                    status_code=409,
+                    detail="系统当前未配置生效的合同规范集合",
+                )
+
+        # ── 步骤 4：上传文件到 MinIO ──────────────────────────────────────────
+        check_id = uuid.uuid4()
+        file_storage_key = (
+            f"{COMPLIANCE_FILE_PATH_PREFIX}/{user_id}/{check_id}/{file_name}"
+        )
+        minio_client.upload_file_data(
+            object_name=file_storage_key,
+            file_data=file_data,
+            file_size=file_size,
+            content_type=file_mime_type,
+        )
+
+        # ── 步骤 5：插入 pending 记录并 commit ───────────────────────────────
+        check_result = ComplianceCheckResult(
+            id=check_id,
+            status=ComplianceCheckStatus.PENDING,
+            file_storage_key=file_storage_key,
+            file_name=file_name,
+            file_size=file_size,
+            file_mime_type=file_mime_type,
+            number_draft=number_draft,
+            name_draft=name_draft,
+            description_draft=description_draft,
+            rule_set_id=rule_set.id,
+            requested_by=uuid.UUID(str(user_id)),
+            requested_at=datetime.utcnow(),
+            extracted_text="",
+            text_truncated=False,
+            violations=[],
+        )
+        db.add(check_result)
+        await db.commit()
+        await db.refresh(check_result)
+        return check_result
+
     async def perform_check(
         self,
         *,
@@ -539,27 +628,8 @@ class ComplianceService:
         db: AsyncSession,
     ) -> ComplianceCheckResult:
         """
-        执行完整的合规检查流程。
-
-        执行顺序（严格保证零副作用直到文件参数通过校验）：
-        1. 频控校验
-        2. MIME / 文件大小校验（此前不上传 MinIO、不写库、不调 AI）
-        3. 解析 rule_set_id（不存在 / 无 active 时抛异常，仍不上传/不写库/不调 AI）
-        4. 上传文件到 MinIO
-        5. 插入 pending 记录（flush 获取 id，不 commit）
-        6. 文本抽取
-        7. 查询规则列表
-        8. 调用 AI
-        9. 更新为 completed（同一事务 commit）
-        10. 返回 check_result
-
-        Raises:
-            HTTPException(429): 频控超限
-            HTTPException(422): 不支持的文件类型 / 文件过大 / 抽取失败 / 空文本
-            HTTPException(404): rule_set_id 不存在
-            HTTPException(409): 无生效规则集合
-            HTTPException(504): AI 超时
-            HTTPException(502): AI 服务错误
+        [已废弃，保留供 recheck 内部调用] 同步执行完整合规检查流程。
+        新代码请使用 create_pending_check + Celery task。
         """
         # ── 步骤 1：频控校验 ──────────────────────────────────────────────────
         await self._enforce_rate_limit(user_id)
