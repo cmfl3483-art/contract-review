@@ -56,11 +56,12 @@ class AsyncTask(Task):
     base=AsyncTask,
     bind=True,
     name="app.tasks.compliance_tasks.run_compliance_check_task",
-    max_retries=0,          # AI 检查不自动重试，失败直接标 failed
+    max_retries=2,          # worker 重启导致任务中断时自动重试
+    default_retry_delay=5,  # 5 秒后重试
     soft_time_limit=300,    # 5 分钟软超时
     time_limit=360,         # 6 分钟硬超时
-    acks_late=True,
-    reject_on_worker_lost=True,
+    acks_late=True,         # 任务完成后才 ack，worker 崩溃时重新入队
+    reject_on_worker_lost=True,  # worker 丢失时拒绝任务（触发重试）
 )
 async def run_compliance_check_task(self, check_id: str) -> None:
     """

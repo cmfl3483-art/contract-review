@@ -52,13 +52,18 @@ jobs:
               $SRC/ $DEPLOY_DIR/
             rm -rf $SRC
 
-            echo "=== [2/5] Rebuild backend & frontend & celery_worker (no-cache) ==="
+            echo "=== [2/5] Graceful stop celery_worker before rebuild ==="
+            # 先优雅停止 worker，避免正在执行的任务被强制中断产生孤儿记录
+            # --signal SIGTERM 让 worker 完成当前任务后退出（最多等 30s）
+            docker compose -f $DEPLOY_DIR/docker-compose.yml stop celery_worker || true
+
+            echo "=== [3/5] Rebuild backend & frontend & celery_worker (no-cache) ==="
             docker compose -f $DEPLOY_DIR/docker-compose.yml build --no-cache backend frontend celery_worker
 
-            echo "=== [3/5] Restart backend & frontend & celery_worker ==="
+            echo "=== [4/5] Restart backend & frontend & celery_worker ==="
             docker compose -f $DEPLOY_DIR/docker-compose.yml up -d backend frontend celery_worker
 
-            echo "=== [4/5] Waiting for backend ==="
+            echo "=== [5/6] Waiting for backend ==="
             for i in $(seq 1 30); do
               if curl -fsS http://127.0.0.1:8000/health > /dev/null 2>&1; then
                 echo "backend ready"
@@ -67,7 +72,7 @@ jobs:
               sleep 2
             done
 
-            echo "=== [5/5] DB migrations ==="
+            echo "=== [6/6] DB migrations ==="
             docker compose -f $DEPLOY_DIR/docker-compose.yml exec -T backend alembic upgrade head
 
             echo "=== Verifying ==="
