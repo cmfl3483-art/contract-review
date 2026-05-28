@@ -939,6 +939,8 @@ description_draft: {description_draft if description_draft else 'null'}"""
                 }
 
         violations = []
+        # 合规但被 AI 误列为违规项的关键词（suggestion 包含这些词时跳过）
+        compliant_keywords = ("无需修改", "无需调整", "无须修改", "无须调整", "符合要求，无需", "已满足要求", "符合规定，无需")
         for v in parsed.get("violations", []):
             rid = v.get("rule_id")
             rule = rule_map.get(str(rid) if rid else "")
@@ -954,6 +956,11 @@ description_draft: {description_draft if description_draft else 'null'}"""
                 draft_val = drafts.get(f"{location}_draft")
                 if not draft_val or not str(draft_val).strip():
                     continue
+
+            # 过滤 AI 误列为违规但实际合规的项
+            suggestion = v.get("suggestion", "") or ""
+            if any(kw in suggestion for kw in compliant_keywords):
+                continue
 
             violations.append(
                 {
