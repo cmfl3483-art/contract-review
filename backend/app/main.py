@@ -41,6 +41,32 @@ async def lifespan(app: FastAPI):
         print(f"✅ Bucket 初始化成功: {settings.MINIO_BUCKET}")
     except Exception as e:
         print(f"❌ MinIO 连接失败: {e}")
+
+    # 恢复孤儿 pending 任务（worker 重启导致任务丢失时自动重新投递）
+    try:
+        from datetime import datetime, timedelta
+        from sqlalchemy import select
+        from app.core.database import AsyncSessionLocal
+        from app.models.compliance import ComplianceCheckResult, ComplianceCheckStatus
+        from app.tasks.compliance_tasks import run_compliance_check_task
+
+        async with AsyncSessionLocal() as db:
+            # 查找超过 2 分钟还是 pending 的记录（正常任务不会超过 2 分钟还没开始）
+            threshold = datetime.utcnow() - timedelta(minutes=2)
+            result = await db.execute(
+                select(ComplianceCheckResult).where(
+                    ComplianceCheckResult.status == ComplianceCheckStatus.PENDING,
+                    ComplianceCheckResult.requested_at < threshold,
+                )
+            )
+            orphans = result.scalars().all()
+            if orphans:
+                print(f"🔄 发现 {len(orphans)} 条孤儿 pending 记录，重新投递任务...")
+                for check in orphans:
+                    run_compliance_check_task.delay(str(check.id))
+                    print(f"  ↳ 重新投递 check_id={check.id}")
+    except Exception as e:
+        print(f"⚠️ 孤儿任务恢复失败（不影响启动）: {e}")
     
     yield
     
