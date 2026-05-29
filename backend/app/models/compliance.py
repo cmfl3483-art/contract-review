@@ -74,15 +74,9 @@ class ComplianceRuleSet(Base):
         lazy="select",
     )
 
-    __table_args__ = (
-        # Partial unique index: 同一时刻最多一个 is_active=true 的规则集合
-        Index(
-            "uq_compliance_rule_sets_one_active",
-            "is_active",
-            unique=True,
-            postgresql_where=text("is_active = true"),
-        ),
-    )
+    # 注意：原本有 partial unique index 限制最多一个 is_active=true，
+    # 已通过 migration 006 移除，现在允许同时多条 active。
+    # 业务层（compliance_service.update_rule_set）保证至少 1 条 active。
 
 
 class ComplianceRule(Base):

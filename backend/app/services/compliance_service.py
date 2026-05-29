@@ -34,7 +34,7 @@ COMPLIANCE_FILE_PATH_PREFIX = "compliance"
 COMPLIANCE_TEXT_MAX_LENGTH = 100_000
 COMPLIANCE_RATE_LIMIT_WINDOW = 60
 COMPLIANCE_RATE_LIMIT_QUOTA = 10
-COMPLIANCE_AI_TIMEOUT = 60
+COMPLIANCE_AI_TIMEOUT = 300
 COMPLIANCE_RULES_PER_SET_LIMIT = 200
 COMPLIANCE_FILE_SIZE_LIMIT = 50 * 1024 * 1024
 COMPLIANCE_FILE_MIME_WHITELIST = {
@@ -154,8 +154,7 @@ class ComplianceService:
         """
         创建新的 ComplianceRuleSet 记录。
 
-        如果 is_active=True，在同一事务中先将其他所有 rule_set 的 is_active
-        设为 False，再将新记录设为 True，最后 commit。
+        允许同时多条 is_active=true，不再自动停用其他记录。
         写操作完成后清除 Redis 缓存 ``compliance:active-rule-set``。
 
         Returns:
@@ -164,28 +163,12 @@ class ComplianceService:
         rule_set = ComplianceRuleSet(
             name=name,
             description=description,
-            is_active=False,  # 先以 False 插入，避免触发 partial unique index 冲突
+            is_active=is_active,
             created_by=uuid.UUID(str(created_by)) if created_by else None,
             created_at=datetime.utcnow(),
             updated_at=datetime.utcnow(),
         )
         db.add(rule_set)
-        await db.flush()  # 获取自动生成的 id，但不提交
-
-        if is_active:
-            # 同一事务内：先将其他所有 rule_set 的 is_active 设为 False
-            await db.execute(
-                update(ComplianceRuleSet)
-                .where(ComplianceRuleSet.id != rule_set.id)
-                .values(is_active=False, updated_at=datetime.utcnow())
-            )
-            # 再将新记录设为 True
-            await db.execute(
-                update(ComplianceRuleSet)
-                .where(ComplianceRuleSet.id == rule_set.id)
-                .values(is_active=True, updated_at=datetime.utcnow())
-            )
-
         await db.commit()
         await db.refresh(rule_set)
 
@@ -248,8 +231,8 @@ class ComplianceService:
         更新 ComplianceRuleSet 记录。
 
         不存在则抛 HTTPException(404)。
-        如果 is_active 从 False 变为 True，在同一事务中将其他所有 rule_set
-        的 is_active 设为 False。
+        允许同时多条 is_active=true。但拒绝把最后一条 active 改为 inactive
+        （保证至少剩 1 条 active），返回 HTTPException(409)。
         写操作完成后清除 Redis 缓存 ``compliance:active-rule-set``。
 
         Returns:
@@ -264,26 +247,30 @@ class ComplianceService:
         if rule_set is None:
             raise HTTPException(status_code=404, detail="规范集合不存在")
 
+        # 校验：把最后一条 active 改为 inactive 时拒绝
+        deactivating = is_active is False and rule_set.is_active
+        if deactivating:
+            count_result = await db.execute(
+                select(func.count(ComplianceRuleSet.id)).where(
+                    ComplianceRuleSet.is_active == True  # noqa: E712
+                )
+            )
+            active_count = count_result.scalar_one()
+            if active_count <= 1:
+                raise HTTPException(
+                    status_code=409,
+                    detail="至少需要保留一条生效的规则集合，无法停用最后一条",
+                )
+
         # 更新提供的字段
         if name is not None:
             rule_set.name = name
         if description is not None:
             rule_set.description = description
-
-        activate_now = is_active is True and not rule_set.is_active
-
         if is_active is not None:
             rule_set.is_active = is_active
 
         rule_set.updated_at = datetime.utcnow()
-
-        if activate_now:
-            # 同一事务内：先将其他所有 rule_set 的 is_active 设为 False
-            await db.execute(
-                update(ComplianceRuleSet)
-                .where(ComplianceRuleSet.id != uuid.UUID(str(rule_set_id)))
-                .values(is_active=False, updated_at=datetime.utcnow())
-            )
 
         await db.commit()
         await db.refresh(rule_set)
@@ -561,22 +548,25 @@ class ComplianceService:
             raise HTTPException(status_code=422, detail="文件大小超过 50MB 限制")
 
         # ── 步骤 3：解析 rule_set_id（零副作用区域）──────────────────────────
-        if rule_set_id is not None:
-            result = await db.execute(
-                select(ComplianceRuleSet).where(
-                    ComplianceRuleSet.id == uuid.UUID(str(rule_set_id))
-                )
+        # rule_set_id 必填且必须是 active 的
+        if rule_set_id is None:
+            raise HTTPException(
+                status_code=422,
+                detail="请选择规则集合",
             )
-            rule_set = result.scalar_one_or_none()
-            if rule_set is None:
-                raise HTTPException(status_code=404, detail="规范集合不存在")
-        else:
-            rule_set = await self._resolve_active_rule_set(db)
-            if rule_set is None:
-                raise HTTPException(
-                    status_code=409,
-                    detail="系统当前未配置生效的合同规范集合",
-                )
+        result = await db.execute(
+            select(ComplianceRuleSet).where(
+                ComplianceRuleSet.id == uuid.UUID(str(rule_set_id))
+            )
+        )
+        rule_set = result.scalar_one_or_none()
+        if rule_set is None:
+            raise HTTPException(status_code=404, detail="规范集合不存在")
+        if not rule_set.is_active:
+            raise HTTPException(
+                status_code=422,
+                detail="所选规则集合已停用，请选择当前生效的规则集合",
+            )
 
         # ── 步骤 4：上传文件到 MinIO ──────────────────────────────────────────
         check_id = uuid.uuid4()
@@ -642,24 +632,25 @@ class ComplianceService:
             raise HTTPException(status_code=422, detail="文件大小超过 50MB 限制")
 
         # ── 步骤 3：解析 rule_set_id（零副作用区域）──────────────────────────
-        if rule_set_id is not None:
-            # 提供了 rule_set_id，查询数据库验证存在性
-            result = await db.execute(
-                select(ComplianceRuleSet).where(
-                    ComplianceRuleSet.id == uuid.UUID(str(rule_set_id))
-                )
+        # rule_set_id 必填且必须是 active 的（与 create_pending_check 一致）
+        if rule_set_id is None:
+            raise HTTPException(
+                status_code=422,
+                detail="请选择规则集合",
             )
-            rule_set = result.scalar_one_or_none()
-            if rule_set is None:
-                raise HTTPException(status_code=404, detail="规范集合不存在")
-        else:
-            # 未提供 rule_set_id，取当前生效的规则集合
-            rule_set = await self._resolve_active_rule_set(db)
-            if rule_set is None:
-                raise HTTPException(
-                    status_code=409,
-                    detail="系统当前未配置生效的合同规范集合",
-                )
+        result = await db.execute(
+            select(ComplianceRuleSet).where(
+                ComplianceRuleSet.id == uuid.UUID(str(rule_set_id))
+            )
+        )
+        rule_set = result.scalar_one_or_none()
+        if rule_set is None:
+            raise HTTPException(status_code=404, detail="规范集合不存在")
+        if not rule_set.is_active:
+            raise HTTPException(
+                status_code=422,
+                detail="所选规则集合已停用，请选择当前生效的规则集合",
+            )
 
         # ── 步骤 4：上传文件到 MinIO ──────────────────────────────────────────
         check_id = uuid.uuid4()
