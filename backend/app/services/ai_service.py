@@ -822,7 +822,7 @@ class AIService:
                         ],
                         # response_format 不传：deepseek-v4-pro 不支持该参数，传了会返回空内容
                         # 改为依赖 system prompt 中的 JSON 格式指令
-                        max_tokens=4096,
+                        max_tokens=8192,  # 调大避免长合同+多规则时 JSON 被截断
                         temperature=0,
                     ),
                     timeout=270,
@@ -835,12 +835,16 @@ class AIService:
                 raise ComplianceAIError(str(e))
 
             raw = response.choices[0].message.content or ""
+            finish_reason = response.choices[0].finish_reason
             try:
                 parsed = json.loads(raw)
                 return self._postprocess(parsed, rules, drafts, extracted_text)
             except (json.JSONDecodeError, ValueError, KeyError):
                 import logging
-                logging.getLogger(__name__).error(f"AI JSON parse failed, raw={repr(raw[:500])}")
+                truncated_hint = " (RESPONSE TRUNCATED BY max_tokens!)" if finish_reason == "length" else ""
+                logging.getLogger(__name__).error(
+                    f"AI JSON parse failed{truncated_hint}, finish_reason={finish_reason}, raw_len={len(raw)}, raw_tail={repr(raw[-300:])}"
+                )
                 if attempt == 1:
                     raise ComplianceAIInvalidResponseError("ai_invalid_response")
                 continue
