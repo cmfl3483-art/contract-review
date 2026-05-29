@@ -477,3 +477,35 @@ run_compliance_check_task.delay('check_id_here')
 | 2026-05-27 | 双环境（test + prod）部署完成 |
 | 2026-05-28 | `compliance-rule-excel-import` 开发 + 上线，期间踩坑 N 个，本文档主要内容 |
 | 2026-05-29 | 合规检查异步化（同步 → Celery） |
+| 2026-05-29 | 业务规则调整：允许多条 active 规则集合，前端只展示 active（migration 006） |
+
+
+---
+
+## 9. 业务规则变更记录
+
+### 9.1 规则集合 `is_active` 语义（2026-05-29）
+
+**变更前**：
+- 数据库 partial unique index 限制最多一条 `is_active=true`
+- 创建/编辑设为 active 时自动把其他所有改为 inactive
+- 「新建合规检查」选择器显示**所有**规则集合
+- `rule_set_id` 不传时自动取当前 active 那条
+
+**变更后**：
+- **可以同时多条 `is_active=true`**（migration 006 删除唯一约束）
+- **必须至少有 1 条 active**（停用最后一条返回 409）
+- 「新建合规检查」选择器**只显示 active 的**
+- `rule_set_id` 必填，且必须是 active 的（传 inactive 返回 422）
+- 删除规则集合的限制不变：active 不能删，inactive 随便删
+
+**对应文件**：
+- `backend/alembic/versions/006_allow_multiple_active_rule_sets.py`
+- `backend/app/models/compliance.py`（去掉 `__table_args__`）
+- `backend/app/services/compliance_service.py`（`create_rule_set` / `update_rule_set` / `create_pending_check` / `perform_check`）
+- `frontend/src/components/Compliance/RuleSetSelector.tsx`
+
+**业务上的语义**：
+- "active" 表示"当前可用的规则集合"，可以并行多套（比如不同业务线用不同规则）
+- 销售/法务/运营在新建检查时主动选择要用哪套规则
+- 历史 / 草稿规则集合保持 inactive，不会出现在选择器里，避免误用
