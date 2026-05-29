@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import { Button, Typography } from 'antd';
+import { Button, Modal, Typography } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import RuleSetTable from '../../../components/Compliance/RuleSetTable';
 import RuleSetCreateModal from '../../../components/Compliance/RuleSetCreateModal';
+import RuleSetMetaForm from '../../../components/Compliance/RuleSetMetaForm';
+import type { RuleSet } from '../../../types/compliance';
 
 const { Title } = Typography;
 
 const RuleSetListPage: React.FC = () => {
   const navigate = useNavigate();
   const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [editingRuleSet, setEditingRuleSet] = useState<RuleSet | null>(null);
 
   const handleCreateSuccess = (ruleSetId: string) => {
     navigate(`/compliance/admin/rule-sets/${ruleSetId}`);
@@ -35,6 +38,7 @@ const RuleSetListPage: React.FC = () => {
       <RuleSetTable
         onCreateClick={() => setCreateModalOpen(true)}
         onViewDetail={(ruleSetId) => navigate(`/compliance/admin/rule-sets/${ruleSetId}`)}
+        onEdit={(ruleSet) => setEditingRuleSet(ruleSet)}
       />
 
       {/* 新建规则集合弹窗 */}
@@ -43,6 +47,23 @@ const RuleSetListPage: React.FC = () => {
         onClose={() => setCreateModalOpen(false)}
         onSuccess={handleCreateSuccess}
       />
+
+      {/* 编辑规则集合弹窗 */}
+      <Modal
+        title="编辑规则集合"
+        open={editingRuleSet !== null}
+        onCancel={() => setEditingRuleSet(null)}
+        footer={null}
+        destroyOnClose
+        width={560}
+      >
+        {editingRuleSet && (
+          <RuleSetMetaForm
+            ruleSet={editingRuleSet}
+            onSuccess={() => setEditingRuleSet(null)}
+          />
+        )}
+      </Modal>
     </div>
   );
 };
