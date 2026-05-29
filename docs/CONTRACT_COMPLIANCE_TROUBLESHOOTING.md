@@ -323,6 +323,22 @@ if any(kw in suggestion for kw in compliant_keywords):
     continue
 ```
 
+#### 坑：max_tokens 不够导致 JSON 被截断 → ai_invalid_response
+
+**症状**：偶发 `ai_invalid_response`，看 worker 日志 `raw_tail=` 显示 JSON 在中间被切断
+（比如末尾是 `"excerpt": "上线试运行结束后，乙方向甲方安"` 这种不完整字符串）。
+
+**根因**：`max_tokens=4096` 对长合同 + 多规则的场景不够。AI 还没输出完整 JSON 就被强制停止，
+返回的内容是不完整 JSON，`json.loads` 解析失败。
+
+**判断方法**：日志里 `finish_reason=length` 就是被 max_tokens 截断了。
+
+**修复**：
+1. `max_tokens=8192`（够大但不浪费）
+2. 在解析失败的日志里打印 `finish_reason` 和 raw 末尾，方便后续诊断
+
+**未来如果还撞上**：考虑改为分批检查（每次只让 AI 检查 N 条规则），或换支持更大 max_tokens 的模型。
+
 #### 坑：同一合同多次检查结果不一致
 
 **现象**：同一合同 5 次检查，违规数 8-11，分数 0-20。
