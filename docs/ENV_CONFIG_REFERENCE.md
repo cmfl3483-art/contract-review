@@ -31,7 +31,7 @@
 # AI 配置（会覆盖 backend/.env 里的同名配置）
 AI_PROVIDER=deepseek
 AI_API_BASE=https://api.deepseek.com/v1
-AI_API_KEY=sk-a4f19da0172247ff9573c00e48eabf4e
+AI_API_KEY=<在 DeepSeek 控制台生成，不要贴在文档里>
 AI_MODEL=deepseek-v4-pro
 ```
 
@@ -54,25 +54,25 @@ REDIS_CACHE_TTL=300
 
 # MinIO
 MINIO_ENDPOINT=minio:9000
-MINIO_ACCESS_KEY=minioadmin
-MINIO_SECRET_KEY=minioadmin
+MINIO_ACCESS_KEY=<MinIO admin user>
+MINIO_SECRET_KEY=<MinIO admin password>
 MINIO_SECURE=false
 MINIO_BUCKET=contract-attachments
 
-# JWT
-SECRET_KEY=3JzN1P7IAKkCD5LfOD-gKtI5oV9cKh4spnQ4Suai9L0
+# JWT（必须用 openssl rand -base64 32 生成强随机值）
+SECRET_KEY=<openssl rand -base64 32 生成>
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=1440
 
-# 钉钉
-DINGTALK_APP_KEY=dingkyxfjd5bhgtr78rc
-DINGTALK_APP_SECRET=PiNGAGUjtoh4byvBgNS-ZISS97COd7y4QftrFhGC8_ynuBS7N3B5aOeyMEhST2ag
+# 钉钉（从钉钉开放平台获取，不要贴文档）
+DINGTALK_APP_KEY=<钉钉 AppKey>
+DINGTALK_APP_SECRET=<钉钉 AppSecret>
 DINGTALK_REDIRECT_URI=https://chenmin.yunumall.com/api/auth/dingtalk/callback
 
-# AI（DeepSeek）—— 注意：AI_MODEL 实际由根目录 .env 的容器环境变量覆盖
+# AI（DeepSeek）—— 注意：AI_MODEL/AI_API_KEY 实际由根目录 .env 的容器环境变量覆盖
 AI_PROVIDER=deepseek
 AI_API_BASE=https://api.deepseek.com/v1
-AI_API_KEY=sk-a4f19da0172247ff9573c00e48eabf4e
+AI_API_KEY=<DeepSeek API Key>
 AI_MODEL=deepseek-v4-pro
 AI_TIMEOUT=300
 
@@ -90,6 +90,9 @@ MAX_FILE_SIZE=52428800
 LOG_LEVEL=INFO
 LOG_FILE=logs/app.log
 ```
+
+> ⚠️ **绝不要把真实 API Key、SECRET、密码贴到任何 git 跟踪的文件里**。
+> 真实值只在服务器 `.env` 中存在，本文档只展示**结构和占位符**。
 
 ---
 
