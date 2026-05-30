@@ -93,21 +93,39 @@ class TextExtractor:
         except ImportError:
             raise TextExtractionError("python-docx 未安装，无法处理 .docx 文件")
 
+        MAX_EXTRACT_CHARS = 100_000  # 与 MAX_LENGTH 保持一致
+
         try:
             doc = Document(io.BytesIO(file_data))
             parts = []
+            total_chars = 0
 
             # 段落文本
             for para in doc.paragraphs:
                 if para.text.strip():
-                    parts.append(para.text)
+                    text = para.text.strip()
+                    parts.append(text)
+                    total_chars += len(text)
+                    if total_chars >= MAX_EXTRACT_CHARS:
+                        break
 
-            # 表格文本
-            for table in doc.tables:
-                for row in table.rows:
-                    for cell in row.cells:
-                        if cell.text.strip():
-                            parts.append(cell.text)
+            # 表格文本（提前截断避免处理超大文档）
+            if total_chars < MAX_EXTRACT_CHARS:
+                for table in doc.tables:
+                    for row in table.rows:
+                        for cell in row.cells:
+                            if cell.text.strip():
+                                text = cell.text.strip()
+                                parts.append(text)
+                                total_chars += len(text)
+                                if total_chars >= MAX_EXTRACT_CHARS:
+                                    break
+                        if total_chars >= MAX_EXTRACT_CHARS:
+                            break
+                    if total_chars >= MAX_EXTRACT_CHARS:
+                        break
+                if total_chars >= MAX_EXTRACT_CHARS:
+                    pass
 
             return "\n".join(parts).strip()
 
