@@ -509,3 +509,30 @@ run_compliance_check_task.delay('check_id_here')
 - "active" 表示"当前可用的规则集合"，可以并行多套（比如不同业务线用不同规则）
 - 销售/法务/运营在新建检查时主动选择要用哪套规则
 - 历史 / 草稿规则集合保持 inactive，不会出现在选择器里，避免误用
+
+
+### 9.2 DeepSeek API Key 泄露事件（2026-05-29）
+
+**事件**：在 `docs/ENV_CONFIG_REFERENCE.md` 中**直接贴了 `.env` 完整内容**，包含真实的：
+- DeepSeek API Key（被恶意消费）
+- JWT SECRET_KEY
+- 钉钉 AppSecret
+- MinIO 默认密码
+
+由于 GitHub 仓库是 public，commit 推送后**立即被自动化扫描器抓取并利用**。
+
+**响应措施**：
+1. 立即在 DeepSeek 控制台禁用泄露 key
+2. 文档脱敏：所有真实密钥替换为占位符（`<REDACTED-...>`）
+3. 服务器 `.env` 更换为新 key
+4. 增加 git pre-commit hook（`.githooks/pre-commit`）扫描密钥模式
+5. **未重写 git 历史**：考虑到 key 已废弃，重写历史的成本（强制 push、所有人重新 clone）大于收益
+
+**经验**：
+- **绝对不要在 git 跟踪的任何文件里贴真实密钥**。文档里只用占位符（`<API_KEY>`、`__GENERATE_RANDOM__`）
+- 写 `.env` 配置文档时，用结构示例 + 占位符，而不是 server 上 cat 出来直接贴
+- 启用 pre-commit hook 兜底（`git config core.hooksPath .githooks`）
+- public 仓库尤其危险，GitHub Secret Scanning 也只能查已知模式
+- 即便 private 仓库，也不要把密钥写入文件，因为：
+  - 切换 public 时密钥泄露
+  - 团队成员离职后仓库 fork 副本可能保留密钥

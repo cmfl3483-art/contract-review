@@ -1,0 +1,89 @@
+#!/bin/bash
+# Pre-commit hook: 阻止密钥泄露到 git
+# 启用方式：git config core.hooksPath .githooks
+
+set -e
+
+# 待暂存的文件内容（不包括二进制文件）
+files=$(git diff --cached --name-only --diff-filter=ACM)
+if [ -z "$files" ]; then
+    exit 0
+fi
+
+# 危险模式（误报率较低的强特征）
+patterns=(
+    # DeepSeek / OpenAI sk- 开头的 32 位 hex key
+    'sk-[a-f0-9]{32,}'
+    # 钉钉 AppSecret（典型形式：62 位 base64-like）
+    'APP_SECRET=[A-Za-z0-9_-]{50,}'
+    # JWT SECRET_KEY（base64 形式）
+    'SECRET_KEY=[A-Za-z0-9_+/-]{30,}={0,2}'
+    # AWS Access Key
+    'AKIA[0-9A-Z]{16}'
+    # 私钥头
+    '-----BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY-----'
+)
+
+# 占位符白名单（出现在示例/文档中是正常的）
+allowlist=(
+    'your-secret-key'
+    'your-very-secure'
+    'change-this'
+    'change-in-production'
+    '__GENERATE_'
+    'test-secret-key'
+    'placeholder'
+    '<REDACTED'
+    'xxxxxxxx'
+    '<.*>'  # 任意尖括号占位符 <new-key>
+)
+
+found=0
+for file in $files; do
+    # 跳过二进制
+    if ! file --mime "$file" 2>/dev/null | grep -q "charset=binary"; then
+        # 跳过 .env 文件本身（已经被 gitignore，不会真到 commit，但万一被强加）
+        case "$file" in
+            *.env|*.env.*|.env|backend/.env|frontend/.env)
+                # 这些不该被 commit，单独检查
+                echo "ERROR: trying to commit env file: $file"
+                found=1
+                continue
+                ;;
+        esac
+
+        for pat in "${patterns[@]}"; do
+            matches=$(git diff --cached "$file" 2>/dev/null | grep -E "^\+" | grep -E -- "$pat" || true)
+            if [ -n "$matches" ]; then
+                # 检查是否是占位符
+                is_allowed=0
+                for allow in "${allowlist[@]}"; do
+                    if echo "$matches" | grep -qE -- "$allow"; then
+                        is_allowed=1
+                        break
+                    fi
+                done
+                if [ "$is_allowed" -eq 0 ]; then
+                    echo ""
+                    echo "❌ ERROR: 疑似密钥泄露！"
+                    echo "   文件: $file"
+                    echo "   匹配规则: $pat"
+                    echo "   匹配内容（前 100 字符）:"
+                    echo "$matches" | head -3 | sed 's/^/     /' | cut -c1-200
+                    echo ""
+                    found=1
+                fi
+            fi
+        done
+    fi
+done
+
+if [ "$found" -eq 1 ]; then
+    echo ""
+    echo "💡 如果确认是占位符（如 <YOUR_KEY>），加到 .githooks/pre-commit 的 allowlist。"
+    echo "💡 如果是真实密钥，请：1) 不要 commit  2) 改用占位符  3) 真值放到服务器 .env"
+    echo "💡 紧急绕过（不推荐）：git commit --no-verify"
+    exit 1
+fi
+
+exit 0
