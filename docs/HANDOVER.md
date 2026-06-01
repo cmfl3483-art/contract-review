@@ -203,9 +203,12 @@ docker builder prune -af
 接手后第一件事：
 
 ```bash
-# 1. 克隆仓库
-git clone https://github.com/cmfl3483-art/contract-review.git
+# 1. 克隆仓库（拉 develop 分支，这是最新代码）
+git clone -b develop https://github.com/cmfl3483-art/contract-review.git
 cd contract-review
+
+# 注意：main 分支是生产版本（旧），develop 是最新版本（含合规检查等新功能）
+# 日常开发都在 develop 上，改完推 develop 自动部署测试环境
 
 # 2. 启用 pre-commit hook（防止密钥泄露）
 git config core.hooksPath .githooks
@@ -218,6 +221,19 @@ ssh -i kaifa.pem ubuntu@124.222.219.177 'docker ps --format "{{.Names}}\t{{.Stat
 
 # 5. 访问测试环境
 # https://chenmin.yunumall.com
+```
+
+**日常开发流程**：
+```
+在 develop 上改代码
+    ↓ git push origin develop
+    ↓ GitHub Actions 自动部署到测试环境（约 8-10 分钟）
+    ↓ 在 https://chenmin.yunumall.com 验证
+    ↓ 验证通过后上生产：
+git checkout main && git merge develop && git push origin main
+    ↓ GitHub Actions 等待审批
+    ↓ 打开 https://github.com/cmfl3483-art/contract-review/actions 点 Approve
+    ↓ 约 8-10 分钟后 https://chenmin0922.online 更新
 ```
 
 如有问题，优先查 `docs/CONTRACT_COMPLIANCE_TROUBLESHOOTING.md` 和 `docs/DUAL_ENV_DEPLOYMENT.md`。
